@@ -20,7 +20,7 @@
   <!-- seven steps, 150 wide, 22 apart, starting at x=32; each lights for 1s of the 7s loop -->
   <g transform="translate(32 40)">
     <rect class="pill" width="150" height="84" rx="12"/><rect class="lit" width="150" height="4" rx="2" style="animation-delay:0s"/>
-    <text x="14" y="26" class="num">01</text><text x="14" y="50" class="label">Judges seal</text><text x="14" y="70" class="who">OPUS · SONNET · HAIKU</text>
+    <text x="14" y="26" class="num">01</text><text x="14" y="50" class="label">Judges seal</text><text x="14" y="70" class="who">ONE SECRET EACH</text>
   </g>
   <g transform="translate(204 40)">
     <rect class="pill" width="150" height="84" rx="12"/><rect class="lit" width="150" height="4" rx="2" style="animation-delay:1s"/>

@@ -25,6 +25,18 @@ send. Always pass absolute paths. `<WS>` = the workspace folder, `<TEAM>` = `<WS
 appends that round's files to `<TEAM>/log.md` in role order: Visionary, Producer, Skeptic,
 Craftsperson, Wildcard.)
 
+**LOOK** (paste into every prompt that builds, red-teams, judges or crits something that moves):
+> To see an animated build, use the shared capture script - never the shared in-app Browser pane
+> (every agent in the session sees the same tabs) and never a local server:
+> `node <SKILL>/scripts/capture.mjs <path/to/index.html> --out <your scratch dir> --times 0,1.25,2.5,3.75`
+> It records the page in real time and saves a PNG per time (seconds after load), so it catches
+> every animation. Add `--gif` for one loop as a GIF, `--reduced-motion` to see the reduced-motion
+> state, `--grayscale-blur` for a glance test, `--size 400x400` to change the viewport. Then read
+> the PNGs. Say in your notes which frames you looked at.
+
+(Host: replace `<SKILL>` with this skill's directory. The script needs ffmpeg and the playwright
+package; if it reports playwright missing, run the install command it prints once before the round.)
+
 ## Judges
 
 **Judge: introduce yourself** (model per seat)
@@ -47,8 +59,13 @@ Craftsperson, Wildcard.)
 
 **Judge: Q&A question** (model per seat)
 > You are <judge>. Read `<WS>/judges/judges-brief.md`, your sealed file, and for each team
-> `<WS>/teams/*/build/` and `pitch.md`. For each team, append one sharp question to that team's
-> `qa.md` as `**<judge name>:** <question>`. Ask what would most change your score. Don't reveal your signature.
+> `<WS>/teams/*/build/` and `pitch.md`. Write `<WS>/qa/<judge-id>.json` as
+> `{"judge": "<judge name>", "questions": {"<team-id>": "<question>", ...}}` - one sharp question per
+> team, asking what would most change your score. Don't reveal your signature. Don't write into
+> any team folder.
+
+(Host: once every judge has written, build each `<TEAM>/qa.md` with one `**<judge name>:** <question>`
+line per judge, in panel order.)
 
 **Team: answer Q&A** (sonnet, Producer persona + ISOLATION)
 > Answer every question in `<TEAM>/qa.md` directly beneath it, as `**<Team> (<Name>):** ...`,
@@ -57,7 +74,8 @@ Craftsperson, Wildcard.)
 **Judge: score** (model per seat)
 > You are <judge>. Read your sealed file `<WS>/judges/sealed/<judge-id>.md`,
 > `<WS>/judges/rubric.json`, `<WS>/judges/judges-brief.md`, and for every team: `build/` (open
-> and inspect the actual files), `pitch.md`, `qa.md`, `charter.md`. Do NOT read `<WS>/scores/`.
+> and inspect the actual files - for anything animated, capture frames with LOOK), `pitch.md`,
+> `qa.md`, `charter.md`. Do NOT read `<WS>/scores/`.
 > Score independently and in character. Use the full 1-10 range; don't cluster at 7.
 > Write `<WS>/scores/<judge-id>.json` exactly in this schema: <paste schema from rubric.md>.
 > Team ids: <list>. Criterion ids: <list>.
@@ -93,16 +111,14 @@ Craftsperson, Wildcard.)
 > Read `<TEAM>/plan.md` and the log. Build your part into `<TEAM>/build/`. <MEDIUM GUIDE>.
 > Finished, openable files - not descriptions of files. Include `build/README.md`: what's
 > here, how to open/run it, one line per file.
-> To check your work in a browser, launch your own private headless browser from the shell
-> (Playwright or Chrome headless) and open the file via `file://`. Never use the shared in-app
-> Browser pane tools - every agent in the session sees the same tabs. If you truly need a server,
-> use port <PORT> (unique to your team), never kill a process you didn't start, and stop yours when done.
+> Check your work with LOOK before you finish. If you truly need a server, use port <PORT>
+> (unique to your team), never kill a process you didn't start, and stop yours when done.
 
 (Host: give each team its own <PORT>, e.g. 8701, 8702, ... Teams build in parallel, and a
 shared port lets one team's checker load another team's build.)
 
 **Round 5 - Red team** (Skeptic)
-> Open and inspect everything in `<TEAM>/build/`. Read the judges' brief and rubric. Write
+> Open and inspect everything in `<TEAM>/build/`, capturing frames with LOOK. Read the judges' brief and rubric. Write
 > `<TEAM>/redteam.md`: the issues that would cost points, ranked, each with a concrete fix.
 > Guess what hidden signature criteria these judges might hold and whether the build survives them.
 
@@ -135,12 +151,11 @@ shared port lets one team's checker load another team's build.)
 > `<WS>/judges/sealed-v2/`, everything in `<WS>/crit/`, anything under `<TEAM>/`, and - read-only,
 > for stealing - other teams' `build/` folders and `pitch.md` files. Never open `sealed-v2/`,
 > `scores/`, `scores-v2/`, or other teams' logs, plans, proposals or rounds. Never write outside
-> `<TEAM>/`. To check rendering, launch your own private headless browser on `file://`; never
-> use the shared in-app Browser pane or any local server.
+> `<TEAM>/`. To check rendering, use LOOK.
 
 **Judge: crit** (model per seat)
 > You are <judge>. Re-read your bio, your sealed v1 criterion, the rubric, and your own
-> `<WS>/scores/<judge-id>.json`. Re-open every team's `build/` and `pitch.md`.
+> `<WS>/scores/<judge-id>.json`. Re-open every team's `build/` and `pitch.md`, capturing frames with LOOK.
 > 1. Write `<WS>/crit/<judge-id>.json`:
 > `{"judge":"<id>","teams":{"<team-id>":{"fix":"the one change that would most raise my score, concrete enough to build","criterion":"<criterion id or 'signature'>","expected_gain":<points out of 10 on that criterion>,"confidence":"high|medium|low","keep":"the one thing they must not lose"}}}`
 > Give the fix, not the verdict. If a team is close to its ceiling, say what would take it the last step.
@@ -174,7 +189,8 @@ shared port lets one team's checker load another team's build.)
 **Judge: re-score** (model per seat) - **paired: v1 and v2 in one pass**
 > You are <judge>. Read your fresh `<WS>/judges/sealed-v2/<judge-id>.md`, the rubric, your own
 > `<WS>/crit/<judge-id>.json`, and for every team: `build/` (v1), `build-v2/`, `build-v2/CHANGES.md`,
-> `triage.md` and `pitch-v2.md`. Do NOT read `<WS>/scores/` (your round-1 scores) or `<WS>/scores-v2/`.
+> `triage.md` and `pitch-v2.md`. Capture frames of both versions at the same times with LOOK.
+> Do NOT read `<WS>/scores/` (your round-1 scores) or `<WS>/scores-v2/`.
 > Score **both versions of every team now, side by side, against the same standard** - the rubric
 > and your fresh sealed criterion. Score v1 as if it were entered today, not as you remember it;
 > the point is that any harshness you've gained since round 1 applies to both. Pitch: score v1

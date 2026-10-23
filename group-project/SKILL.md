@@ -48,6 +48,7 @@ group-project-runs/<slug>-<YYYYMMDD>/
     build/                      # the actual deliverable
     pitch.md                    # the pitch
     qa.md                       # judge questions + team answers
+  qa/<judge-id>.json            # each judge's questions, one per team (Host merges into qa.md)
   scores/<judge-id>.json        # one per judge
   results.md                    # final, written by tally + Host
   # rematch only (section 6)
@@ -87,7 +88,9 @@ Every member is a separate `Agent` call with `model: "sonnet"`, using the role p
 [references/prompts.md](references/prompts.md). Within a round, launch **all members of all
 teams in parallel** (one message, many Agent calls) whenever they don't depend on each other.
 Each agent reads its team folder + the public judge files, writes its output to its team folder,
-and appends a dated, signed entry to `log.md`.
+and writes its round entry to its own `rounds/<N>-<member-id>.md`. After each round the Host
+appends that round's entries to `log.md` in role order - members never edit `log.md` themselves,
+so parallel writers can't overwrite each other.
 
 | Round | Who | What |
 |---|---|---|
@@ -106,13 +109,17 @@ Rules the Host enforces:
 - **Real friction.** If a team's log reads like agreement, the next round's prompt tells the
   Skeptic and Visionary to escalate. Consensus must be earned.
 - **Real builds.** A deliverable is files someone can open, not a description of files.
+- **One way to look.** Anyone checking an animated build - Craftsperson, Skeptic or judge - uses
+  `scripts/capture.mjs` (the LOOK block in prompts.md). It records in real time, so every judge
+  sees the same frames, and nobody touches the shared browser pane or a local server.
 - Between rounds, post the user a one-line status per team (direction, biggest fight).
 
 ## 4. Judging
 
 1. **Q&A** (if on): each judge, in parallel, reads every team's `build/` and `pitch.md` and writes
-   one sharp question per team into that team's `qa.md`. Then the team's Producer (Sonnet)
-   answers, in parallel across teams.
+   one sharp question per team to its own `qa/<judge-id>.json`. The Host then builds each team's
+   `qa.md` from those files (judges never write into team folders, so they can't collide). Then
+   the team's Producer (Sonnet) answers, in parallel across teams.
 2. **Scoring**: each judge, in parallel, using its own model, reads its sealed file, every team's
    build, pitch and Q&A, and writes `scores/<judge-id>.json` in the schema from
    [references/rubric.md](references/rubric.md). Judges score independently - no judge sees another's scores.

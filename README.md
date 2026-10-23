@@ -125,6 +125,12 @@ git clone https://github.com/rader-ai/hackathon-skill.git
 ln -s "$PWD/hackathon-skill/group-project" ~/.claude/skills/group-project
 ```
 
+For animated work, the builders and judges look at frames through `scripts/capture.mjs`, which needs `ffmpeg` and Playwright:
+
+```bash
+npm install --prefix ~/.cache/group-project playwright
+```
+
 Then ask Claude Code for a group project:
 
 ```text
@@ -160,6 +166,7 @@ group-project/                 the skill
   lessons.md                   what earlier runs learned
   references/                  roles, judges, rubric, every prompt
   scripts/tally.py             scoring for round 1 and rematches
+  scripts/capture.mjs          frames and GIFs of animated builds, for builders and judges
 group-project-runs/
   coffee-loader-20261023/      the example run, every file
 assets/                        README visuals
