@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440" role="img" aria-labelledby="t d">
+  <title id="t">Group Project</title>
+  <desc id="d">Three teams of agents debate, build and get scored by a panel of five judges, each holding a sealed criterion.</desc>
+  <style>
+    .bg { fill: #15100D; }
+    .card { fill: #1F1814; stroke: #3A2F28; stroke-width: 1.5; }
+    .ink { fill: #F2EBE5; }
+    .muted { fill: #A99B91; }
+    .crema { fill: #D9A066; }
+    .cherry { fill: #E4687A; }
+    .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+    .sans { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+    .title { font-size: 64px; font-weight: 800; letter-spacing: -1.5px; }
+    .eyebrow { font-size: 14px; letter-spacing: 2px; }
+    .sub { font-size: 20px; }
+    .team { font-size: 14px; font-weight: 700; }
+    .score { font-size: 22px; font-weight: 700; }
+    .tag { font-size: 11px; letter-spacing: 1px; }
+
+    /* 8s loop: debate 0-35%, build 25-60%, judging 55-75%, scores and sealed criteria 70-92%, reset to 100%. */
+    .dot { animation: talk 8s infinite; transform-box: fill-box; transform-origin: center; }
+    @keyframes talk {
+      0%, 4% { opacity: .35; transform: scale(1); }
+      6% { opacity: 1; transform: scale(1.5); }
+      10%, 100% { opacity: .35; transform: scale(1); }
+    }
+    .bar { animation: build 8s infinite; transform-box: fill-box; transform-origin: left center; }
+    @keyframes build {
+      0%, 25% { transform: scaleX(0); }
+      58%, 94% { transform: scaleX(1); }
+      100% { transform: scaleX(0); }
+    }
+    .wire { stroke: #D9A066; stroke-width: 2; stroke-dasharray: 6 6; fill: none; animation: wire 8s infinite; }
+    @keyframes wire {
+      0%, 55% { opacity: 0; stroke-dashoffset: 24; }
+      62% { opacity: 1; }
+      75% { opacity: 1; stroke-dashoffset: 0; }
+      90%, 100% { opacity: 0; stroke-dashoffset: 0; }
+    }
+    .judge { animation: judge 8s infinite; transform-box: fill-box; transform-origin: center; }
+    @keyframes judge {
+      0%, 60% { opacity: .45; }
+      66% { opacity: 1; transform: scale(1.12); }
+      72%, 92% { opacity: 1; transform: scale(1); }
+      100% { opacity: .45; }
+    }
+    .seal { animation: seal 8s infinite; }
+    @keyframes seal {
+      0%, 72% { opacity: 1; }
+      78%, 94% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    .open { animation: open 8s infinite; }
+    @keyframes open {
+      0%, 72% { opacity: 0; }
+      78%, 94% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    .result { animation: result 8s infinite; }
+    @keyframes result {
+      0%, 72% { opacity: 0; }
+      80%, 94% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .dot, .bar, .wire, .judge, .seal, .open, .result { animation: none; }
+      .bar { transform: scaleX(1); }
+      .result, .open { opacity: 1; }
+      .seal { opacity: 0; }
+    }
+  </style>
+
+  <rect class="bg" width="1200" height="440" rx="20"/>
+
+  <!-- Left: the pitch -->
+  <text x="56" y="92" class="mono eyebrow crema">CLAUDE CODE SKILL</text>
+  <text x="52" y="160" class="sans title ink">Group Project</text>
+  <text x="56" y="210" class="sans sub muted">Teams of agents argue, build and pitch.</text>
+  <text x="56" y="240" class="sans sub muted">Expert judges score every variation,</text>
+  <text x="56" y="270" class="sans sub muted">each holding one secret criterion.</text>
+  <text x="56" y="300" class="sans sub muted">Then the notes go back for a rematch.</text>
+  <text x="56" y="370" class="mono tag muted">VISIONARY · PRODUCER · SKEPTIC · CRAFTSPERSON</text>
+  <text x="56" y="392" class="mono tag muted">JUDGES: 2 OPUS · 2 SONNET · 1 HAIKU</text>
+
+  <!-- Right: three teams -->
+  <g id="teams">
+    <!-- Team A -->
+    <g transform="translate(640 48)">
+      <rect class="card" width="160" height="150" rx="12"/>
+      <text x="16" y="28" class="sans team ink">Warm Hands</text>
+      <circle class="dot crema" cx="80" cy="62" r="7" style="animation-delay:0s"/>
+      <circle class="dot cherry" cx="110" cy="84" r="7" style="animation-delay:-7.4s"/>
+      <circle class="dot ink" cx="80" cy="106" r="7" style="animation-delay:-6.8s"/>
+      <circle class="dot muted" cx="50" cy="84" r="7" style="animation-delay:-6.2s"/>
+      <rect x="16" y="128" width="128" height="6" rx="3" fill="#3A2F28"/>
+      <rect class="bar crema" x="16" y="128" width="128" height="6" rx="3"/>
+      <text x="80" y="180" text-anchor="middle" class="mono score crema result">80.7</text>
+    </g>
+    <!-- Team B -->
+    <g transform="translate(820 48)">
+      <rect class="card" width="160" height="150" rx="12"/>
+      <text x="16" y="28" class="sans team ink">The Glitch</text>
+      <circle class="dot crema" cx="80" cy="62" r="7" style="animation-delay:-0.5s"/>
+      <circle class="dot cherry" cx="110" cy="84" r="7" style="animation-delay:-7.9s"/>
+      <circle class="dot ink" cx="80" cy="106" r="7" style="animation-delay:-7.1s"/>
+      <circle class="dot muted" cx="50" cy="84" r="7" style="animation-delay:-6.5s"/>
+      <rect x="16" y="128" width="128" height="6" rx="3" fill="#3A2F28"/>
+      <rect class="bar crema" x="16" y="128" width="128" height="6" rx="3"/>
+      <text x="80" y="180" text-anchor="middle" class="mono score crema result">77.0</text>
+    </g>
+    <!-- Team C -->
+    <g transform="translate(1000 48)">
+      <rect class="card" width="160" height="150" rx="12"/>
+      <text x="16" y="28" class="sans team ink">Bare Wire</text>
+      <circle class="dot crema" cx="80" cy="62" r="7" style="animation-delay:-0.9s"/>
+      <circle class="dot cherry" cx="110" cy="84" r="7"/>
+      <circle class="dot ink" cx="80" cy="106" r="7" style="animation-delay:-7.6s"/>
+      <circle class="dot muted" cx="50" cy="84" r="7" style="animation-delay:-7s"/>
+      <rect x="16" y="128" width="128" height="6" rx="3" fill="#3A2F28"/>
+      <rect class="bar crema" x="16" y="128" width="128" height="6" rx="3"/>
+      <text x="80" y="180" text-anchor="middle" class="mono score crema result">75.1</text>
+    </g>
+  </g>
+
+  <!-- Wires from each build down to the panel -->
+  <path class="wire" d="M720 244 C720 280 900 280 900 316"/>
+  <path class="wire" d="M900 244 L900 316"/>
+  <path class="wire" d="M1080 244 C1080 280 900 280 900 316"/>
+
+  <!-- Judges: two Opus (large), two Sonnet, one Haiku (the everyday-user gut check) -->
+  <g transform="translate(0 0)">
+    <rect class="card" x="640" y="316" width="520" height="92" rx="12"/>
+    <text x="656" y="340" class="mono tag muted">PANEL</text>
+    <g class="judge" style="animation-delay:0s"><circle cx="740" cy="368" r="20" class="ink"/></g>
+    <g class="judge" style="animation-delay:-7.85s"><circle cx="820" cy="368" r="20" class="ink"/></g>
+    <g class="judge" style="animation-delay:-7.7s"><circle cx="900" cy="368" r="16" class="ink"/></g>
+    <g class="judge" style="animation-delay:-7.55s"><circle cx="980" cy="368" r="16" class="ink"/></g>
+    <g class="judge" style="animation-delay:-7.4s"><circle cx="1060" cy="368" r="12" class="ink"/></g>
+    <!-- Sealed criteria: an envelope on each judge, which opens at the reveal -->
+    <g class="seal">
+      <g fill="#D9A066"><rect x="730" y="384" width="20" height="13" rx="2"/><rect x="810" y="384" width="20" height="13" rx="2"/><rect x="890" y="380" width="20" height="13" rx="2"/><rect x="970" y="380" width="20" height="13" rx="2"/><rect x="1050" y="376" width="20" height="13" rx="2"/></g>
+      <g fill="none" stroke="#15100D" stroke-width="1.5"><path d="M730 385 l10 7 l10 -7"/><path d="M810 385 l10 7 l10 -7"/><path d="M890 381 l10 7 l10 -7"/><path d="M970 381 l10 7 l10 -7"/><path d="M1050 377 l10 7 l10 -7"/></g>
+    </g>
+    <g class="open"><text x="1144" y="340" text-anchor="end" class="mono tag cherry">SEALED CRITERIA OPENED</text></g>
+    <g class="seal"><text x="1144" y="340" text-anchor="end" class="mono tag muted">5 SEALED CRITERIA</text></g>
+  </g>
+</svg>
