@@ -4,9 +4,15 @@
 
 | # | Team | Total | Rubric | Signature bonus | j-dana-reyes | j-ines-carvalho | j-priya-nandakumar | j-sam-okoye | j-theo-marsh | Spread |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1 | group-b | **84.8** | 73.7 | +11.1 | 81.5 | 65.5 | 70.5 | 76.5 | 74.5 | 16.0 |
-| 2 | group-c | **83.2** | 73.6 | +9.6 | 78.0 | 72.0 | 68.5 | 82.5 | 67.0 | 15.5 |
-| 3 | group-a | **82.6** | 72.1 | +10.5 | 75.5 | 72.5 | 74.0 | 67.5 | 71.0 | 8.0 |
+| =1 | group-b | **84.8** | 73.7 | +11.1 | 81.5 | 65.5 | 70.5 | 76.5 | 74.5 | 16.0 |
+| =1 | group-c | **83.2** | 73.6 | +9.6 | 78.0 | 72.0 | 68.5 | 82.5 | 67.0 | 15.5 |
+| =1 | group-a | **82.6** | 72.1 | +10.5 | 75.5 | 72.5 | 74.0 | 67.5 | 71.0 | 8.0 |
+
+**How clear is each lead?** A lead counts only if it is at least twice its standard error across judges; otherwise the teams share a place.
+
+- group-b vs group-c: **too close to call**, 1.6 points with a standard error of 4.4 (3 of 5 judges had group-b ahead).
+- group-c vs group-a: **too close to call**, 0.6 points with a standard error of 4.8 (3 of 5 judges had group-c ahead).
+- Every team shares first place: pick on what each does best, not on the total.
 
 ## Criterion averages
 

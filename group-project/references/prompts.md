@@ -77,12 +77,27 @@ package; if it reports playwright missing, run the install command it prints onc
 > <Producer only: Say which ideas can't be built well in <BUILD-MIN> minutes, and why.>
 > <Host note, when the proposals converged: name what they share and call it table stakes.>
 
+**Divergence check** (one sonnet agent, Host-side, launched in the same message as Round 2a; TIMEBOX 1.5)
+> You keep the teams in a competition from building the same thing. Read every file in
+> `<WS>/teams/*/proposals/` and `<WS>/brief.md`. Group all the proposals, across every team, by
+> their core mechanism: the one move a judge would describe the idea by (not its colours or
+> wording). A group is **crowded** when it holds proposals from two or more teams. Give each
+> crowded group to the one team whose proposal in it is most specific and best argued; every
+> other team must leave it. Then write, for each team, `<WS>/teams/<team-id>/divergence.md`:
+> - **Taken by another team:** each crowded group this team must leave, in one line, without
+>   naming the other team or quoting its proposal.
+> - **Yours to use:** groups this team holds alone, plus any crowded group given to it.
+> Reply with the groups, one line each, marking which were crowded and who got them.
+
 **Round 2b - Second clash** (each member, standard, TIMEBOX 1.5)
 > Read `<TEAM>/rounds/`. Respond to what was said about your position. Move or harden - with
 > reasons. Propose the strongest hybrid you'd actually fight for.
 
 **Round 3 - Decide** (Producer, TIMEBOX 1)
-> Read `<TEAM>/proposals/` and `<TEAM>/rounds/`. Make the call. Write `<TEAM>/plan.md`: the
+> Read `<TEAM>/proposals/`, `<TEAM>/rounds/` and `<TEAM>/divergence.md`. Don't pick a direction
+> listed there as taken by another team. If the team's favourite is taken, pick the next best, or
+> change its core mechanism and say in one line why a judge could no longer confuse the two.
+> Make the call. Write `<TEAM>/plan.md`: the
 > direction in one sentence, why it beats the alternatives on the rubric, what was rejected and
 > who dissented, the exact files to build and who owns each.
 > **The build budget is <BUILD-MIN> minutes for one Craftsperson.** Size the plan to it: the

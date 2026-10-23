@@ -5,8 +5,40 @@
     "group-c",
     "group-b"
   ],
+  "places": {
+    "group-a": 1,
+    "group-c": 1,
+    "group-b": 1
+  },
+  "margins": [
+    {
+      "above": "group-a",
+      "below": "group-c",
+      "gap": 3.6,
+      "se": 2.56,
+      "judges_for": 4,
+      "judges_against": 1,
+      "clear": false
+    },
+    {
+      "above": "group-c",
+      "below": "group-b",
+      "gap": 0.7,
+      "se": 3.57,
+      "judges_for": 2,
+      "judges_against": 3,
+      "clear": false
+    }
+  ],
   "teams": {
     "group-a": {
+      "judge_total": {
+        "j-jess-alvarez": 82.0,
+        "j-keiko-hart": 81.5,
+        "j-marcus-webb": 96.0,
+        "j-priya-raman": 92.5,
+        "j-tomas-ferreira": 95.5
+      },
       "rubric": 78.4,
       "signature_bonus": 11.1,
       "total": 89.5,
@@ -27,6 +59,13 @@
       }
     },
     "group-b": {
+      "judge_total": {
+        "j-jess-alvarez": 92.0,
+        "j-keiko-hart": 83.0,
+        "j-marcus-webb": 86.5,
+        "j-priya-raman": 78.5,
+        "j-tomas-ferreira": 86.0
+      },
       "rubric": 75.6,
       "signature_bonus": 9.6,
       "total": 85.2,
@@ -47,6 +86,13 @@
       }
     },
     "group-c": {
+      "judge_total": {
+        "j-jess-alvarez": 85.5,
+        "j-keiko-hart": 78.5,
+        "j-marcus-webb": 84.5,
+        "j-priya-raman": 92.0,
+        "j-tomas-ferreira": 89.0
+      },
       "rubric": 75.7,
       "signature_bonus": 10.2,
       "total": 85.9,

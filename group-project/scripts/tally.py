@@ -7,6 +7,10 @@ writes <workspace>/results.json and <workspace>/results.md.
 With --round N (N >= 2, a rematch) it reads scores-vN/ instead, writes results-vN.*,
 and compares every team with the previous round's results. If every judge also scored v1
 in the same pass (a "v1" block per team), the change comes from that pass and drift is reported.
+
+Every pair of neighbours in the ranking is also checked for a tie: each judge's own total for the
+two teams is compared, and the gap only counts as a lead if it is at least twice its standard error
+across judges. Otherwise the two are called "too close to call", with how the judges split.
 """
 import json
 import statistics
@@ -100,7 +104,13 @@ def main():
             per_judge[s["judge"]] = sum(entry["criteria"][c] / 10 * weights[c] for c in crit_ids)
             bonus += entry["signature_score"] / 10 * sig_points
         rub = statistics.mean(per_judge.values())
+        n = len(judges)
+        # Each judge's own view of the total: their rubric score plus n times their signature bonus,
+        # so the mean over judges equals the team's total.
+        judge_total = {s["judge"]: per_judge[s["judge"]] + n * pick(s["teams"][t])["signature_score"] / 10 * sig_points
+                       for s in judges}
         return {
+            "judge_total": {j: round(v, 2) for j, v in judge_total.items()},
             "rubric": round(rub, 2),
             "signature_bonus": round(bonus, 2),
             "total": round(rub + bonus, 2),
@@ -124,6 +134,24 @@ def main():
 
     ranking = sorted(teams, key=rank_key)
 
+    # Is each place in the ranking a real lead, or inside the judges' disagreement?
+    margins = []
+    for a, b in zip(ranking, ranking[1:]):
+        diffs = [results[a]["judge_total"][j] - results[b]["judge_total"][j] for j in results[a]["judge_total"]]
+        gap = statistics.mean(diffs)
+        se = statistics.stdev(diffs) / len(diffs) ** 0.5 if len(diffs) > 1 else 0.0
+        # With fewer than 3 judges there is no spread to test against; keep the order and say so.
+        clear = gap > 0 and (len(diffs) < 3 or gap >= 2 * se)
+        margins.append({"above": a, "below": b, "gap": round(gap, 2), "se": round(se, 2),
+                        "judges_for": sum(d > 0 for d in diffs), "judges_against": sum(d < 0 for d in diffs),
+                        "clear": clear})
+    # Shared places: a team shares the place of the team above it when that margin isn't clear.
+    place, places = 1, {}
+    for i, t in enumerate(ranking):
+        if i and margins[i - 1]["clear"]:
+            place = i + 1
+        places[t] = place
+
     awards = []
     for s in judges:
         best = max(teams, key=lambda t: s["teams"][t]["signature_score"])
@@ -139,7 +167,8 @@ def main():
         })
 
     most_split = max(teams, key=lambda t: results[t]["spread"])
-    out = {"round": rnd, "ranking": ranking, "teams": results, "signature_awards": awards,
+    out = {"round": rnd, "ranking": ranking, "places": places, "margins": margins,
+           "teams": results, "signature_awards": awards,
            "most_divisive": most_split, "criteria": criteria, "signature_points": sig_points}
     if rnd > 1:
         out["paired"] = paired
@@ -185,8 +214,10 @@ def main():
     lines += ["## Standings", "",
               "| # | Team | Total |" + extra_head + " Rubric | Signature bonus | " + " | ".join(jids) + " | Spread |",
               "|---|---|---|" + extra_rule + "---|---|" + "---|" * len(jids) + "---|"]
+    tied = {t for t in ranking if list(places.values()).count(places[t]) > 1}
     for i, t in enumerate(ranking, 1):
         r = results[t]
+        i = f"={places[t]}" if t in tied else places[t]
         pj = " | ".join(f"{r['per_judge'][j]:.1f}" for j in jids)
         ch = ""
         if paired:
@@ -196,6 +227,18 @@ def main():
             ch = f" {r['change']:+.1f} (was #{r['previous_rank']}) |" if "change" in r else " new |"
         lines.append(f"| {i} | {t} | **{r['total']:.1f}** |{ch} {r['rubric']:.1f} | "
                      f"+{r['signature_bonus']:.1f} | {pj} | {r['spread']:.1f} |")
+    lines += ["", "**How clear is each lead?** A lead counts only if it is at least twice its standard error "
+              "across judges; otherwise the teams share a place.", ""]
+    for m in margins:
+        split = f"{m['judges_for']} of {len(jids)} judges had {m['above']} ahead"
+        if m["clear"]:
+            untested = " - too few judges to test it" if len(jids) < 3 else ""
+            lines.append(f"- {m['above']} over {m['below']}: **clear lead**, {m['gap']:.1f} points ({split}){untested}.")
+        else:
+            lines.append(f"- {m['above']} vs {m['below']}: **too close to call**, {m['gap']:.1f} points "
+                         f"with a standard error of {m['se']:.1f} ({split}).")
+    if len(set(places.values())) == 1:
+        lines.append(f"- Every team shares first place: pick on what each does best, not on the total.")
     if out.get("most_improved"):
         mi = out["most_improved"]
         lines += ["", f"Most improved: **{mi}** ({results[mi]['change']:+.1f})"]
@@ -237,7 +280,7 @@ def main():
             lines.append(f"- {s['judge']}: loved - {e.get('loved', '')}; docked - {e.get('docked', '')}")
         lines.append("")
     (ws / f"results{suffix}.md").write_text("\n".join(lines))
-    print("\n".join(lines[:6 + len(ranking)]))
+    print("\n".join(lines[:6 + len(ranking) + 3 + len(margins) + 1]))
 
 
 if __name__ == "__main__":

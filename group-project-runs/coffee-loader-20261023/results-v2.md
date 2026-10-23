@@ -7,8 +7,13 @@ Paired re-score: every judge scored v1 and v2 in the same pass. **Change** is v2
 | # | Team | Total | v1 today | Change | Drift | Rubric | Signature bonus | j-amara-diallo | j-henrik-vale | j-mara-okafor | j-rosie-tran | j-sun-park | Spread |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | 1 | warm-hands | **80.7** | 76.6 | +4.1 | -9.6 | 69.3 | +11.4 | 72.0 | 69.5 | 74.5 | 61.0 | 69.5 | 13.5 |
-| 2 | the-glitch | **77.0** | 61.2 | +15.8 | -4.3 | 68.0 | +9.0 | 70.0 | 67.5 | 69.5 | 66.0 | 67.0 | 4.0 |
-| 3 | bare-wire | **75.1** | 62.5 | +12.6 | -11.0 | 66.1 | +9.0 | 65.5 | 65.5 | 68.0 | 60.0 | 71.5 | 11.5 |
+| =2 | the-glitch | **77.0** | 61.2 | +15.8 | -4.3 | 68.0 | +9.0 | 70.0 | 67.5 | 69.5 | 66.0 | 67.0 | 4.0 |
+| =2 | bare-wire | **75.1** | 62.5 | +12.6 | -11.0 | 66.1 | +9.0 | 65.5 | 65.5 | 68.0 | 60.0 | 71.5 | 11.5 |
+
+**How clear is each lead?** A lead counts only if it is at least twice its standard error across judges; otherwise the teams share a place.
+
+- warm-hands over the-glitch: **clear lead**, 3.7 points (4 of 5 judges had warm-hands ahead).
+- the-glitch vs bare-wire: **too close to call**, 1.9 points with a standard error of 2.2 (3 of 5 judges had the-glitch ahead).
 
 Most improved: **the-glitch** (+15.8)
 

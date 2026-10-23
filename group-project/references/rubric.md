@@ -7,8 +7,12 @@
 - **Signature bonus (0-15 with 5 judges)**: each judge scores their secret criterion 0-10 for
   every team; it's worth up to `signature_points` (default 3) per judge:
   score / 10 × signature_points. Bonuses add up across judges.
-- **Total** = rubric score + signature bonus. Ties break on the Head Judge's rubric score, then
-  on the lowest judge spread.
+- **Total** = rubric score + signature bonus. Equal totals are ordered by the Head Judge's rubric
+  score, then by the lowest judge spread.
+- **Clear lead or shared place**: for each pair of neighbours in the ranking, tally compares every
+  judge's own total for the two teams. The gap counts as a lead only if it is at least twice its
+  standard error across judges; otherwise the two share a place (`=1`) and the reveal names no
+  winner between them.
 
 ## Default criteria (Head Judge adapts these to the domain)
 

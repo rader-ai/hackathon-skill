@@ -5,8 +5,13 @@
 | # | Team | Total | Rubric | Signature bonus | j-amara-diallo | j-henrik-vale | j-mara-okafor | j-rosie-tran | j-sun-park | Spread |
 |---|---|---|---|---|---|---|---|---|---|---|
 | 1 | warm-hands | **86.2** | 74.8 | +11.4 | 80.0 | 69.5 | 74.0 | 70.0 | 80.5 | 11.0 |
-| 2 | bare-wire | **73.5** | 64.2 | +9.3 | 69.0 | 59.5 | 65.5 | 55.5 | 71.5 | 16.0 |
-| 3 | the-glitch | **65.5** | 58.6 | +6.9 | 64.5 | 50.5 | 46.5 | 65.0 | 66.5 | 20.0 |
+| =2 | bare-wire | **73.5** | 64.2 | +9.3 | 69.0 | 59.5 | 65.5 | 55.5 | 71.5 | 16.0 |
+| =2 | the-glitch | **65.5** | 58.6 | +6.9 | 64.5 | 50.5 | 46.5 | 65.0 | 66.5 | 20.0 |
+
+**How clear is each lead?** A lead counts only if it is at least twice its standard error across judges; otherwise the teams share a place.
+
+- warm-hands over bare-wire: **clear lead**, 12.7 points (5 of 5 judges had warm-hands ahead).
+- bare-wire vs the-glitch: **too close to call**, 8.0 points with a standard error of 6.5 (4 of 5 judges had bare-wire ahead).
 
 ## Criterion averages
 

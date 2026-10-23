@@ -5,8 +5,40 @@
     "the-glitch",
     "bare-wire"
   ],
+  "places": {
+    "warm-hands": 1,
+    "the-glitch": 2,
+    "bare-wire": 2
+  },
+  "margins": [
+    {
+      "above": "warm-hands",
+      "below": "the-glitch",
+      "gap": 3.7,
+      "se": 1.69,
+      "judges_for": 4,
+      "judges_against": 1,
+      "clear": true
+    },
+    {
+      "above": "the-glitch",
+      "below": "bare-wire",
+      "gap": 1.9,
+      "se": 2.16,
+      "judges_for": 3,
+      "judges_against": 2,
+      "clear": false
+    }
+  ],
   "teams": {
     "bare-wire": {
+      "judge_total": {
+        "j-amara-diallo": 73.0,
+        "j-henrik-vale": 73.0,
+        "j-mara-okafor": 78.5,
+        "j-rosie-tran": 69.0,
+        "j-sun-park": 82.0
+      },
       "rubric": 66.1,
       "signature_bonus": 9.0,
       "total": 75.1,
@@ -72,6 +104,13 @@
       }
     },
     "the-glitch": {
+      "judge_total": {
+        "j-amara-diallo": 80.5,
+        "j-henrik-vale": 76.5,
+        "j-mara-okafor": 77.0,
+        "j-rosie-tran": 73.5,
+        "j-sun-park": 77.5
+      },
       "rubric": 68.0,
       "signature_bonus": 9.0,
       "total": 77.0,
@@ -137,6 +176,13 @@
       }
     },
     "warm-hands": {
+      "judge_total": {
+        "j-amara-diallo": 82.5,
+        "j-henrik-vale": 81.5,
+        "j-mara-okafor": 86.5,
+        "j-rosie-tran": 73.0,
+        "j-sun-park": 80.0
+      },
       "rubric": 69.3,
       "signature_bonus": 11.4,
       "total": 80.7,

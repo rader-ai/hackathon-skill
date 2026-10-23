@@ -33,9 +33,9 @@ Runs now keep to a clock. Every agent has a timebox, groups move at their own pa
 
 <table>
   <tr>
-    <th>1st · Group B · 84.8</th>
-    <th>2nd · Group C · 83.2</th>
-    <th>3rd · Group A · 82.6</th>
+    <th>=1st · Group B · 84.8</th>
+    <th>=1st · Group C · 83.2</th>
+    <th>=1st · Group A · 82.6</th>
   </tr>
   <tr valign="top">
     <td><img src="group-project-runs/bakery-404-20261023/renders/group-b-375.png" alt="Group B's 404 page at phone width: the visitor's mistyped address carved into a loaf" width="100%"></td>
@@ -49,7 +49,7 @@ Runs now keep to a clock. Every agent has a timebox, groups move at their own pa
   </tr>
 </table>
 
-Only 2.2 points separate first from last. Clock, scores and every judge's note are in [`group-project-runs/bakery-404-20261023/`](group-project-runs/bakery-404-20261023/).
+Only 2.2 points separate the top total from the bottom one, and the judges split 3 to 2 on each pair, so the scoring script calls all three too close to call and they share first place. Pick by what each does best: B for the idea, C for usefulness, A for a page that never breaks. Clock, scores and every judge's note are in [`group-project-runs/bakery-404-20261023/`](group-project-runs/bakery-404-20261023/).
 
 ## See it work: a coffee-app loader
 
@@ -125,14 +125,16 @@ Each run can produce a shareable gallery: live loaders, the score sheet, every s
 |---|---|
 | **Visionary** | The creative. Refuses anything generic, and drafts the pitch. |
 | **Producer** | Makes the call, owns the plan, and cuts every claim the build doesn't back up. |
-| **Skeptic** | Finds the fatal flaw in every idea, including their own, and red-groups the build. |
+| **Skeptic** | Finds the fatal flaw in every idea, including their own, and attacks the build before the judges do. |
 | **Craftsperson** | Builds the real thing: files you can open, not a description of files. |
 
 Each member also gets a name, a personality, taste anchors and a blind spot that groupmates are expected to catch. Groups are never told what to make. Their temperament (Purists, Humanists, Provocateurs...) and their people decide it.
 
 **The friction is real.** Members propose alone, then attack each other's ideas. If a group agrees too easily, the next round tells the Skeptic and Visionary to escalate. In the example run, Skeptics caught a contrast failure, a bug in their own group's plan, and a glitch that read as the app breaking.
 
-**Judging is independent.** Every judge scores alone on their own model. `scripts/tally.py` validates every score file, totals rubric and secret-criterion points, and reports where the judges disagreed most.
+**No two groups build the same idea.** While the groups argue, one more agent reads every group's proposals and sorts them by their core move. If two groups are heading for the same idea, it goes to the group that argued it best, and the other has to pick something else. Earlier runs without this check kept converging: all three bakery groups added the same "open right now" line.
+
+**Judging is independent, and ties are called ties.** Every judge scores alone on their own model. `scripts/tally.py` validates every score file, totals rubric and secret-criterion points, and reports where the judges disagreed most. It also checks each lead against the judges' disagreement: a lead smaller than twice its standard error across judges isn't a lead, so those groups share a place instead of being ranked on noise.
 
 ## The feedback loop
 
@@ -146,7 +148,7 @@ The Skeptic attacks that triage from both sides: notes taken just to please a ju
 
 **The judges score v1 and v2 side by side, in the same pass.** That turned out to matter. In the example, after writing their notes, the judges graded the same v1 builds 4 to 11 points harder than in round 1. Comparing v2 with the old round-1 score made Warm Hands look like it got 5 points worse. Paired, it got 4 points better.
 
-Every run also appends what it learned to [`lessons.md`](group-project/lessons.md). The Head Judge reads the lessons on what wins in that domain; groups only ever see the process lessons, so no run simply copies the last winner.
+Every run also appends what it learned to [`lessons.md`](group-project/lessons.md). The panel designer reads the lessons on what wins in that domain; groups only ever see the process lessons, so no run simply copies the last winner.
 
 ---
 
@@ -175,20 +177,37 @@ Or just say "run a hackathon on…", "have teams compete on…", or "I want vari
 
 | Setting | Default |
 |---|---|
-| Groups | 4 (3-5) |
+| Groups | 3 in `lite`, 4 in `standard` (3-5) |
 | Group size | 4 (3-5; 5 adds a Wildcard from an unrelated field) |
 | Mode | `lite` (~15 min), or `standard` for a second clash, judges' Q&A and a bigger build (~25 min) |
 | Rematch | offered after the reveal |
+| Cap | the most subagent calls a run may make: `lite` 58, `standard` 110 (the estimate + 25%) |
 
 ### Time and cost
 
-Every agent works to a timebox, groups move at their own pace after the decision round, and the Host stops anything far over budget, so a run keeps to a clock. The skill tells you the mode, group count and expected time before it starts.
+Every agent works to a timebox, groups move at their own pace after the decision round, and the Host stops anything far over budget, so a run keeps to a clock. Before it starts, the skill shows you this estimate and the cap, and at the end it reports what the run actually used.
 
-| Run | Time | Subagent calls |
-|---|---|---|
-| `lite`, 3 groups × 4 | ~15 min (measured: 9 min 50 s) | about 45 |
-| `standard`, 4 groups × 4 | ~25 min | about 80 |
-| Rematch, 3 groups | ~10 min more | about 22 more |
+| Run | Time | Subagent calls (Opus / Sonnet / Haiku) | Tokens |
+|---|---|---|---|
+| `lite`, 3 groups × 4 | ~15 min (measured: 9 min 50 s) | about 46 (3 / 42 / 1) | measured: ~19M input, about 80% read from cache; ~0.1M output |
+| `standard`, 4 groups × 4 | ~25 min | about 88 (5 / 81 / 2) | not yet measured |
+| Rematch, 3 groups | ~10 min more | about 22 more (4 / 16 / 2) | not yet measured |
+
+Cost follows the number of calls more than the brief: each subagent starts by loading Claude Code's system prompt and tool definitions, about 95k tokens in the measured run and more if you have many connectors enabled. If a run would pass the cap, the Host cuts optional steps (rematch first, then Q&A, the second clash, the extra reviewer, the fix round) and goes straight to judging, and tells you what it cut. Stop a run at any time: everything finished so far stays on disk.
+
+### Words you'll see
+
+| Word | Meaning |
+|---|---|
+| Host | Your Claude Code session. It runs the hackathon but never designs anything. |
+| Group / team | The same thing. The README says groups; the skill's files say teams. |
+| `lite` / `standard` | How long a run is. `standard` adds a second argument round, judges' questions and a longer build. |
+| Signature criterion | One thing each judge scores in secret, revealed at the end. Worth up to 3 points per judge. |
+| Spread | How far apart the judges' scores for one group are. A big spread means the judges disagreed. |
+| Too close to call | Two groups whose gap is smaller than the judges' disagreement. They share a place (`=1`). |
+| Divergence check | The step that stops two groups from building the same idea. |
+| Rematch | Judges' notes go back to the groups, who build a v2 that is scored side by side with v1. |
+| Cap | The most subagent calls a run may make before the Host starts cutting optional steps. |
 
 ## What's inside
 
@@ -203,8 +222,11 @@ group-project-runs/
   coffee-loader-20261023/      the example run, with the rematch
   readme-showcase-20261023/    a run that built a README skill
   bakery-404-20261023/         the timed 10-minute run
+roadmap/                       the backlog and the user feedback behind it
 assets/                        README visuals
 ```
+
+Everything a run makes goes in `group-project-runs/<brief>-<date>/` under the folder you start it from. Agents are told to write nowhere else. That is an instruction to them, not a sandbox, so start runs from a folder without secrets in it.
 
 ## Status
 

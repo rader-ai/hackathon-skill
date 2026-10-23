@@ -54,7 +54,8 @@ Budgets are ceilings, not targets: agents usually finish early, and teams don't 
 other, so the deadlines add up to more than the run takes. The extra build minute in `lite` is there
 because timed builds came in at 3-5 KB and three minutes early; spend it on depth, not scope.
 
-Tell the user the mode, team count and expected time before Setup.
+Before Setup, show the user the cost preview (see **Cost and the cap** at the end) and the cap,
+and start only when they've seen it.
 
 ## 0. Intake (one exchange, then go)
 
@@ -70,13 +71,14 @@ single `AskUserQuestion` call; otherwise state your defaults in one line and sta
 | **Mode** | `lite` (~15 min). `standard` adds a second clash, judges' Q&A and a bigger build (~25 min) |
 | **Rematch** - judges' notes go back to the teams, who build a v2 that is re-scored (section 6) | offer after the reveal |
 | **Constraints** - brand, assets, tools, length, format | none |
+| **Cap** - the most subagent calls the run may make | the mode's estimate + 25% (`lite` 58, `standard` 110) |
 
 Create the workspace in the current directory:
 
 ```
 group-project-runs/<slug>-<YYYYMMDD>/
   brief.md                      # idea, medium, constraints, settings
-  clock.md                      # phase deadlines (Host)
+  clock.md                      # phase deadlines, agent calls so far vs the cap (Host)
   judges/
     panel.md                    # PUBLIC - who the judges are
     judges-brief.md             # PUBLIC - goals + rubric (no signature criteria)
@@ -85,6 +87,7 @@ group-project-runs/<slug>-<YYYYMMDD>/
   teams/<team-id>/
     charter.md                  # team identity + members
     rounds/<N>-<member-id>.md   # each member's entry for a round - the debate transcript
+    divergence.md               # which crowded ideas this team must leave (divergence check)
     proposals/<member-id>.md    # Round 1 solo proposals
     plan.md                     # the Producer's decision
     build/                      # the actual deliverable
@@ -131,8 +134,9 @@ Every member is a separate `Agent` call with `model: "sonnet"`, using the role p
 |---|---|---|
 | **1. Propose** | every member, solo | Read the brief + judges' brief. Name the three obvious ideas, then propose something that isn't one of them. ≤250 words. |
 | **2a. Clash** | every member | Read teammates' proposals. Attack the weakest ideas, defend or concede your own, steal what's good. Skeptic finds the fatal flaw in every proposal. |
+| **Divergence check** (with 2a) | one Host-side agent | Groups every team's proposals by core mechanism. Where two teams share one, gives it to the team that argued it best and tells the others, in `teams/<id>/divergence.md`, to leave it. Adds no time: it runs alongside 2a. |
 | **2b. Second clash** (standard) | every member | Respond to what was said about your position. Move or harden, with reasons. |
-| **3. Decide** | Producer | One direction, a plan that fits the build budget, who owns what, honest dissent. |
+| **3. Decide** | Producer | One direction no other team holds (per `divergence.md`), a plan that fits the build budget, who owns what, honest dissent. |
 | **4. Build** | Craftsperson (+ Visionary on a split) | Build the real deliverable into `build/` within the budget. |
 | **5. Review** | Skeptic; for a tool, + Visionary in parallel | Skeptic ranks what would lose points. If the deliverable is a tool, skill or anything meant to be used, the Visionary uses it cold at the same time and logs every guess as a bug. |
 | **6. Fix** | Craftsperson | Fix the top 3 issues (cold-use blockers count first); log the rest as known issues. |
@@ -145,6 +149,10 @@ Rules the Host enforces:
   the Decide prompt's note to the Producer that consensus was too easy, and name the convergence.
   When every proposal shares one mechanism because the brief demands it (e.g. "no invented
   claims"), call that mechanism table stakes so teams compete on something else.
+- **Different directions.** Every run before the divergence check converged on a shared idea (all
+  12 README-skill proposals built on the same claim ledger; all three bakery teams added an "open
+  right now" line). The check hands each crowded idea to one team. Say in the Round 2a status line which ideas were crowded
+  and who got them.
 - **Real builds.** A deliverable is files someone can open, not a description of files.
 - **One way to look.** Anyone checking an animated build - Craftsperson, Skeptic or judge - uses
   `scripts/capture.mjs` (the LOOK block in prompts.md). It records in real time, so every judge
@@ -171,11 +179,15 @@ Rules the Host enforces:
 ## 4. Reveal
 
 Present to the user, in this order:
-1. The standings table (from `results.md`) and how long the run took against the clock.
+1. The standings table (from `results.md`), how long the run took against the clock, and how
+   many subagent calls it made by model against the estimate and the cap. Read
+   the "How clear is each lead?" lines out: when tally calls teams too close to call, they share a
+   place (`=1`), so never name a winner among them - say what each one is best at instead.
 2. Each judge's **signature criterion revealed**, with who won it and the judge's one-line why.
 3. Per team: the pitch hook, where the build lives (clickable path), what the judges loved and docked.
 4. The biggest judge disagreement (highest spread) - often the most interesting variation.
 5. One recommendation: which variation to take forward, and what to graft onto it from the others.
+   When teams tie, base it on the user's goal and each team's strongest criterion, not the total.
 
 If the user wants a shareable page, build a scoreboard/gallery page from `results.json` and
 the team builds, following the Artifact tool's own instructions.
@@ -221,9 +233,29 @@ Append to [lessons.md](lessons.md) under the domain's heading (create it if new)
 
 Keep each lesson one line, dated, with the run folder it came from. Prune contradicted lessons.
 
-## Cost note
+## Cost and the cap
 
-`lite` with 3 teams × 4 ≈ 45 subagent calls (panel 1, propose 12, clash 12, decide 3, build 3-6,
-review 3-6, fix 3, pitch 3, judges 5). `standard` with 4 × 4 ≈ 80 (adds a second clash and Q&A).
-A rematch adds about 5 + 4 per team + 5. Tell the user the mode, team count and expected time
-before Setup.
+Show this before Setup, filled in for the chosen mode and team count:
+
+| Run | Subagent calls (Opus / Sonnet / Haiku) | Time | Measured tokens |
+|---|---|---|---|
+| `lite`, 3 teams × 4 | ≈46 (3 / 42 / 1) | ~15 min (measured 10) | ~19M input, ~80% read from cache; ~0.1M output |
+| `standard`, 4 teams × 4 | ≈88 (5 / 81 / 2) | ~25 min | not yet measured (expect about twice `lite`) |
+| Rematch, 3 teams | +22 (4 / 16 / 2) | ~10 min | not yet measured |
+
+Where the calls go in `lite`: panel 1, propose 12, clash 12, divergence 1, decide 3, build 3-6,
+review 3-6, fix 3, pitch 3, judges 5. `standard` adds a second clash and Q&A.
+
+Tokens scale with call count more than with the brief: every subagent starts by loading the
+session's system prompt and tool definitions (about 95k tokens in the measured run, more with
+many connectors enabled), and most of that is read from cache on later turns. You can't see the
+user's plan limits, so give the numbers, not a share of their allowance.
+
+**The cap.** Keep a running count of subagent calls in `clock.md`. Before each launch, check it
+against the cap. If the next phase would pass it, finish the phase that's running, then cut in
+this order: the rematch, Q&A, the second clash, the cold-use reviewer, the fix round. Then go
+straight to judging with what's on disk. Never seat fewer than 3 judges (at least one Opus and the
+Haiku). Say in the reveal what was cut and why.
+
+**Stopping early.** If the user stops the run, stop every running agent (`TaskStop`), write what
+finished to `clock.md`, and tell them which phase each team reached. Everything on disk stays.

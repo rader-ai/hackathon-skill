@@ -4,9 +4,15 @@
 
 | # | Team | Total | Rubric | Signature bonus | j-jess-alvarez | j-keiko-hart | j-marcus-webb | j-priya-raman | j-tomas-ferreira | Spread |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1 | group-a | **89.5** | 78.4 | +11.1 | 70.0 | 78.5 | 82.5 | 80.5 | 80.5 | 12.5 |
-| 2 | group-c | **85.9** | 75.7 | +10.2 | 72.0 | 75.5 | 75.5 | 80.0 | 75.5 | 8.0 |
-| 3 | group-b | **85.2** | 75.6 | +9.6 | 80.0 | 80.0 | 76.0 | 68.0 | 74.0 | 12.0 |
+| =1 | group-a | **89.5** | 78.4 | +11.1 | 70.0 | 78.5 | 82.5 | 80.5 | 80.5 | 12.5 |
+| =1 | group-c | **85.9** | 75.7 | +10.2 | 72.0 | 75.5 | 75.5 | 80.0 | 75.5 | 8.0 |
+| =1 | group-b | **85.2** | 75.6 | +9.6 | 80.0 | 80.0 | 76.0 | 68.0 | 74.0 | 12.0 |
+
+**How clear is each lead?** A lead counts only if it is at least twice its standard error across judges; otherwise the teams share a place.
+
+- group-a vs group-c: **too close to call**, 3.6 points with a standard error of 2.6 (4 of 5 judges had group-a ahead).
+- group-c vs group-b: **too close to call**, 0.7 points with a standard error of 3.6 (2 of 5 judges had group-c ahead).
+- Every team shares first place: pick on what each does best, not on the total.
 
 ## Criterion averages
 

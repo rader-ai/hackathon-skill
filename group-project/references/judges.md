@@ -6,7 +6,7 @@ Default 5 judges. Model mix is fixed so the panel has different depths of readin
 
 | Seat | Model | Role on the panel |
 |---|---|---|
-| Head Judge | opus | Most senior voice in the domain; breaks ties. |
+| Head Judge | opus | Most senior voice in the domain; orders teams with equal totals. |
 | Senior Judge | opus | A different senior discipline that touches the domain. |
 | Practitioner | sonnet | Someone who does this work daily - craft and feasibility. |
 | Practitioner | sonnet | An adjacent field (client side, strategy, engineering, marketing...). |
