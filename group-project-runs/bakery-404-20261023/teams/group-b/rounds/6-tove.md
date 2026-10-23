@@ -1,0 +1,2 @@
+## Round 6 - Tove (Craftsperson)
+Fixed Sam's top 3. Live open/closed status now sits directly under the lead; duplicate hours line deleted. Hours button points to #status so the recovery page never 404s itself. Voice is now bakery: "That page has sold out. Nothing in the oven at this address." Added two more score marks so the loaf reads as bread. Also made the svg aria-hidden and bumped small text to 16px. README lists known issues: /menu assumption, flat loaf, local-clock status.

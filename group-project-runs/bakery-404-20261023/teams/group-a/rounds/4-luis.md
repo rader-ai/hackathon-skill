@@ -1,0 +1,2 @@
+## Round 4 - Luis (Craftsperson)
+Built the Ticket Stub exactly per plan: build/index.html (cream ticket on kraft, plain headline, "No. 404", echoed path via textContent, three 48px links above the fold at 375px, dashed stub with static hours plus a live open/closed line, one reduced-motion-guarded slide-in) and build/README.md. Checked at 375x812 and 1280x800; both read cleanly, no fixes needed. Unfinished: nothing from the plan; echoed path shows a file path when opened locally (fine on a real server). Cut items stayed cut.

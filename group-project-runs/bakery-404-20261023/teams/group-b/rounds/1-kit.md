@@ -1,0 +1,3 @@
+## Round 1 - Kit (Visionary)
+
+Everyone's going to give you a sad croissant and a pun. I'm not. Nobody lands on a bakery 404 because they love errors; they're hungry and probably checking if you're open. So we flip it: the page opens with "Open till 2pm. Come in." (or "Closed Mondays, back Tuesday 7am"), and the missing page becomes a small till receipt: "1 x page, not found, no charge." No apology, no joke about toast. Sam will say the error is buried, so "Page not found" stays a real heading, just not the loudest thing. Rina gets her three fat buttons. Tove, I want a loaf SVG and maybe one wisp of steam, calm under reduced-motion. The risk is clarity; I'll own it.

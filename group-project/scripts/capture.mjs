@@ -100,7 +100,8 @@ await browser.close();
 fs.mkdirSync(args.out, { recursive: true });
 // Name files after the team and build folders (e.g. warm-hands-build-v2) so teams never collide.
 const buildDir = path.dirname(args.file);
-const tag = `${path.basename(path.dirname(buildDir))}-${path.basename(buildDir)}` + (args.reduced ? '-reduced' : '') + (args.blur ? '-blur' : '');
+// The size is part of the name too, so captures at two sizes don't overwrite each other.
+const tag = `${path.basename(path.dirname(buildDir))}-${path.basename(buildDir)}-${width}x${height}` + (args.reduced ? '-reduced' : '') + (args.blur ? '-blur' : '');
 const written = { frames: [], gif: null, loadedAt };
 for (const t of args.times) {
   const png = path.join(args.out, `${tag}-${t.toFixed(2)}s.png`);

@@ -60,3 +60,17 @@ a later run contradicts.
 - 2026-10-23 · readme-showcase: A self-test that SKIPs when a dependency is missing reads as a pass; make it exit non-zero and say INCOMPLETE.
 - 2026-10-23 · readme-showcase (Host): The run took 56 min; one team's unbounded build (15 min) and revise (19 min) set the pace while the fastest team was done at 25. Timebox every agent, size plans to the build budget, and let teams run at their own pace after Decide.
 
+
+## Process (all domains), added from bakery-404
+
+- 2026-10-23 · bakery-404 (Host): The clock redesign ran a lite 3-group run in 9:50 against a 15 min target; builds came in at 3-5KB, so the Build budget can grow before the run gets slow again.
+- 2026-10-23 · bakery-404 (Host): Render web pages over a local HTTP server, not file://; file:// renders printed the local path into two builds that echo the URL, and judges would have scored the leak.
+- 2026-10-23 · bakery-404: Three of three groups and four of twelve members reached for an "open right now" line and pencilled paper notes; when a brief asks for "a sense of place", expect the shop-notice cliché and ask teams to prove theirs.
+- 2026-10-23 · bakery-404: Judges docked every page whose echoed path broke at the real URL (/menue.html); test the dynamic text at the address judges will see, with JS on and off.
+
+## Error pages / small web pages
+
+### What wins
+
+- 2026-10-23 · bakery-404: The visitor's own typo turned into the joke (baked onto a loaf) won the gut-check and ten-second-read judges; a useful week-hours table won the practical and keyboard judges. Top three were within 2.2 points.
+- 2026-10-23 · bakery-404: Hours, headline and links must be static HTML; a JS-built hours table cost a team the "survives without extras" signature.

@@ -1,0 +1,3 @@
+## Round 4 - Tove (Craftsperson)
+Built build/index.html and README.md as planned: plain h1 "Page not found" with rust 404 stamp, three 56px links above the fold at 375px, SVG loaf with the last path segment on an arc (textContent only, 12-char cap, "?" fallback), full path as wrapped mono text, live open/closed line plus static hours. One fade-in, off under reduced motion.
+Checked at 375 and 1280; the path came out as /index.html because it was opened from file. Not tested: /menue and a 200-char path in a server context (logic read only). Unfinished: nothing from the plan; slashes are simple curves.

@@ -1,0 +1,12 @@
+{
+  "goal": "The 404 page that makes a lost visitor instantly understand, find their way, and feel they've arrived at Crumb & Co. rather than a template.",
+  "head_judge": "j-ines-carvalho",
+  "signature_points": 3,
+  "criteria": [
+    {"id": "recover", "name": "Recovery & clarity", "weight": 25, "description": "Instantly clear the page wasn't found; home, menu and opening hours (7am-2pm, closed Mondays) are obvious and one tap away."},
+    {"id": "place", "name": "Sense of place", "weight": 20, "description": "Feels unmistakably like this small neighbourhood sourdough bakery, not a generic 404 or another team's page."},
+    {"id": "concept", "name": "Concept strength", "weight": 15, "description": "One clear, ownable idea you can say in a sentence, and it's surprising."},
+    {"id": "craft", "name": "Craft & execution", "weight": 25, "description": "Finished and polished; one self-contained index.html, works at 375px and desktop, respects prefers-reduced-motion."},
+    {"id": "pitch", "name": "Pitch", "weight": 15, "description": "Short, persuasive, honest about risk; makes the bakery owner want to say yes."}
+  ]
+}

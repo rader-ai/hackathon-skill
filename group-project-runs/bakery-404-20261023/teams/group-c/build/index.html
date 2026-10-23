@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Page not found - Crumb &amp; Co.</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#fbf4e3;--rule:#d9c9a3;--ink:#2b2118;--pencil:#4a4a52;--crust:#8a3b12}
+*{box-sizing:border-box}
+body{margin:0;background:#efe3c8;color:var(--ink);font:17px/1.5 Georgia,"Times New Roman",serif}
+.sheet{max-width:640px;margin:0 auto;min-height:100vh;padding:28px 20px 40px 56px;position:relative;background:var(--paper);
+background-image:repeating-linear-gradient(transparent 0,transparent 31px,var(--rule) 31px,var(--rule) 32px);box-shadow:0 0 24px rgba(0,0,0,.12)}
+.sheet:before{content:"";position:absolute;left:40px;top:0;bottom:0;width:2px;background:#c9543a;opacity:.6}
+.top{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--pencil);margin:0 0 8px}
+h1{font-size:clamp(36px,9vw,56px);line-height:1.1;margin:8px 0 0}
+.hand{font-family:Caveat,"Bradley Hand","Segoe Script",cursive;font-weight:700;font-size:32px;color:var(--pencil);margin:4px 0 20px;transform:rotate(-1deg)}
+.path{position:relative;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font:16px/1.4 ui-monospace,Menlo,monospace;padding:6px 4px;margin:0 0 6px}
+.path svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.path path{stroke:var(--pencil);stroke-width:5;fill:none;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:0;animation:draw .7s ease-out both}
+@keyframes draw{from{stroke-dashoffset:1}}
+@media(prefers-reduced-motion:reduce){.path path{animation:none}}
+.open{margin:0 0 16px}.loaf{width:40px;height:20px;vertical-align:middle}
+.sr{position:absolute;left:-9999px}
+.note{margin:0 0 20px}
+nav a{display:flex;align-items:center;justify-content:space-between;min-height:48px;width:100%;padding:8px 14px;margin:0 0 10px;background:#fff9ea;border:2px solid var(--ink);color:var(--ink);text-decoration:none;font-weight:700}
+nav a span{font-weight:400;font-size:15px;color:var(--pencil)}
+nav a:focus-visible,nav a:hover{background:var(--ink);color:var(--paper)}
+nav a:hover span,nav a:focus-visible span{color:var(--paper)}
+h2{font-size:20px;margin:24px 0 8px}
+table{border-collapse:collapse;width:100%;background:rgba(255,249,234,.85)}
+td{padding:6px 10px;border-bottom:1px solid var(--rule)}
+td:last-child{text-align:right}
+tr.off td{color:var(--pencil)}tr.off th,tr.off td:last-child{text-decoration:line-through;text-decoration-thickness:2px}
+tr.today td{border-top:2px solid var(--pencil);border-bottom:2px solid var(--pencil);font-weight:700}tr.today th{border-top:2px solid var(--pencil);border-bottom:2px solid var(--pencil);border-left:2px solid var(--pencil);border-radius:14px 0 0 14px;padding:6px 10px}tr.today td:first-child{border-left:2px solid var(--pencil);border-radius:14px 0 0 14px}tr.today td:last-child{border-right:2px solid var(--pencil);border-radius:0 14px 14px 0}
+.mon{margin:8px 0 0;font-weight:700}
+.baker{margin:28px 0 4px;font-style:italic}
+.margin{font-family:Caveat,"Bradley Hand",cursive;font-size:22px;color:var(--crust);margin:6px 0 0}
+</style></head><body>
+<main class="sheet">
+<p class="top">Crumb &amp; Co. &middot; Bake sheet</p>
+<h1>Page not found</h1>
+<p class="hand">Not on today's sheet.</p>
+<p class="open"><b>Open 7am-2pm, closed Mondays.</b> Sourdough, a few tables, coffee. <svg class="loaf" viewBox="0 0 40 20" aria-hidden="true"><path d="M3 16 C2 6 12 2 20 2 C28 2 38 6 37 16 Z" fill="#c98a4b" stroke="#8a3b12" stroke-width="2"/><path d="M12 6l4 6M20 4l4 8M28 6l3 6" stroke="#8a3b12" stroke-width="1.5" fill="none"/></svg></p>
+<p class="note">We looked for this line and couldn't find it:</p>
+<span class="path" id="p"><span id="pt"></span><svg viewBox="0 0 100 20" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M1 11 C 25 4, 50 17, 99 8"/></svg></span>
+<nav aria-label="Get back on track">
+<a href="/">Home <span>the front counter</span></a>
+<a href="/menu">Menu <span>what's in the oven</span></a>
+<a href="#hours">Full week <span>today is marked</span></a>
+</nav>
+<h2 id="hours">Hours</h2>
+<table id="t"></table>
+<p class="mon" id="mon" hidden>Closed Mondays, back Tuesday at 7.</p>
+<p class="baker">The page you wanted isn't baked. The bread is. &mdash; the bakers at Crumb &amp; Co.</p>
+<p class="margin">&larr; tell us if a link sent you here.</p>
+</main>
+<script>
+document.getElementById('pt').textContent=/\.html?$/.test(location.pathname)?'this page':location.pathname;
+var d=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],n=new Date().getDay(),h='';
+[1,2,3,4,5,6,0].forEach(function(i){h+='<tr class="'+(i==1?'off ':'')+(i==n?'today':'')+'"><th scope="row" style="text-align:left;font-weight:inherit">'+d[i]+(i==n?' (today)':'')+'</th><td>'+(i==1?'no bake':'7am - 2pm')+'</td></tr>'});
+document.getElementById('t').innerHTML='<caption class="sr">Opening hours by day</caption>'+h;
+if(n==1)document.getElementById('mon').hidden=false;
+</script></body></html>

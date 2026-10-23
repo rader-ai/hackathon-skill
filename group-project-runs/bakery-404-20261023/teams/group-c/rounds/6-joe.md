@@ -1,0 +1,2 @@
+## Round 6 - Joe (Craftsperson)
+Fixed the top 3 from Ada: hours line now sits under the headline ("Open 7am-2pm, closed Mondays"), and the redundant Hours nav became "Full week". The path line truncates with an ellipsis and says "this page" on .html files. Added a small loaf SVG and a line of voice, plus table caption, row headers and a "(today)" text cue. Left in README Known issues: guessed hrefs, notebook concept, focus style.

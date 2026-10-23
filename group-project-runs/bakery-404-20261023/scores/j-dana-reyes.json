@@ -1,0 +1,49 @@
+{
+  "judge": "j-dana-reyes",
+  "model": "haiku",
+  "signature": {
+    "name": "Tell-a-friend detail",
+    "description": "Ten minutes after closing the tab, is there one specific thing from the page she'd remember and mention to someone?"
+  },
+  "teams": {
+    "group-a": {
+      "criteria": {
+        "recover": 8,
+        "place": 8,
+        "concept": 7,
+        "craft": 8,
+        "pitch": 6
+      },
+      "signature_score": 7,
+      "signature_why": "The loaf standing in for the zero in No. 404 is cute and I'd half-mention it, but it's a visual gag rather than a line I'd repeat.",
+      "loved": "The ticket framing with 'You've drawn a number we don't have' and bold hours right under the headline.",
+      "docked": "The ticket floats in empty kraft at desktop width, and the pitch doesn't say much beyond the idea."
+    },
+    "group-b": {
+      "criteria": {
+        "recover": 9,
+        "place": 8,
+        "concept": 9,
+        "craft": 7,
+        "pitch": 8
+      },
+      "signature_score": 9,
+      "signature_why": "MENUE.HTML baked onto the loaf is exactly the thing I'd text a friend: 'the 404 bakes your typo into bread.'",
+      "loved": "'Every other 404 hides your typo. Ours bakes it into a loaf.' and the typo carved into the bread.",
+      "docked": "The loaf is a flat brown ellipse with no crust, so the bread looks more like a plate than a loaf."
+    },
+    "group-c": {
+      "criteria": {
+        "recover": 9,
+        "place": 9,
+        "concept": 8,
+        "craft": 6,
+        "pitch": 7
+      },
+      "signature_score": 8,
+      "signature_why": "'The page you wanted isn't baked. The bread is.' is a line I'd repeat, and the crossed-out Monday is a nice touch.",
+      "loved": "The full week table with today highlighted and Monday marked 'no bake', plus 'The bread is.' at the foot.",
+      "docked": "At 375px the pencil strike sits on top of 'this page' and makes it hard to read."
+    }
+  }
+}

@@ -1,0 +1,2 @@
+## Round 6 - Luis (Craftsperson)
+Fixed Greta's top three. Hours and live status now sit right under the headline, bold, and "Hours" anchors to #hours instead of a maybe-404. The h1 moved inside the ticket, and the 0 became a bitten loaf SVG with a sourdough line. I also centred the ticket, added aria-live and a "(local time)" label. Re-captured at 375: ran clean. Known issues listed in the README (timezone, external fonts, empty desktop space).

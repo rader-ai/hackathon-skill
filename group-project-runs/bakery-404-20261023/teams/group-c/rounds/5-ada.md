@@ -1,0 +1,2 @@
+## Round 5 - Ada (Skeptic)
+Top three costs. One: hours sit below the fold; Dana wants 7am-2pm, closed Mondays, under the headline, and the third "Hours" button just duplicates that. Two: the struck-through path balloons into a filesystem string when opened as a file; ellipsis it and fall back to "this page". Three: ruled paper reads as stationery, not bakery; add one inline SVG loaf and one specific sentence about the sourdough and tables. Also add table caption/th for Sam and a text "today" cue. Reduced motion is handled. Full list in review.md.

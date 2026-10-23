@@ -12,12 +12,44 @@
 
 <p align="center">
   <a href="#install">Install</a> ·
+  <a href="#latest-a-full-hackathon-in-under-10-minutes">Latest</a> ·
   <a href="#see-it-work-a-coffee-app-loader">See it work</a> ·
   <a href="#how-a-run-works">How it works</a> ·
   <a href="#the-feedback-loop">The rematch</a>
 </p>
 
 ---
+
+## Latest: a full hackathon in under 10 minutes
+
+Runs now keep to a clock. Every agent has a timebox, groups move at their own pace after they decide, and the Host stops anything that runs long. A timed `lite` run (3 groups of 4, 5 judges) on a small brief, a bakery's "page not found" page, went from brief to ranked results in **9 min 50 s**. The run before the change took 56 minutes.
+
+| Phase | Deadline | Finished |
+|---|---|---|
+| Setup: judges, brief, groups | 1:30 | 0:59 |
+| Propose, clash, decide | 5:30 | 5:26 |
+| Build, review, fix | 12:30 | 7:33 |
+| Pitch, judging, tally | 16:00 | 9:50 |
+
+<table>
+  <tr>
+    <th>1st · Group B · 84.8</th>
+    <th>2nd · Group C · 83.2</th>
+    <th>3rd · Group A · 82.6</th>
+  </tr>
+  <tr valign="top">
+    <td><img src="group-project-runs/bakery-404-20261023/renders/group-b-375.png" alt="Group B's 404 page at phone width: the visitor's mistyped address carved into a loaf" width="100%"></td>
+    <td><img src="group-project-runs/bakery-404-20261023/renders/group-c-375.png" alt="Group C's 404 page at phone width: a bake sheet with the missing page crossed off and the week's hours" width="100%"></td>
+    <td><img src="group-project-runs/bakery-404-20261023/renders/group-a-375.png" alt="Group A's 404 page at phone width: a bakery counter ticket with a number they don't have" width="100%"></td>
+  </tr>
+  <tr valign="top">
+    <td><sub>"Every other 404 hides your typo. Ours bakes it into a loaf." Won on concept; two judges said the loaf reads as a frown.</sub></td>
+    <td><sub>The missing page is a line crossed off the morning bake sheet. Most useful hours, best keyboard path.</sub></td>
+    <td><sub>"You've drawn a number we don't have." The leanest page (3.7 KB), and it still works with JavaScript off.</sub></td>
+  </tr>
+</table>
+
+Only 2.2 points separate first from last. Clock, scores and every judge's note are in [`group-project-runs/bakery-404-20261023/`](group-project-runs/bakery-404-20261023/).
 
 ## See it work: a coffee-app loader
 
@@ -154,7 +186,7 @@ Every agent works to a timebox, groups move at their own pace after the decision
 
 | Run | Time | Subagent calls |
 |---|---|---|
-| `lite`, 3 groups × 4 | ~15 min | about 45 |
+| `lite`, 3 groups × 4 | ~15 min (measured: 9 min 50 s) | about 45 |
 | `standard`, 4 groups × 4 | ~25 min | about 80 |
 | Rematch, 3 groups | ~10 min more | about 22 more |
 
@@ -168,14 +200,16 @@ group-project/                 the skill
   scripts/tally.py             scoring for round 1 and rematches
   scripts/capture.mjs          frames and GIFs of animated builds, for builders and judges
 group-project-runs/
-  coffee-loader-20261023/      the example run, every file
+  coffee-loader-20261023/      the example run, with the rematch
+  readme-showcase-20261023/    a run that built a README skill
+  bakery-404-20261023/         the timed 10-minute run
 assets/                        README visuals
 ```
 
 ## Status
 
-**Tested:** `lite` mode, 3 groups of 4, one domain (UI motion), the rematch with paired re-scoring, and the scoring script.
+**Tested:** `lite` mode with 3 groups of 4, the 15-minute clock, the rematch with paired re-scoring, the scoring script, and three domains: UI motion, a Claude Code skill, and a web page.
 
-**Not yet tested:** `standard` mode and the Q&A round, 4-5 groups, group sizes 3 and 5, the Wildcard role, and any domain other than UI motion.
+**Not yet tested:** `standard` mode and the Q&A round, 4-5 groups, group sizes 3 and 5, the Wildcard role, and domains beyond those three.
 
 Issues and run reports are welcome.

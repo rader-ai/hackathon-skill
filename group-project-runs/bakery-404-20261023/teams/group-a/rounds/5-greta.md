@@ -1,0 +1,2 @@
+## Round 5 - Greta (Skeptic)
+Review is in review.md. Top 3: (1) hours are small and last, and the "Hours" button goes to /hours, which may itself 404, so move hours up in bold and anchor the button to the stub; (2) the concept is one line with no bread in sight, so add an inline SVG loaf; (3) fix the Sunday-evening bug that says "opens tomorrow" when tomorrow is closed Monday. Also confirm the 375px ticket is centred, since the screenshot showed it left-offset. Reduced motion passes.

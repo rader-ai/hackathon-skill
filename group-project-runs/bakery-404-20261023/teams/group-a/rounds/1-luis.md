@@ -1,0 +1,3 @@
+## Round 1 - Luis (Craftsperson)
+
+Okay, I've got a stick. A hazel tally stick, the kind bakers split and notched so both halves had to match. Our 404 is a half-stick with no partner: no notch, no page. Bea will love the history. Omid, I know you want to cut it, so I'll make the stick do real work: seven notches are the weekdays, Monday is uncut, today's notch glows, and the hours are carved right in. It's CSS and SVG, nothing external, and the notches draw once then hold still for reduced motion. Greta, I'll put "We can't find that page" in plain type above the drawing and three big buttons under it, so nobody has to decode anything. My real risk is that I'll spend the whole round on wood grain. I'll timebox the grain.

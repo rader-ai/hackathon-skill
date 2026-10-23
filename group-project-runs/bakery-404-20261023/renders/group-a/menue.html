@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Page not found - Crumb &amp; Co.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--kraft:#b98e5b;--cream:#fbf3e2;--ink:#2b1d12;--crust:#7a3f17}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--kraft);color:var(--ink);font:16px/1.4 "Space Mono",ui-monospace,monospace;display:flex;flex-direction:column;align-items:center;padding:20px 16px 32px}
+h1{font:800 clamp(1.6rem,6vw,2.2rem)/1.1 Fraunces,Georgia,serif;margin:0 auto 10px;text-align:center;max-width:16ch}
+.brand{font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem;margin:0}
+.ticket{margin:0 auto;width:100%;max-width:420px;background:var(--cream);box-shadow:0 2px 0 rgba(0,0,0,.25);border-radius:6px;overflow:hidden}
+@media (prefers-reduced-motion:no-preference){.ticket{animation:in .6s cubic-bezier(.2,.8,.2,1) both}@keyframes in{from{transform:translateX(60px) rotate(2deg);opacity:0}}}
+.main{padding:18px 20px 14px;text-align:center}
+.no{font:800 4.2rem/1 Fraunces,Georgia,serif;color:var(--crust);margin:0}
+.no small{font:700 1rem "Space Mono",monospace;display:block;letter-spacing:.2em}
+.line{margin:8px 0 6px;font-weight:700}
+.path{display:inline-block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border:2px dashed var(--ink);padding:2px 8px;font-size:.9rem}
+nav{display:grid;gap:8px;margin-top:14px}
+nav a{display:block;min-height:48px;line-height:48px;background:var(--ink);color:var(--cream);text-decoration:none;font-weight:700;border-radius:4px}
+nav a:focus-visible,nav a:hover{outline:3px solid var(--crust);outline-offset:2px}
+.stub{border-top:3px dashed var(--kraft);padding:12px 20px 16px;text-align:center;font-size:.9rem;background:radial-gradient(circle at 50% 0,var(--kraft) 8px,transparent 9px) 0 0/22px 14px repeat-x var(--cream)}
+.stub p{margin:2px 0}.hrs{margin:0 0 12px;font-size:1.05rem}.live{display:block;font-weight:700;color:var(--crust)}.loaf{vertical-align:-4px}
+</style></head><body>
+<p class="brand">Crumb &amp; Co.</p>
+<main class="ticket">
+<div class="main">
+<h1>We can't find that page.</h1>
+<p class="hrs" id="hours"><strong>Open 7am-2pm, closed Mondays</strong><span class="live" id="live" aria-live="polite"></span></p>
+<p class="no"><small>No.</small>4<svg class="loaf" viewBox="0 0 40 30" width="52" height="40" role="img" aria-label="0, a loaf with a bite out"><path d="M4 22C2 10 12 3 22 3c9 0 16 6 14 14-1 6-4 8-7 8H9c-3 0-5-1-5-3z" fill="#c9852e" stroke="#7a3f17" stroke-width="2.5"/><path d="M13 9l4 6M21 7l4 6M29 10l3 5" stroke="#fbf3e2" stroke-width="2" stroke-linecap="round"/><circle cx="36" cy="6" r="5" fill="#fbf3e2"/></svg>4</p>
+<p class="line">You've drawn a number we don't have. Sold out of that page, like our 9am country loaf.</p>
+<span class="path" id="p">/this-page</span>
+<nav aria-label="Get back on track"><a href="/">Home</a><a href="/menu">Menu</a><a href="#hours">Hours</a></nav>
+</div>
+<div class="stub"><p>Crumb &amp; Co. - fresh daily</p></div>
+</main>
+<script>
+try{var s=decodeURIComponent(location.pathname);if(s&&s!=="/")document.getElementById("p").textContent=s.length>40?s.slice(0,40)+"...":s}catch(e){}
+try{var d=new Date(),day=d.getDay(),h=d.getHours(),t=document.getElementById("live");
+t.textContent=day===1?"Closed today. Back Tuesday, 7am.":(h>=7&&h<14)?"Open right now (local time).":(h<7&&day!==1)?"Opens at 7am today.":(day===0?"Closed Mondays: opens Tuesday 7am.":"Opens 7am tomorrow.");}catch(e){}
+</script></body></html>

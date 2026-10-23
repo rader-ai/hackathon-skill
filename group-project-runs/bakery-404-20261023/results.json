@@ -1,0 +1,151 @@
+{
+  "round": 1,
+  "ranking": [
+    "group-b",
+    "group-c",
+    "group-a"
+  ],
+  "teams": {
+    "group-a": {
+      "rubric": 72.1,
+      "signature_bonus": 10.5,
+      "total": 82.6,
+      "per_judge": {
+        "j-dana-reyes": 75.5,
+        "j-ines-carvalho": 72.5,
+        "j-priya-nandakumar": 74.0,
+        "j-sam-okoye": 67.5,
+        "j-theo-marsh": 71.0
+      },
+      "spread": 8.0,
+      "criteria_avg": {
+        "recover": 7.8,
+        "place": 7.2,
+        "concept": 7,
+        "craft": 7,
+        "pitch": 6.8
+      }
+    },
+    "group-b": {
+      "rubric": 73.7,
+      "signature_bonus": 11.1,
+      "total": 84.8,
+      "per_judge": {
+        "j-dana-reyes": 81.5,
+        "j-ines-carvalho": 65.5,
+        "j-priya-nandakumar": 70.5,
+        "j-sam-okoye": 76.5,
+        "j-theo-marsh": 74.5
+      },
+      "spread": 16.0,
+      "criteria_avg": {
+        "recover": 8.4,
+        "place": 6.6,
+        "concept": 8,
+        "craft": 6.8,
+        "pitch": 7
+      }
+    },
+    "group-c": {
+      "rubric": 73.6,
+      "signature_bonus": 9.6,
+      "total": 83.2,
+      "per_judge": {
+        "j-dana-reyes": 78.0,
+        "j-ines-carvalho": 72.0,
+        "j-priya-nandakumar": 68.5,
+        "j-sam-okoye": 82.5,
+        "j-theo-marsh": 67.0
+      },
+      "spread": 15.5,
+      "criteria_avg": {
+        "recover": 8.2,
+        "place": 7.8,
+        "concept": 7.6,
+        "craft": 6,
+        "pitch": 7.4
+      }
+    }
+  },
+  "signature_awards": [
+    {
+      "judge": "j-dana-reyes",
+      "model": "haiku",
+      "signature": "Tell-a-friend detail",
+      "description": "Ten minutes after closing the tab, is there one specific thing from the page she'd remember and mention to someone?",
+      "winner": "group-b",
+      "score": 9,
+      "why": "MENUE.HTML baked onto the loaf is exactly the thing I'd text a friend: 'the 404 bakes your typo into bread.'"
+    },
+    {
+      "judge": "j-ines-carvalho",
+      "model": "opus",
+      "signature": "From screen to doorstep",
+      "description": "Does the page leave a lost web visitor wanting to walk into the shop, with a concrete reason and enough practical info (when, where) to act on it today?",
+      "winner": "group-c",
+      "score": 7,
+      "why": "Week grid with today ringed and 'sourdough, a few tables, coffee' lets me plan the visit; no live open-now or address."
+    },
+    {
+      "judge": "j-priya-nandakumar",
+      "model": "sonnet",
+      "signature": "Survives without the extras",
+      "description": "Does the page still work with JavaScript disabled and before web fonts load, and is the file lean?",
+      "winner": "group-a",
+      "score": 9,
+      "why": "3.7KB; hours, headline and all three links are static HTML; JS only fills a status line and path; fonts swap but layout holds."
+    },
+    {
+      "judge": "j-sam-okoye",
+      "model": "sonnet",
+      "signature": "Keyboard path home",
+      "description": "Can a keyboard or screen-reader visitor reach and activate Home in three Tabs or fewer, with a strong visible focus indicator and link names that make sense out of context?",
+      "winner": "group-c",
+      "score": 9,
+      "why": "Home is the first link (1 Tab), full-width 48px rows with descriptive hints, an inverted-fill focus state with the default outline kept, and the hours table is real semantic content with today marked in text, not colour alone."
+    },
+    {
+      "judge": "j-theo-marsh",
+      "model": "opus",
+      "signature": "Ten-second read",
+      "description": "Can every word of visible copy on the first screen be read in about ten seconds, with nothing cuttable?",
+      "winner": "group-b",
+      "score": 7,
+      "why": "Tightest first screen: headline, one line, status, three buttons; still says 'sold out' and 'nothing in the oven' for the same idea, and repeats the path twice."
+    }
+  ],
+  "most_divisive": "group-b",
+  "criteria": [
+    {
+      "id": "recover",
+      "name": "Recovery & clarity",
+      "weight": 25,
+      "description": "Instantly clear the page wasn't found; home, menu and opening hours (7am-2pm, closed Mondays) are obvious and one tap away."
+    },
+    {
+      "id": "place",
+      "name": "Sense of place",
+      "weight": 20,
+      "description": "Feels unmistakably like this small neighbourhood sourdough bakery, not a generic 404 or another team's page."
+    },
+    {
+      "id": "concept",
+      "name": "Concept strength",
+      "weight": 15,
+      "description": "One clear, ownable idea you can say in a sentence, and it's surprising."
+    },
+    {
+      "id": "craft",
+      "name": "Craft & execution",
+      "weight": 25,
+      "description": "Finished and polished; one self-contained index.html, works at 375px and desktop, respects prefers-reduced-motion."
+    },
+    {
+      "id": "pitch",
+      "name": "Pitch",
+      "weight": 15,
+      "description": "Short, persuasive, honest about risk; makes the bakery owner want to say yes."
+    }
+  ],
+  "signature_points": 3
+}

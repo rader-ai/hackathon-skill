@@ -1,0 +1,2 @@
+## Round 5 - Sam (Skeptic)
+Path handling is safe (textContent only, decode try/caught); long paths wrap, Tove's CSS fix holds. Top 3 fixes: (1) move the live open/closed status above the nav and drop the duplicate hours line, as Dana reads it on a phone; (2) point Hours to an on-page anchor, since /hours may itself 404; (3) replace the template lead "We couldn't find that page" with a bakery line and add loaf scoring so it stops reading as a smiley. Minor: static SVG aria-label, 14px text. Weakest criteria: place and concept; recovery is solid. Full list in review.md.

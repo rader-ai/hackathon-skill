@@ -1,0 +1,3 @@
+## Round 1 - Joe (Craftsperson)
+
+Right, so the obvious ones are the sad-loaf mascot, the "sold out" chalkboard and the crumb trail. I love all three and I'm not doing any of them. Mine is the bake sheet: the page you wanted is a line the baker looked for on her pencilled sheet and crossed off. Your own mistyped URL gets struck through in hand-drawn SVG, and the exits are the sheet's other lines, big and tappable, with the hours right there. I'm happy to bend on almost anything, which is my known weakness, so someone keep me honest on the plain "page not found" wording. Hand-lettering at 375px is my worry; I'll test it small first.

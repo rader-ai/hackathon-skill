@@ -1,0 +1,2 @@
+## Round 4 - Joe (Craftsperson)
+Built the Bake Sheet exactly as planned: lined cream sheet, plain serif "Page not found" H1, Caveat handwriting line, mistyped path (textContent) with one SVG pencil strike drawn once (static under reduced motion), three 48px+ rows (Home, Menu, Hours), Mon-struck hours grid with today ringed, Monday-only line, baker sign-off and margin note. Checked at 375 and 1280; fixed the split "today" ring. Unfinished: did not re-capture after the ring fix; no open-now logic (cut per plan).
