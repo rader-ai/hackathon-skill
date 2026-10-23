@@ -1,0 +1,22 @@
+{"judge":"j-henrik-vale","model":"opus","signature":{"name":"Freeze-Frame Brandability (the cup sleeve test)","description":"Pause the loader at 0s, 1.25s, 2.5s, 3.75s and at its worst frame, and ask whether each still, full colour and reduced to one ink at 2cm, is a composed mark a cafe could print on a sleeve, bag stamp or menu board."},
+"lesson":"Strong coffee loaders put the idea inside the cup and make every still a printable mark; weak ones bolt UI chrome or a generic pulse onto a cup and only look like coffee while moving.",
+"teams":{
+"bare-wire":{"criteria":{"concept":6,"motion":6,"craft":8,"clarity":6,"pitch":7},"signature_score":5,
+"signature_why":"Every frame is the same top-down cup, but two of four samples are a bare orange disc and the rest a dark dot in it: consistent, centred-icon generic, holds in one ink but nobody would call it ownable.",
+"loved":"The wound now closes instead of spreading: fast open, a held dark hole, a slow settle, which is crema physics told honestly in six shapes.",
+"docked":"Still a dot in a disc; nothing in the still says this cafe rather than any brown circle, and the bare-field frames at each handoff are an empty cup icon.",
+"fix_landed":"yes","fix_note":"Heal disc deleted, scar opens fast and shrinks over ~1.7s, two off-centre drops per 5s; they added a 0.5s hold, which helps the 120px read.",
+"v1":{"criteria":{"concept":5,"motion":4,"craft":8,"clarity":5,"pitch":5},"signature_score":4}},
+"warm-hands":{"criteria":{"concept":7,"motion":6,"craft":7,"clarity":8,"pitch":7},"signature_score":8,
+"signature_why":"Every frame is the same hand-made latte-art cup at a new angle, wobbled rim, stain and sienna tip intact; the new stream makes each still a pour stamp, though the stain goes to fuzz at 2cm in one ink.",
+"loved":"Still the only entry that looks like a specific cafe, and the static stream finally tells a glance that milk is going in.",
+"docked":"The finished rosetta still spins as a rigid decal, so the motion keeps spinner grammar; the stream sits on top of it rather than driving it.",
+"fix_landed":"rejected","fix_note":"Refused offset-path on seam and Safari risk; the seam worry is real for an open spiral path, and the stream covers the 'being poured' read, but the rotating-decal problem I named is untouched.",
+"v1":{"criteria":{"concept":7,"motion":6,"craft":7,"clarity":7,"pitch":7},"signature_score":8}},
+"the-glitch":{"criteria":{"concept":6,"motion":6,"craft":8,"clarity":7,"pitch":7},"signature_score":6,
+"signature_why":"With pips and band gone every frame is a clean cup under a spout with a drop or stream in a different spot, a usable stamp family in one ink, but it is the category's stock side-view cup.",
+"loved":"The coffee now keeps the score: crema lightens per landing and the 3s pull is a real espresso event, not a render bug.",
+"docked":"The stepped crema peaks near 4.7s then drains in 0.25s, which flirts with a fill-and-reset, and the side-profile cup is generic clip art territory.",
+"fix_landed":"yes","fix_note":"Pips and striped band deleted, crema steps live on the surface ellipse, the hiccup became a scaleY stream at 3.0-3.5s; built as a separate element rather than a stretched drop, which is a fair call.",
+"v1":{"criteria":{"concept":4,"motion":5,"craft":7,"clarity":6,"pitch":6},"signature_score":4}}
+}}

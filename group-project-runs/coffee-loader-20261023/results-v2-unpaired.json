@@ -1,0 +1,249 @@
+{
+  "round": 2,
+  "ranking": [
+    "warm-hands",
+    "the-glitch",
+    "bare-wire"
+  ],
+  "teams": {
+    "bare-wire": {
+      "rubric": 67.1,
+      "signature_bonus": 9.3,
+      "total": 76.4,
+      "per_judge": {
+        "j-amara-diallo": 63.0,
+        "j-henrik-vale": 71.5,
+        "j-mara-okafor": 73.5,
+        "j-rosie-tran": 56.0,
+        "j-sun-park": 71.5
+      },
+      "spread": 17.5,
+      "criteria_avg": {
+        "concept": 6.2,
+        "motion": 6.6,
+        "craft": 7.8,
+        "clarity": 5.6,
+        "pitch": 7.6
+      },
+      "previous_total": 73.5,
+      "change": 2.9,
+      "previous_rank": 2,
+      "fixes": {
+        "j-amara-diallo": {
+          "landed": "rejected",
+          "note": "Five travelling scars were refused as spinner grammar and clutter, which is a fair reason, but the 75ms fade-in is far short of my 0.4s and the dead-frame problem remains."
+        },
+        "j-henrik-vale": {
+          "landed": "yes",
+          "note": "Heal disc deleted, scar opens in 0.3s, holds, closes over 1.7s, two off-centre drops per loop at 2.5s; built as written and verified in code."
+        },
+        "j-mara-okafor": {
+          "landed": "partly",
+          "note": "The 1Hz target pulse is gone and the cap holds (.55 at that offset clears the cup wall, which was what I wanted). They overruled #8A5A33 with #6B4226 for contrast, which is a fair call. They rejected one-per-5s in favour of two per loop for a felt beat, and that reason mostly holds."
+        },
+        "j-rosie-tran": {
+          "landed": "rejected",
+          "note": "Refused with a reason: a drip stroke outside the cup reads as a second subject, so the team enlarged the held scar instead. The reason is fair, but the hole still looks like a dot to me."
+        },
+        "j-sun-park": {
+          "landed": "partly",
+          "note": "Held, larger scar taken and the heal rim removed with the heal; the markup-halving ask was declined on a plausible Safari shadow-tree reason, so no leaner."
+        }
+      }
+    },
+    "the-glitch": {
+      "rubric": 70.2,
+      "signature_bonus": 9.0,
+      "total": 79.2,
+      "per_judge": {
+        "j-amara-diallo": 78.0,
+        "j-henrik-vale": 69.0,
+        "j-mara-okafor": 63.0,
+        "j-rosie-tran": 67.5,
+        "j-sun-park": 73.5
+      },
+      "spread": 15.0,
+      "criteria_avg": {
+        "concept": 7.2,
+        "motion": 6.4,
+        "craft": 7.2,
+        "clarity": 7,
+        "pitch": 7.6
+      },
+      "previous_total": 65.5,
+      "change": 13.7,
+      "previous_rank": 3,
+      "fixes": {
+        "j-amara-diallo": {
+          "landed": "yes",
+          "note": "Slip, ghost and hard cuts all deleted and the drop now fades in and squash-fades out; code matches the pitch."
+        },
+        "j-henrik-vale": {
+          "landed": "partly",
+          "note": "Pips and band deleted, count moved onto the surface ellipse, gush built as a scaleY stream; but the reset I asked to hide behind a cup swap became a visible drain."
+        },
+        "j-mara-okafor": {
+          "landed": "partly",
+          "note": "The orange pips, slip and ghost are all gone, as asked. I asked for the drop and ring to be the only clock; they refused because 'a cup with no count is a glide'. That reason does not hold: the 1s drop already counts, and the new count resets just as visibly as the pips did."
+        },
+        "j-rosie-tran": {
+          "landed": "yes",
+          "note": "Landed and then some: they removed the orange band and ghost at every size, not only at 120px, and kept the one-second drop and the five-step count, now in crema."
+        },
+        "j-sun-park": {
+          "landed": "yes",
+          "note": "Drop snap/teleport replaced with eased fade and squash, and the slip that I asked to cut to 4px was deleted entirely, which is cleaner."
+        }
+      }
+    },
+    "warm-hands": {
+      "rubric": 70.5,
+      "signature_bonus": 10.5,
+      "total": 81.0,
+      "per_judge": {
+        "j-amara-diallo": 76.0,
+        "j-henrik-vale": 67.0,
+        "j-mara-okafor": 78.0,
+        "j-rosie-tran": 61.0,
+        "j-sun-park": 70.5
+      },
+      "spread": 17.0,
+      "criteria_avg": {
+        "concept": 7.4,
+        "motion": 7,
+        "craft": 6.6,
+        "clarity": 6.8,
+        "pitch": 7.6
+      },
+      "previous_total": 86.2,
+      "change": -5.2,
+      "previous_rank": 1,
+      "fixes": {
+        "j-amara-diallo": {
+          "landed": "yes",
+          "note": "Stream added from rim to spiral origin and held in reduced motion, stroke 6.5 instead of 7 with a sound reason; verified in code and frames."
+        },
+        "j-henrik-vale": {
+          "landed": "rejected",
+          "note": "Rejected for seam and Safari risk; the seam worry is fair but a 15-degree drift loops as cleanly as a full turn, so the reason only half holds and the spinning-decal problem the note targeted is still on screen."
+        },
+        "j-mara-okafor": {
+          "landed": "yes",
+          "note": "They built the stream as I specified (3 units, outside .sweep, opacity-only 5s shimmer, held under reduced motion). They also thickened the stain to 3.6 and made it static, a sensible partial take on the stain half of my note. The stream ends at the spiral's origin (54,57), which orbits the 54,60 pivot by 3 units, so you can barely see it move."
+        },
+        "j-rosie-tran": {
+          "landed": "partly",
+          "note": "Idea taken but geometry changed: they made a static stream from the top edge to the pivot, always visible, not a line to a moving tip. It helps the pour read, but the spiral still turns."
+        },
+        "j-sun-park": {
+          "landed": "rejected",
+          "note": "Layer split refused as a point of gain for a second SVG and a stacking bug surface; honest and README-disclosed, and the reason is defensible, but the repaint cost is unchanged."
+        }
+      }
+    }
+  },
+  "signature_awards": [
+    {
+      "judge": "j-amara-diallo",
+      "model": "sonnet",
+      "signature": "Half-Awake Read Time",
+      "description": "Whether a tired, low-vision user can name 'coffee in progress' from one frozen frame at 120px, through grayscale and a 1.5x blur, with a deliberate reduced-motion cue and a specific accessible name.",
+      "winner": "the-glitch",
+      "score": 8,
+      "why": "Light cup on dark, spout and falling drop read as coffee even in blurred grayscale, the crema steps are a real progress cue, and the aria-label names the order; early dark crema steps are low contrast."
+    },
+    {
+      "judge": "j-henrik-vale",
+      "model": "opus",
+      "signature": "Freeze-Frame Brandability (the cup sleeve test)",
+      "description": "Pause at 0s, 1.25s, 2.5s, 3.75s and the worst frame I can scrub to, print each in one ink at 2cm on kraft, and ask whether every still is a composed, ownable mark that belongs to one family.",
+      "winner": "bare-wire",
+      "score": 7,
+      "why": "Every sampled still is the same top-down cup with an off-centre dark mark in a different size and place, a stamp family that survives one ink; the bare-field frames at 0s and 2.5s are plain but not broken."
+    },
+    {
+      "judge": "j-mara-okafor",
+      "model": "opus",
+      "signature": "One Lead Mover",
+      "description": "At every moment exactly one element carries 'working on it', and every other moving part is visibly quieter, nearby, and on a tempo that nests with the lead rather than competing with it.",
+      "winner": "bare-wire",
+      "score": 8,
+      "why": "One dark hole at a time is the clear lead; the 5s field bloom and the 2.5s glint nest under it, and the reduced-motion version keeps a single breathing scar as the focal point. The two drops land about 11 units apart, which nudges the eye slightly."
+    },
+    {
+      "judge": "j-rosie-tran",
+      "model": "haiku",
+      "signature": "Already-pouring first frame",
+      "description": "Scores whether the loader already shows coffee being made in the first frame a customer sees after tapping order, at 120px, with no beat needed to start the motion.",
+      "winner": "warm-hands",
+      "score": 8,
+      "why": "The stream and the spiral are both in place at frame one, so a restart reads as the pour carrying on."
+    },
+    {
+      "judge": "j-sun-park",
+      "model": "sonnet",
+      "signature": "Frame-Budget Footprint",
+      "description": "How much of the loader repaints per frame, how many layers it promotes, and whether it costs nothing when idle or hidden.",
+      "winner": "bare-wire",
+      "score": 7,
+      "why": "Six shapes, fills only, zero JS in the path, will-change only on the two scars; but SVG-child animation still repaints the whole 120px each frame and there is no play-state hook."
+    }
+  ],
+  "most_divisive": "bare-wire",
+  "criteria": [
+    {
+      "id": "concept",
+      "name": "Coffee concept & ownability",
+      "weight": 20,
+      "description": "One clear idea drawn from the ritual of coffee (grind, bloom, pour, crema, tamp, drip) rather than generic steam-over-a-cup; it could belong to this one caf\u00e9-ordering brand and could anchor a wider motion language."
+    },
+    {
+      "id": "motion",
+      "name": "Motion, timing & perceived wait",
+      "weight": 25,
+      "description": "Purposeful timing, rhythm and easing that make the wait feel shorter and calmer; the 5s cycle loops seamlessly and reads as steady, ongoing progress, never as stalled or as a finish that then resets."
+    },
+    {
+      "id": "craft",
+      "name": "Engineering craft & performance",
+      "weight": 20,
+      "description": "Lean, self-contained build that honours every technical constraint: compositor-friendly animation (transform/opacity), crisp scaling from 120px to full splash, no jank on weak devices, readable and maintainable code."
+    },
+    {
+      "id": "clarity",
+      "name": "Glanceability & inclusion",
+      "weight": 20,
+      "description": "A half-awake customer understands 'your coffee is on its way' in one second at 120px; nothing flashes or demands attention; the prefers-reduced-motion version still clearly says 'working on it'."
+    },
+    {
+      "id": "pitch",
+      "name": "Pitch",
+      "weight": 15,
+      "description": "Short, persuasive, honest about trade-offs and risks; explains the idea, the timing choices, and why it would hold up across real wait times."
+    }
+  ],
+  "signature_points": 3,
+  "most_improved": "the-glitch",
+  "lessons": [
+    {
+      "judge": "j-amara-diallo",
+      "lesson": "Strong loaders keep a coffee subject and a progress cue visible in every frozen frame and under blur, and say so in a specific accessible name; weak ones only work while you watch them move."
+    },
+    {
+      "judge": "j-henrik-vale",
+      "lesson": "In coffee, the strong work puts the motion inside the drink and makes every still printable on a sleeve; the weak work bolts a UI gesture (a spin, a fill, a counter) onto a cup and calls it ritual."
+    },
+    {
+      "judge": "j-mara-okafor",
+      "lesson": "The strong loaders are the ones where one thing moves and everything else breathes; the weak ones keep a second idea (a counter, a hitch, a reset) that the waiting eye has to track."
+    },
+    {
+      "judge": "j-rosie-tran",
+      "lesson": "Strong coffee loaders show coffee moving into the cup from the first frame, in a shape a half-awake eye reads at 120px; weak ones show a dot or a turning rosette."
+    },
+    {
+      "judge": "j-sun-park",
+      "lesson": "Strong loaders keep the moving part small, on its own layer, and driven by nothing but a pausable CSS clock; weak ones animate five things inside one SVG and call it lean because the keyframes only touch transform and opacity."
+    }
+  ]
+}

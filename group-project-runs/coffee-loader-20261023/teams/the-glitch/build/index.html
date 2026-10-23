@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TICK - coffee loader</title>
+<style>
+  /* Timing contract: cycle 5s; beats 1s x5 (drop and ring run 1s, band/ghost/pips run 5s). */
+  :root {
+    --roast: #1B100B;   /* field */
+    --cup: #F3E6D2;     /* cup, saucer, spout */
+    --crema: #C8873E;   /* the band that slips, the drop and its ring */
+    --shade: #5A3720;   /* cup shadow, coffee surface */
+    --orange: #FF5F1F;  /* the system acting: lit pip and registration ghost only */
+    --pip-off: #6B4430; /* unlit pip (about 2.4:1 on the roast field) */
+    --cycle: 5s;                   /* one full loop */
+    --beat: calc(var(--cycle) / 5); /* one drop = 1s, divides the cycle */
+    --slip: 6px;   /* DIAL: glitch shift in viewBox units (5% of width). Floor: 4px */
+    --ghost: .35;  /* DIAL: opacity of the orange registration ghost */
+  }
+
+  /* ---------- page chrome (not part of the loader) ---------- */
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: flex; background: var(--roast); color: var(--cup); font: 13px/1.4 system-ui, sans-serif; }
+  .side { width: 200px; flex: none; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
+  .box { width: 120px; height: 120px; outline: 1px dashed var(--pip-off); outline-offset: 4px; }
+  .splash { flex: 1; min-width: 0; height: 100vh; display: grid; place-items: center; }
+  .splash .tick { width: min(100%, 100vh); aspect-ratio: 1; height: auto; }
+  .label { opacity: .6; }
+  button, label { font: inherit; color: var(--cup); }
+  button { background: none; border: 1px solid var(--pip-off); border-radius: 4px; padding: 4px 12px; cursor: pointer; }
+  @media (max-width: 600px) {
+    body { flex-direction: column; }
+    .side { width: auto; padding: 24px 0; }
+    .splash { height: 70vh; }
+  }
+
+  /* ---------- the loader: one art, used twice ---------- */
+  .tick { display: block; width: 100%; height: 100%; }
+  .drop, .ring, .band { transform-box: fill-box; transform-origin: center; }
+
+  .drop  { animation: drop var(--beat) linear infinite both; }
+  .ring  { opacity: 0; animation: ring var(--beat) linear infinite both; }
+  .band  { animation: slip var(--cycle) linear infinite both; }
+  .ghost { opacity: 0; animation: ghost var(--cycle) linear infinite both; }
+  /* pip i is lit during second i; negative delay places each on the shared 5s clock */
+  .lit   { opacity: 0; animation: pip var(--cycle) linear infinite both; animation-delay: calc((var(--i) - 5) * var(--beat)); }
+
+  /* 1s beat: swell (0-15%), gravity fall (15-55%), hard cut on impact, hidden reset */
+  @keyframes drop {
+    0%    { opacity: 0; transform: translateY(0) scale(.3); animation-timing-function: ease-out; }
+    4%    { opacity: 1; transform: translateY(0) scale(.55); animation-timing-function: ease-out; }
+    15%   { opacity: 1; transform: translateY(0) scale(1); animation-timing-function: cubic-bezier(.55, 0, 1, .45); }
+    55%   { opacity: 1; transform: translateY(25px) scale(1); }
+    55.1% { opacity: 0; transform: translateY(25px) scale(1); }
+    55.2% { opacity: 0; transform: translateY(0) scale(.3); }
+    100%  { opacity: 0; transform: translateY(0) scale(.3); }
+  }
+  /* ring opens on the impact (55%) and fades out by 90% */
+  @keyframes ring {
+    0%, 55% { opacity: 0; transform: scale(.3); animation-timing-function: ease-out; }
+    56%     { opacity: .9; transform: scale(.3); animation-timing-function: ease-out; }
+    90%     { opacity: 0; transform: scale(1); }
+    100%    { opacity: 0; transform: scale(.3); }
+  }
+  /* the glitch: out 3.05-3.25s, held, home 3.35-3.55s (lands with the 3s drop impact).
+     The band is clipped to the cup, so it slides behind the cup edge instead of leaving it. */
+  @keyframes slip {
+    0%, 61% { transform: translateX(0); animation-timing-function: ease-in-out; }
+    65%, 67% { transform: translateX(var(--slip)); animation-timing-function: ease-in-out; }
+    71%, 100% { transform: translateX(0); }
+  }
+  @keyframes ghost {
+    0%, 61% { opacity: 0; animation-timing-function: ease-in-out; }
+    65%, 67% { opacity: var(--ghost); animation-timing-function: ease-in-out; }
+    71%, 100% { opacity: 0; }
+  }
+  /* chaser: hop on, hold one second, then a one-second soft tail (a comet, not a counter) */
+  @keyframes pip {
+    0%, 20% { opacity: 1; }
+    40%, 100% { opacity: 0; }
+  }
+
+  /* ---------- reduced motion: no movement, only slow fades ---------- */
+  @keyframes pip-soft { 0% { opacity: 0; } 12%, 20% { opacity: 1; } 32%, 100% { opacity: 0; } }
+  @keyframes calm { 0%, 100% { opacity: .25; } 50% { opacity: .7; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .drop  { animation: none; opacity: 1; transform: translateY(12px); }
+    .ring  { animation: calm var(--cycle) ease-in-out infinite; transform: scale(.8); }
+    .band, .ghost { animation: none; }
+    .lit   { animation-name: pip-soft; }
+  }
+  /* same rules, driven by the page toggle (keep in sync with the block above) */
+  :root[data-motion="reduce"] .drop  { animation: none; opacity: 1; transform: translateY(12px); }
+  :root[data-motion="reduce"] .ring  { animation: calm var(--cycle) ease-in-out infinite; transform: scale(.8); }
+  :root[data-motion="reduce"] .band,
+  :root[data-motion="reduce"] .ghost { animation: none; }
+  :root[data-motion="reduce"] .lit   { animation-name: pip-soft; }
+</style>
+</head>
+<body>
+  <div class="side">
+    <div class="box">
+<svg class="tick" viewBox="0 0 120 120" role="img" aria-label="Loading: coffee dripping into a cup, one drop per second">
+  <ellipse cx="60" cy="98" rx="40" ry="5" fill="var(--cup)"/>
+  <path d="M92 64h6a9 9 0 0 1 0 18h-6" fill="none" stroke="var(--cup)" stroke-width="5"/>
+  <path d="M28 56H92V78Q92 96 74 96H46Q28 96 28 78Z" fill="var(--cup)"/>
+  <path d="M84 56H92V78Q92 94 78 96Q84 88 84 78Z" fill="var(--shade)"/>
+  <ellipse cx="60" cy="56" rx="32" ry="5" fill="var(--shade)"/>
+  <rect x="57" y="10" width="6" height="14" fill="var(--cup)"/>
+  <path d="M57 24H63L60 29Z" fill="var(--cup)"/>
+  <clipPath id="cupclipa"><path d="M28 56H92V78Q92 96 74 96H46Q28 96 28 78Z"/></clipPath>
+  <g clip-path="url(#cupclipa)">
+  <rect class="ghost" x="28" y="66" width="64" height="10" rx="3" fill="var(--orange)"/>
+  <rect class="band" x="28" y="66" width="64" height="10" rx="3" fill="var(--crema)"/>
+  </g>
+  <ellipse class="ring" cx="60" cy="56" rx="22" ry="4" fill="none" stroke="var(--crema)" stroke-width="2.5"/>
+  <circle class="drop" cx="60" cy="31" r="5" fill="var(--crema)"/>
+  <g fill="var(--pip-off)">
+    <circle cx="32" cy="112" r="4.5"/><circle cx="46" cy="112" r="4.5"/><circle cx="60" cy="112" r="4.5"/><circle cx="74" cy="112" r="4.5"/><circle cx="88" cy="112" r="4.5"/>
+  </g>
+  <g fill="var(--orange)">
+    <circle class="lit" style="--i:0" cx="32" cy="112" r="4.5"/><circle class="lit" style="--i:1" cx="46" cy="112" r="4.5"/><circle class="lit" style="--i:2" cx="60" cy="112" r="4.5"/><circle class="lit" style="--i:3" cx="74" cy="112" r="4.5"/><circle class="lit" style="--i:4" cx="88" cy="112" r="4.5"/>
+  </g>
+</svg>
+    </div>
+    <div class="label">120px in-app</div>
+    <button id="replay" type="button">Replay</button>
+    <label><input id="rm" type="checkbox"> Preview reduced motion</label>
+  </div>
+  <div class="splash" aria-hidden="true">
+<svg class="tick" viewBox="0 0 120 120">
+  <ellipse cx="60" cy="98" rx="40" ry="5" fill="var(--cup)"/>
+  <path d="M92 64h6a9 9 0 0 1 0 18h-6" fill="none" stroke="var(--cup)" stroke-width="5"/>
+  <path d="M28 56H92V78Q92 96 74 96H46Q28 96 28 78Z" fill="var(--cup)"/>
+  <path d="M84 56H92V78Q92 94 78 96Q84 88 84 78Z" fill="var(--shade)"/>
+  <ellipse cx="60" cy="56" rx="32" ry="5" fill="var(--shade)"/>
+  <rect x="57" y="10" width="6" height="14" fill="var(--cup)"/>
+  <path d="M57 24H63L60 29Z" fill="var(--cup)"/>
+  <clipPath id="cupclipb"><path d="M28 56H92V78Q92 96 74 96H46Q28 96 28 78Z"/></clipPath>
+  <g clip-path="url(#cupclipb)">
+  <rect class="ghost" x="28" y="66" width="64" height="10" rx="3" fill="var(--orange)"/>
+  <rect class="band" x="28" y="66" width="64" height="10" rx="3" fill="var(--crema)"/>
+  </g>
+  <ellipse class="ring" cx="60" cy="56" rx="22" ry="4" fill="none" stroke="var(--crema)" stroke-width="2.5"/>
+  <circle class="drop" cx="60" cy="31" r="5" fill="var(--crema)"/>
+  <g fill="var(--pip-off)">
+    <circle cx="32" cy="112" r="4.5"/><circle cx="46" cy="112" r="4.5"/><circle cx="60" cy="112" r="4.5"/><circle cx="74" cy="112" r="4.5"/><circle cx="88" cy="112" r="4.5"/>
+  </g>
+  <g fill="var(--orange)">
+    <circle class="lit" style="--i:0" cx="32" cy="112" r="4.5"/><circle class="lit" style="--i:1" cx="46" cy="112" r="4.5"/><circle class="lit" style="--i:2" cx="60" cy="112" r="4.5"/><circle class="lit" style="--i:3" cx="74" cy="112" r="4.5"/><circle class="lit" style="--i:4" cx="88" cy="112" r="4.5"/>
+  </g>
+</svg>
+  </div>
+<script>
+  // Only two jobs: restart the animations in sync, and preview reduced motion.
+  document.getElementById('replay').onclick = function () {
+    var els = document.querySelectorAll('.tick *');
+    els.forEach(function (e) { e.style.animation = 'none'; });
+    document.body.offsetWidth; // force reflow
+    els.forEach(function (e) { e.style.animation = ''; });
+  };
+  document.getElementById('rm').onchange = function (ev) {
+    var root = document.documentElement;
+    if (ev.target.checked) root.setAttribute('data-motion', 'reduce');
+    else root.removeAttribute('data-motion');
+  };
+</script>
+</body>
+</html>

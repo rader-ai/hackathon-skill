@@ -1,0 +1,150 @@
+{
+  "ranking": [
+    "warm-hands",
+    "bare-wire",
+    "the-glitch"
+  ],
+  "teams": {
+    "bare-wire": {
+      "rubric": 64.2,
+      "signature_bonus": 9.3,
+      "total": 73.5,
+      "per_judge": {
+        "j-amara-diallo": 69.0,
+        "j-henrik-vale": 59.5,
+        "j-mara-okafor": 65.5,
+        "j-rosie-tran": 55.5,
+        "j-sun-park": 71.5
+      },
+      "spread": 16.0,
+      "criteria_avg": {
+        "concept": 6.6,
+        "motion": 5.8,
+        "craft": 7.6,
+        "clarity": 5.4,
+        "pitch": 7
+      }
+    },
+    "the-glitch": {
+      "rubric": 58.6,
+      "signature_bonus": 6.9,
+      "total": 65.5,
+      "per_judge": {
+        "j-amara-diallo": 64.5,
+        "j-henrik-vale": 50.5,
+        "j-mara-okafor": 46.5,
+        "j-rosie-tran": 65.0,
+        "j-sun-park": 66.5
+      },
+      "spread": 20.0,
+      "criteria_avg": {
+        "concept": 5.8,
+        "motion": 4.4,
+        "craft": 6.6,
+        "clarity": 6,
+        "pitch": 7.2
+      }
+    },
+    "warm-hands": {
+      "rubric": 74.8,
+      "signature_bonus": 11.4,
+      "total": 86.2,
+      "per_judge": {
+        "j-amara-diallo": 80.0,
+        "j-henrik-vale": 69.5,
+        "j-mara-okafor": 74.0,
+        "j-rosie-tran": 70.0,
+        "j-sun-park": 80.5
+      },
+      "spread": 11.0,
+      "criteria_avg": {
+        "concept": 7.4,
+        "motion": 8,
+        "craft": 7.2,
+        "clarity": 6.8,
+        "pitch": 8
+      }
+    }
+  },
+  "signature_awards": [
+    {
+      "judge": "j-amara-diallo",
+      "model": "sonnet",
+      "signature": "Calm Wait Safety",
+      "description": "Does the loader feel calm and steady for everyone, with no strobing, an invisible 5s seam, eased pacing, and a reduced-motion state that still says in progress?",
+      "winner": "warm-hands",
+      "score": 9,
+      "why": "One slow linear sweep with eased sway and out-of-phase opacity breaths, frame 5.0 verified equal to frame 0.0, no abrupt changes, and a reduced-motion held pour that still breathes so it reads as working on it."
+    },
+    {
+      "judge": "j-henrik-vale",
+      "model": "opus",
+      "signature": "Coffee-Ritual Specificity (the swap test)",
+      "description": "Does the motion depict a real, specific moment of making coffee with material-true physics, so that swapping the coffee art for a generic shape would break the idea?",
+      "winner": "warm-hands",
+      "score": 6,
+      "why": "A pour, a hand-wobbled rim and a mug-ring stain taste of a real cafe, but the cream spiral rotates as a rigid decal - poured milk never spins as a finished shape, so the motion is a spinner wearing latte art."
+    },
+    {
+      "judge": "j-mara-okafor",
+      "model": "opus",
+      "signature": "Seam & Wait Honesty",
+      "description": "Whether the loop's 5s-to-0s wrap is invisible in position, opacity and velocity, never fakes completion, and leaves every random frame a dignified place to cut away when the network decides the wait is over.",
+      "winner": "warm-hands",
+      "score": 8,
+      "why": "Linear 360deg sweep plus a zero-slope sway at the wrap means no position or velocity seam (verified in code and frames), no finish beat ever, and any frame is a clean pose of a pour in progress; reduced motion holds a composed pose that breathes."
+    },
+    {
+      "judge": "j-rosie-tran",
+      "model": "haiku",
+      "signature": "Glance-to-meaning at 120px",
+      "description": "How quickly a half-awake customer, seeing the 120px loader for the first time, understands it means the coffee is being made, judged by a one-second glance test.",
+      "winner": "the-glitch",
+      "score": 7,
+      "why": "A cup under a falling drop with a counting row of dots says something is being made in one glance."
+    },
+    {
+      "judge": "j-sun-park",
+      "model": "sonnet",
+      "signature": "Compositor-Clean Loop",
+      "description": "Whether the animation runs only on transform/opacity and closes its 5s loop with no detectable seam, in lean markup.",
+      "winner": "bare-wire",
+      "score": 9,
+      "why": "Only transform/opacity on filled circles, 1s beats divide 5s, scar opacity 0 at wrap and heal is crema-on-crema so the reset is invisible; six shapes, lean."
+    }
+  ],
+  "most_divisive": "the-glitch",
+  "criteria": [
+    {
+      "id": "concept",
+      "name": "Coffee concept & ownability",
+      "weight": 20,
+      "description": "One clear idea drawn from the ritual of coffee (grind, bloom, pour, crema, tamp, drip) rather than generic steam-over-a-cup; it could belong to this one caf\u00e9-ordering brand and could anchor a wider motion language."
+    },
+    {
+      "id": "motion",
+      "name": "Motion, timing & perceived wait",
+      "weight": 25,
+      "description": "Purposeful timing, rhythm and easing that make the wait feel shorter and calmer; the 5s cycle loops seamlessly and reads as steady, ongoing progress, never as stalled or as a finish that then resets."
+    },
+    {
+      "id": "craft",
+      "name": "Engineering craft & performance",
+      "weight": 20,
+      "description": "Lean, self-contained build that honours every technical constraint: compositor-friendly animation (transform/opacity), crisp scaling from 120px to full splash, no jank on weak devices, readable and maintainable code."
+    },
+    {
+      "id": "clarity",
+      "name": "Glanceability & inclusion",
+      "weight": 20,
+      "description": "A half-awake customer understands 'your coffee is on its way' in one second at 120px; nothing flashes or demands attention; the prefers-reduced-motion version still clearly says 'working on it'."
+    },
+    {
+      "id": "pitch",
+      "name": "Pitch",
+      "weight": 15,
+      "description": "Short, persuasive, honest about trade-offs and risks; explains the idea, the timing choices, and why it would hold up across real wait times."
+    }
+  ],
+  "signature_points": 3
+}

@@ -1,0 +1,22 @@
+{"judge":"j-mara-okafor","model":"opus","signature":{"name":"One Lead Mover","description":"At any moment exactly one primary mover carries 'working on it' and every other moving element is visibly quieter, on a nested tempo, close to the lead, at both 120px and splash size."},
+"lesson":"Strong loaders pick one mover on one clock and make everything else breathe under it; weak ones add a second rhythm, a counter or an accumulating fill that the waiting eye has to track or that reads as a reset.",
+"teams":{
+"bare-wire":{"criteria":{"concept":6,"motion":7,"craft":8,"clarity":6,"pitch":7},"signature_score":7,
+"signature_why":"The scar is the single lead, opening twice per 5s in nearly the same spot; the 5s bloom and the 2.5s glint lift are nested and quiet, though the glint sits off at the rim.",
+"loved":"Open fast, hold, close slowly over 1.7s: the hole settles instead of rippling, and it all stays in six fills-only shapes.",
+"docked":"At 120px a dark disc in a top-down cup still says 'something in a cup' more than 'coffee on its way', and the 0.3s opening is a little abrupt.",
+"fix_landed":"partly","fix_note":"They took the cap (.55, not .45) and a softer scar colour with a sound contrast reason, but kept two drops per loop; at 2.5s that is calm enough, so I accept the call.",
+"v1":{"criteria":{"concept":6,"motion":5,"craft":8,"clarity":5,"pitch":5},"signature_score":5}},
+"warm-hands":{"criteria":{"concept":8,"motion":8,"craft":7,"clarity":7,"pitch":7},"signature_score":8,
+"signature_why":"The turning spiral is clearly the lead; the stream is static and lands on its pivot, the bloom breathes on the same 5s clock, and making the rim stain static removed the one far-off secondary.",
+"loved":"The stream turns 'a spiral that spins' into 'a spiral being poured' at no cost to the seamless linear sweep.",
+"docked":"The spiral is still the biggest shape and still rotates, so a spinner read survives at 120px, and animated SVG groups behind <use> still repaint.",
+"fix_landed":"yes","fix_note":"The stream was built exactly as specified, outside .sweep, opacity-only; the stain went to 3.6 not 4 but is now static and reads as one ring.",
+"v1":{"criteria":{"concept":7,"motion":8,"craft":7,"clarity":6,"pitch":7},"signature_score":7}},
+"the-glitch":{"criteria":{"concept":7,"motion":6,"craft":8,"clarity":7,"pitch":7},"signature_score":5,
+"signature_why":"The drop now leads on one vertical axis, but the crema steps swing opacity .10 to .80 (as much contrast as the lead) and drain back in 0.25s, a hitch that pulls the eye every loop.",
+"loved":"Removing the orange layer and the hard cuts leaves the most literal and calm coffee read on the table: a drop falls, squashes and rings into the cup.",
+"docked":"The accumulating crema climbs to near-full at 4.7s and then empties: a fill-and-reset that the team's own screenshots confirm, and the 1Hz beat is still brisk.",
+"fix_landed":"partly","fix_note":"The pips, slip and ghost are gone, but they put a new count in their place that resets every loop, the very thing the note asked them to remove; the 'provocation' reason does not hold for a waiting user.",
+"v1":{"criteria":{"concept":6,"motion":4,"craft":7,"clarity":4,"pitch":6},"signature_score":2}}
+}}

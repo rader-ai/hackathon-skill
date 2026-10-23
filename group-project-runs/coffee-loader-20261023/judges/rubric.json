@@ -1,0 +1,37 @@
+{
+  "goal": "Find the 5-second looping loader a real coffee app could ship tomorrow: unmistakably of coffee, readable at 120px in a one-second glance, calm and smooth enough to make any wait feel shorter, and accessible to people who need reduced motion.",
+  "head_judge": "j-mara-okafor",
+  "signature_points": 3,
+  "criteria": [
+    {
+      "id": "concept",
+      "name": "Coffee concept & ownability",
+      "weight": 20,
+      "description": "One clear idea drawn from the ritual of coffee (grind, bloom, pour, crema, tamp, drip) rather than generic steam-over-a-cup; it could belong to this one café-ordering brand and could anchor a wider motion language."
+    },
+    {
+      "id": "motion",
+      "name": "Motion, timing & perceived wait",
+      "weight": 25,
+      "description": "Purposeful timing, rhythm and easing that make the wait feel shorter and calmer; the 5s cycle loops seamlessly and reads as steady, ongoing progress, never as stalled or as a finish that then resets."
+    },
+    {
+      "id": "craft",
+      "name": "Engineering craft & performance",
+      "weight": 20,
+      "description": "Lean, self-contained build that honours every technical constraint: compositor-friendly animation (transform/opacity), crisp scaling from 120px to full splash, no jank on weak devices, readable and maintainable code."
+    },
+    {
+      "id": "clarity",
+      "name": "Glanceability & inclusion",
+      "weight": 20,
+      "description": "A half-awake customer understands 'your coffee is on its way' in one second at 120px; nothing flashes or demands attention; the prefers-reduced-motion version still clearly says 'working on it'."
+    },
+    {
+      "id": "pitch",
+      "name": "Pitch",
+      "weight": 15,
+      "description": "Short, persuasive, honest about trade-offs and risks; explains the idea, the timing choices, and why it would hold up across real wait times."
+    }
+  ]
+}

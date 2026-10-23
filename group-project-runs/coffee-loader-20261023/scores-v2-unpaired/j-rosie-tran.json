@@ -1,0 +1,56 @@
+{
+  "judge": "j-rosie-tran",
+  "model": "haiku",
+  "signature": {
+    "name": "Already-pouring first frame",
+    "description": "Scores whether the loader already shows coffee being made in the first frame a customer sees after tapping order, at 120px, with no beat needed to start the motion."
+  },
+  "lesson": "Strong coffee loaders show coffee moving into the cup from the first frame, in a shape a half-awake eye reads at 120px; weak ones show a dot or a turning rosette.",
+  "teams": {
+    "bare-wire": {
+      "criteria": {
+        "concept": 5,
+        "motion": 6,
+        "craft": 7,
+        "clarity": 4,
+        "pitch": 6
+      },
+      "signature_score": 5,
+      "signature_why": "A crema cup is there at 0ms, but the hole opens only at 0.3s, so the start reads as a settled cup rather than a pour already happening.",
+      "loved": "Calm, one-beat rhythm with no spinner rotation, and the cup still reads as coffee at a glance.",
+      "docked": "The dark hole reads as a dot or bullseye inside the cup at 120px, not as coffee arriving.",
+      "fix_landed": "rejected",
+      "fix_note": "Refused with a reason: a drip stroke outside the cup reads as a second subject, so the team enlarged the held scar instead. The reason is fair, but the hole still looks like a dot to me."
+    },
+    "warm-hands": {
+      "criteria": {
+        "concept": 7,
+        "motion": 5,
+        "craft": 6,
+        "clarity": 6,
+        "pitch": 7
+      },
+      "signature_score": 8,
+      "signature_why": "The stream and the spiral are both in place at frame one, so a restart reads as the pour carrying on.",
+      "loved": "The pour looks like someone is making coffee, and the stream into the spiral is an ownable coffee-ritual image.",
+      "docked": "The spiral still turns 360 degrees and at 120px can read as a spinner or a cinnamon roll, and the stream looks like a straw.",
+      "fix_landed": "partly",
+      "fix_note": "Idea taken but geometry changed: they made a static stream from the top edge to the pivot, always visible, not a line to a moving tip. It helps the pour read, but the spiral still turns."
+    },
+    "the-glitch": {
+      "criteria": {
+        "concept": 7,
+        "motion": 6,
+        "craft": 7,
+        "clarity": 7,
+        "pitch": 7
+      },
+      "signature_score": 4,
+      "signature_why": "At 0ms the cup is dark with no drop; the drop shows by 250ms, but the near-full frame before the swap makes the restart look like a drain.",
+      "loved": "A drop falls into the cup once a second and the crema steps up, so at 120px it reads as coffee coming in. The orange is gone.",
+      "docked": "The crema can look nearly full at 4.6s and then empties in a 0.25s swap, so the loop can read as a fill-and-drain.",
+      "fix_landed": "yes",
+      "fix_note": "Landed and then some: they removed the orange band and ghost at every size, not only at 120px, and kept the one-second drop and the five-step count, now in crema."
+    }
+  }
+}

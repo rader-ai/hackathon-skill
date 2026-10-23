@@ -1,0 +1,1 @@
+The goal should be a loader that could ship in a real app tomorrow: it must stay smooth on weak devices, hold up at 120px and at splash size, and be easy for the next engineer to maintain. Delight matters, but only if it survives a long wait and countless replays without getting annoying or heavy.

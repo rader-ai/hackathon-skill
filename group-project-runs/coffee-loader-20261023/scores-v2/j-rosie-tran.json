@@ -1,0 +1,41 @@
+{
+  "judge": "j-rosie-tran",
+  "model": "haiku",
+  "signature": {
+    "name": "Already-pouring first frame",
+    "description": "Whether the loader already shows coffee being made in the first frame a customer sees after tapping order, at 120px, judged from a restart at 0, 100 and 250ms."
+  },
+  "lesson": "Strong coffee loaders show the pour already happening in the first frame and keep the motion steady and countable; weak ones open on an empty cup, a spinner, or a glitch that reads as a fault.",
+  "teams": {
+    "bare-wire": {
+      "criteria": {"concept": 6, "motion": 6, "craft": 7, "clarity": 5, "pitch": 6},
+      "signature_score": 6,
+      "signature_why": "A full crema cup shows at 0ms and a dark hole opens by 250ms, but nothing is visibly pouring until the scar appears.",
+      "loved": "The top-down cup with its handle reads as coffee at a glance, and the calm one-beat rhythm has no spinner rotation.",
+      "docked": "The dark hole reads as a pothole or a stall more than coffee arriving, so a half-awake glance does not say 'coming'.",
+      "fix_landed": "rejected",
+      "fix_note": "The drip stroke was refused as a second subject outside the cup; the team enlarged and held the scar instead.",
+      "v1": {"criteria": {"concept": 5, "motion": 5, "craft": 7, "clarity": 4, "pitch": 5}, "signature_score": 5}
+    },
+    "warm-hands": {
+      "criteria": {"concept": 7, "motion": 5, "craft": 7, "clarity": 5, "pitch": 7},
+      "signature_score": 8,
+      "signature_why": "The pour is already mid-stroke at 0ms with the pour tip in place, and the 0ms frame matches the 5s frame, so a restart looks like a continuation.",
+      "loved": "It looks like someone is pouring, not loading: the cup, handle, pour tip and stain say coffee, and nothing flashes.",
+      "docked": "The rotating spiral still reads as a spinner or cinnamon roll at 120px, and the thin stream is too faint to carry the pour alone.",
+      "fix_landed": "partly",
+      "fix_note": "The stream landed as a fixed line down to the pivot, not from the rim to the moving tip, so it reads as a pour but not a travelling one.",
+      "v1": {"criteria": {"concept": 6, "motion": 5, "craft": 7, "clarity": 4, "pitch": 6}, "signature_score": 8}
+    },
+    "the-glitch": {
+      "criteria": {"concept": 7, "motion": 6, "craft": 7, "clarity": 7, "pitch": 6},
+      "signature_score": 5,
+      "signature_why": "At 0ms the cup is dark with no drop yet; a drop is visibly at the spout by 250ms, so coffee shows within a quarter-second.",
+      "loved": "One drop a second, falling into a cup that counts up in crema, is a steady, countable wait that reads as coffee on the way.",
+      "docked": "The crema step at beat 5 can look like a drain, and the 3s pull is a little dramatic for a half-awake glance.",
+      "fix_landed": "yes",
+      "fix_note": "The orange layer was removed at every size, not just at 120px; the slip and ghost are gone and the drop and count are kept.",
+      "v1": {"criteria": {"concept": 5, "motion": 4, "craft": 6, "clarity": 3, "pitch": 5}, "signature_score": 4}
+    }
+  }
+}

@@ -1,0 +1,410 @@
+<title>Coffee Loader Cupping Table</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a cupping table - three cups (live loaders) side by side, then the score sheet, then the sealed criteria opened. */
+:root {
+  --bg: #F6F4F1;
+  --surface: #FFFFFF;
+  --ink: #1E1814;
+  --muted: #6B5F57;
+  --line: #E3DCD5;
+  --cherry: #9B2335;      /* coffee-cherry red: the accent */
+  --crema: #C4874A;       /* score bars */
+  --crema-soft: #F1E2D1;
+  --gold: #8A6A12;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "Instrument Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15100D; --surface: #1F1814; --ink: #F2EBE5; --muted: #A99B91; --line: #3A2F28;
+    --cherry: #E4687A; --crema: #D9A066; --crema-soft: #3A2A1D; --gold: #E1BE5A; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15100D; --surface: #1F1814; --ink: #F2EBE5; --muted: #A99B91; --line: #3A2F28;
+  --cherry: #E4687A; --crema: #D9A066; --crema-soft: #3A2A1D; --gold: #E1BE5A; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font: 15px/1.55 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 40px 64px; display: grid; gap: 56px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.1; }
+h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; }
+h3 { font-size: 20px; font-weight: 700; }
+p { margin: 0; }
+.eyebrow { font: 600 12px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+a { color: var(--cherry); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--cherry); outline-offset: 2px; }
+
+header { display: grid; gap: 14px; max-width: 760px; }
+header .lede { font-size: 17px; color: var(--muted); max-width: 65ch; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 20px; font: 13px var(--mono); color: var(--muted); }
+.facts b { color: var(--ink); font-weight: 600; }
+
+section { display: grid; gap: 20px; }
+.section-head { display: grid; gap: 6px; max-width: 70ch; }
+.section-head p { color: var(--muted); }
+
+/* The table: three cups */
+.cups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.cup { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: grid; grid-template-rows: auto auto 1fr; min-width: 0; }
+.cup.winner { border-color: var(--cherry); box-shadow: 0 0 0 1px var(--cherry); }
+/* Each build is laid out for a desktop window, so it renders at 760x440 and is scaled to the card width. */
+.stage { position: relative; background: var(--crema-soft); aspect-ratio: 760 / 440; max-width: 100%; overflow: hidden; }
+.stage iframe { position: absolute; top: 0; left: 0; width: 760px; height: 440px; border: 0; display: block; transform-origin: 0 0; transform: scale(var(--s, 0.48)); }
+.cup-body { padding: 18px 18px 20px; display: grid; gap: 14px; min-width: 0; }
+.cup-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.rank { font: 600 12px var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.cup.winner .rank { color: var(--cherry); }
+.total { font: 600 30px/1 var(--mono); font-variant-numeric: tabular-nums; }
+.total small { font-size: 13px; color: var(--muted); font-weight: 400; margin-left: 4px; }
+.hook { font-family: var(--display); font-size: 18px; line-height: 1.25; font-weight: 500; }
+.concept { color: var(--muted); font-size: 14px; }
+.split { display: flex; gap: 14px; font: 12px var(--mono); color: var(--muted); flex-wrap: wrap; }
+.split b { color: var(--ink); font-weight: 600; }
+.cup-links { display: flex; gap: 16px; font-size: 13px; flex-wrap: wrap; }
+
+.bars { display: grid; gap: 7px; }
+.bar { display: grid; grid-template-columns: 9.5em minmax(0, 1fr) 2.6em; gap: 10px; align-items: center; font-size: 13px; }
+.bar .label { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar .track { height: 8px; background: var(--crema-soft); border-radius: 4px; overflow: hidden; }
+.bar .fill { height: 100%; background: var(--crema); border-radius: 4px; }
+.bar .v { font: 12px var(--mono); text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Score sheet */
+.sheet-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 14px; }
+th, td { padding: 11px 14px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+thead th { font: 600 11px var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); background: var(--bg); }
+tbody tr:last-child td { border-bottom: 0; }
+td.num, th.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+td .model { font: 11px var(--mono); color: var(--muted); margin-left: 6px; }
+tr.sum td { font-weight: 600; background: var(--bg); }
+.hi { color: var(--cherry); font-weight: 600; }
+
+/* Sealed criteria */
+.seals { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.seal { border: 1px dashed var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 10px; align-content: start; background: var(--surface); min-width: 0; }
+.seal .who { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; color: var(--muted); }
+.seal .who b { color: var(--ink); }
+.seal h3 { font-size: 18px; }
+.seal .desc { font-size: 14px; color: var(--muted); }
+.seal .won { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+.chip { font: 600 11px var(--mono); letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 8px; border-radius: 999px; background: var(--crema-soft); color: var(--ink); white-space: nowrap; }
+.seal .why { font-size: 14px; }
+
+/* Judges' notes */
+.notes { display: grid; gap: 12px; }
+details { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+summary { cursor: pointer; padding: 14px 18px; font-family: var(--display); font-weight: 700; font-size: 17px; display: flex; justify-content: space-between; gap: 12px; }
+summary span { font: 13px var(--mono); color: var(--muted); font-weight: 400; }
+.note-list { display: grid; gap: 14px; padding: 0 18px 18px; }
+.note { display: grid; grid-template-columns: 11em minmax(0, 1fr); gap: 4px 16px; font-size: 14px; }
+.note .j { font-weight: 600; }
+.note .j small { display: block; font: 11px var(--mono); color: var(--muted); font-weight: 400; }
+.note .lv::before { content: "Loved "; font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: 0.05em; color: var(--gold); }
+.note .dk::before { content: "Docked "; font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: 0.05em; color: var(--cherry); }
+
+.change { font: 600 13px var(--mono); padding: 3px 8px; border-radius: 999px; background: var(--crema-soft); white-space: nowrap; }
+.change.up { color: var(--gold); }
+.change.down { color: var(--cherry); }
+.drift { max-width: 75ch; color: var(--muted); font-size: 14px; border-left: 3px solid var(--crema); padding-left: 14px; }
+.drift b { color: var(--ink); }
+.vlinks { display: flex; gap: 16px; font-size: 13px; flex-wrap: wrap; }
+.land { display: grid; grid-template-columns: 11em minmax(0, 1fr); gap: 4px 16px; font-size: 14px; }
+.land .ask { color: var(--muted); }
+.land .ask::before { content: "Asked "; font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+.lchip { font: 600 11px var(--mono); letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 7px; border-radius: 999px; border: 1px solid var(--line); margin-right: 8px; }
+.lchip.yes { color: var(--gold); border-color: var(--gold); }
+.lchip.partly { color: var(--crema); border-color: var(--crema); }
+.lchip.no, .lchip.rejected { color: var(--cherry); border-color: var(--cherry); }
+.tally-line { font: 13px var(--mono); color: var(--muted); }
+@media (max-width: 520px) { .land { grid-template-columns: minmax(0, 1fr); } }
+.caveat { border-left: 3px solid var(--cherry); padding: 4px 0 4px 16px; display: grid; gap: 8px; max-width: 75ch; }
+.caveat p { color: var(--muted); }
+.caveat p b { color: var(--ink); }
+
+@media (max-width: 900px) {
+  .cups { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 520px) {
+  .note { grid-template-columns: minmax(0, 1fr); }
+  .bar { grid-template-columns: 7.5em minmax(0, 1fr) 2.4em; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Group project · Lite run + rematch · 23 Oct 2026</span>
+    <h1>Coffee Loader Cupping Table</h1>
+    <p class="lede">Three teams of four agents each built a 5-second looping loader for a coffee-ordering app in plain HTML and CSS. Five judges scored them on a shared rubric, plus one criterion each that they kept sealed until the end. Then every judge gave each team one fix, the teams decided which to take, and built a second version. The loaders below are the real builds, running live.</p>
+    <div class="facts">
+      <span><b>3</b> teams × <b>4</b> members (Sonnet)</span>
+      <span><b>5</b> judges: 2 Opus, 2 Sonnet, 1 Haiku</span>
+      <span><b>73</b> subagents across both rounds</span>
+      <span>Rubric <b>100</b> + sealed bonus <b>15</b></span>
+    </div>
+  </header>
+
+  <section aria-labelledby="re-h">
+    <div class="section-head">
+      <span class="eyebrow">Rematch · v2</span>
+      <h2 id="re-h">After the judges' notes</h2>
+      <p>Each judge wrote the one change that would most raise their score for each team. Each team's Producer accepted, partly took or rejected every note, and the team built v2. The judges re-scored it with fresh sealed criteria.</p>
+    </div>
+    <div class="cups" id="cups2"></div>
+    <p class="drift"><b>Scored side by side.</b> Each judge scored v1 and v2 of every team in the same pass, so each change compares like with like. That pass also showed how much harder the judges grade now: they put the same v1 builds <span id="drift-range"></span> points below their round 1 scores. A first, unpaired re-score had mixed that drift into the change and showed Warm Hands falling 5.2 points; paired, it rose 4.1.</p>
+  </section>
+
+  <section aria-labelledby="land-h">
+    <div class="section-head">
+      <span class="eyebrow">The notes</span>
+      <h2 id="land-h">Did each judge's fix land?</h2>
+      <p>The note each judge gave, and what they found in v2. A rejection with a sound reason was not penalised.</p>
+    </div>
+    <div class="notes" id="landed"></div>
+  </section>
+
+  <section aria-labelledby="seal2-h">
+    <div class="section-head">
+      <span class="eyebrow">Fresh sealed criteria, opened</span>
+      <h2 id="seal2-h">What the judges secretly graded in the rematch</h2>
+      <p>The round 1 criteria were public by then, so each judge sealed a new one.</p>
+    </div>
+    <div class="seals" id="seals2"></div>
+  </section>
+
+  <section aria-labelledby="table-h">
+    <div class="section-head">
+      <span class="eyebrow">Round 1 · v1</span>
+      <h2 id="table-h">The first three loaders, ranked</h2>
+      <p>Each cup shows the team's build as it ships: a 120px in-app instance beside a larger splash. Open one full size to see it at the scale the judges reviewed.</p>
+    </div>
+    <div class="cups" id="cups"></div>
+  </section>
+
+  <section aria-labelledby="sheet-h">
+    <div class="section-head">
+      <span class="eyebrow">Score sheet</span>
+      <h2 id="sheet-h">How the points add up</h2>
+      <p>Criterion scores are the average of five judges, out of 10. A team's rubric score is each judge's weighted total, averaged. Sealed criteria add up to 3 points per judge.</p>
+    </div>
+    <div class="sheet-wrap"><table id="sheet"></table></div>
+    <div class="sheet-wrap"><table id="judges"></table></div>
+  </section>
+
+  <section aria-labelledby="seal-h">
+    <div class="section-head">
+      <span class="eyebrow">Round 1 · sealed criteria, opened</span>
+      <h2 id="seal-h">What each judge was secretly grading</h2>
+      <p>Teams knew every judge held one undisclosed criterion. They never saw what it was.</p>
+    </div>
+    <div class="seals" id="seals"></div>
+  </section>
+
+  <section aria-labelledby="notes-h">
+    <div class="section-head">
+      <span class="eyebrow">Round 1 · judges' notes</span>
+      <h2 id="notes-h">What they loved and docked in v1</h2>
+    </div>
+    <div class="notes" id="notes"></div>
+  </section>
+
+  <section aria-labelledby="cav-h">
+    <div class="caveat">
+      <span class="eyebrow">Read before you share</span>
+      <h2 id="cav-h">Known issues with this run</h2>
+      <p><b>Isolation leaked.</b> Builders shared a local test port and the in-app browser pane, so two Warm Hands members briefly saw Bare Wire's build. Both say they used nothing from it, and Warm Hands won, so treat the ranking as indicative. The skill now gives each team its own port and a private browser.</p>
+      <p><b>Ideas converged early.</b> Nine of twelve first proposals were a drop or a crema ring, likely steered by technique examples in the judges' brief. The Head Judge prompt now describes outcomes only.</p>
+      <p><b>Testing was thin.</b> Every build was checked in headless Chromium only. Safari, Firefox and real phones are untested.</p>
+      <p><b>Judges drifted between rounds.</b> After writing their notes they graded the same v1 builds lower than in round 1. The rematch change is measured inside one pass to cancel this, but round 1 and rematch totals still aren't on the same scale.</p>
+    </div>
+  </section>
+</div>
+
+<script>
+const DATA = {"ranking": ["warm-hands", "bare-wire", "the-glitch"], "teams": {"bare-wire": {"rubric": 64.2, "signature_bonus": 9.3, "total": 73.5, "per_judge": {"j-amara-diallo": 69.0, "j-henrik-vale": 59.5, "j-mara-okafor": 65.5, "j-rosie-tran": 55.5, "j-sun-park": 71.5}, "spread": 16.0, "criteria_avg": {"concept": 6.6, "motion": 5.8, "craft": 7.6, "clarity": 5.4, "pitch": 7}}, "the-glitch": {"rubric": 58.6, "signature_bonus": 6.9, "total": 65.5, "per_judge": {"j-amara-diallo": 64.5, "j-henrik-vale": 50.5, "j-mara-okafor": 46.5, "j-rosie-tran": 65.0, "j-sun-park": 66.5}, "spread": 20.0, "criteria_avg": {"concept": 5.8, "motion": 4.4, "craft": 6.6, "clarity": 6, "pitch": 7.2}}, "warm-hands": {"rubric": 74.8, "signature_bonus": 11.4, "total": 86.2, "per_judge": {"j-amara-diallo": 80.0, "j-henrik-vale": 69.5, "j-mara-okafor": 74.0, "j-rosie-tran": 70.0, "j-sun-park": 80.5}, "spread": 11.0, "criteria_avg": {"concept": 7.4, "motion": 8, "craft": 7.2, "clarity": 6.8, "pitch": 8}}}, "awards": [{"judge": "j-amara-diallo", "model": "sonnet", "signature": "Calm Wait Safety", "description": "Does the loader feel calm and steady for everyone, with no strobing, an invisible 5s seam, eased pacing, and a reduced-motion state that still says in progress?", "winner": "warm-hands", "score": 9, "why": "One slow linear sweep with eased sway and out-of-phase opacity breaths, frame 5.0 verified equal to frame 0.0, no abrupt changes, and a reduced-motion held pour that still breathes so it reads as working on it."}, {"judge": "j-henrik-vale", "model": "opus", "signature": "Coffee-Ritual Specificity (the swap test)", "description": "Does the motion depict a real, specific moment of making coffee with material-true physics, so that swapping the coffee art for a generic shape would break the idea?", "winner": "warm-hands", "score": 6, "why": "A pour, a hand-wobbled rim and a mug-ring stain taste of a real cafe, but the cream spiral rotates as a rigid decal - poured milk never spins as a finished shape, so the motion is a spinner wearing latte art."}, {"judge": "j-mara-okafor", "model": "opus", "signature": "Seam & Wait Honesty", "description": "Whether the loop's 5s-to-0s wrap is invisible in position, opacity and velocity, never fakes completion, and leaves every random frame a dignified place to cut away when the network decides the wait is over.", "winner": "warm-hands", "score": 8, "why": "Linear 360deg sweep plus a zero-slope sway at the wrap means no position or velocity seam (verified in code and frames), no finish beat ever, and any frame is a clean pose of a pour in progress; reduced motion holds a composed pose that breathes."}, {"judge": "j-rosie-tran", "model": "haiku", "signature": "Glance-to-meaning at 120px", "description": "How quickly a half-awake customer, seeing the 120px loader for the first time, understands it means the coffee is being made, judged by a one-second glance test.", "winner": "the-glitch", "score": 7, "why": "A cup under a falling drop with a counting row of dots says something is being made in one glance."}, {"judge": "j-sun-park", "model": "sonnet", "signature": "Compositor-Clean Loop", "description": "Whether the animation runs only on transform/opacity and closes its 5s loop with no detectable seam, in lean markup.", "winner": "bare-wire", "score": 9, "why": "Only transform/opacity on filled circles, 1s beats divide 5s, scar opacity 0 at wrap and heal is crema-on-crema so the reset is invisible; six shapes, lean."}], "criteria": [{"id": "concept", "name": "Coffee concept & ownability", "weight": 20}, {"id": "motion", "name": "Motion, timing & perceived wait", "weight": 25}, {"id": "craft", "name": "Engineering craft & performance", "weight": 20}, {"id": "clarity", "name": "Glanceability & inclusion", "weight": 20}, {"id": "pitch", "name": "Pitch", "weight": 15}], "scores": {"j-amara-diallo": {"model": "sonnet", "teams": {"bare-wire": {"loved": "Honest README and pitch that admit the healing may read as just a pulse; six shapes, fills only, no flashing.", "docked": "Five identical 1Hz pulses with no directional sense of progress, and the subtle crema-heal idea may be lost at 120px.", "c": {"concept": 7, "motion": 6, "craft": 8, "clarity": 6, "pitch": 8}, "sig": 6}, "warm-hands": {"loved": "Steady unhurried rotation plus a deliberately composed reduced-motion pose; the loop is seamless in position and velocity.", "docked": "A turning spiral can still read as a generic spinner at 120px, the stain is fine detail, and SVG child transforms are not compositor-promoted (named honestly).", "c": {"concept": 8, "motion": 9, "craft": 7, "clarity": 7, "pitch": 9}, "sig": 9}, "the-glitch": {"loved": "Reduced-motion branch is well thought out (slow pip cross-fades keep a progress cue), and the pitch is candid about the tic risk.", "docked": "Designing in an intentional hiccup invites anxiety and looks broken to a tired user; hard-cut pips and drop make the pacing busy rather than soothing.", "c": {"concept": 7, "motion": 5, "craft": 7, "clarity": 6, "pitch": 8}, "sig": 3}}}, "j-henrik-vale": {"model": "opus", "teams": {"bare-wire": {"loved": "Real restraint: six shapes, fills only, one container-sized component, and a crema field that breathes on a slow 5s second clock.", "docked": "Pitch sells it as 'the inverse of a ripple' while the code (scar .05->.8, heal .03->.8 a beat later) draws exactly a ripple, at a busy 1Hz that reads as a pulse at 120px.", "c": {"concept": 6, "motion": 5, "craft": 7, "clarity": 6, "pitch": 6}, "sig": 5}, "warm-hands": {"loved": "The most ownable brand world on the table: imperfect rim, thumb smudge, ring stain, sienna pour tip, and a calm one-turn-per-5s wrist sway that loops with no seam.", "docked": "Rigid rotation is the physics of a progress spinner, not liquid; to their credit the pitch names the cinnamon-roll/spinner risk and the per-frame SVG repaint honestly.", "c": {"concept": 7, "motion": 7, "craft": 6, "clarity": 7, "pitch": 8}, "sig": 6}, "the-glitch": {"loved": "The falling drop itself - swell at the spout, ease-in fall, flat ring on the surface - is the one honestly observed coffee gesture here.", "docked": "A deliberate 'hiccup' and hopping safety-orange pips are UI conceits with no coffee in them; a stripe on the outside of the cup is not crema, and the glitch spends the brand's one waiting moment looking broken.", "c": {"concept": 4, "motion": 4, "craft": 6, "clarity": 5, "pitch": 7}, "sig": 4}}}, "j-mara-okafor": {"model": "opus", "teams": {"bare-wire": {"loved": "Six shapes, two easing curves, fills only, one container-sized component; the leanest and most disciplined build on the table, with a README that says what it did not verify.", "docked": "The 'inverse of a ripple' is in practice an expanding dark concentric ring every second, so at 120px it reads as a ripple/target pulse at an insistent 1Hz rather than a calm heal.", "c": {"concept": 6, "motion": 6, "craft": 8, "clarity": 6, "pitch": 7}, "sig": 7}, "warm-hands": {"loved": "One slow net turn per 5s with a wrist's speed variation: steady, never reverses, never resolves; the wait honestly reads as 'someone is pouring' whether it lasts 2s or 30s.", "docked": "Still a rotating spiral, so it risks reading as a spinner or cinnamon roll; the rim stain strokes go to mush at 120px, and animating inside a <use> shadow tree is untested in Safari.", "c": {"concept": 7, "motion": 8, "craft": 7, "clarity": 7, "pitch": 8}, "sig": 8}, "the-glitch": {"loved": "The 1s drop with gravity easing and a ring on impact is genuinely of the drip ritual, and the code is tidy, dial-driven and honest that SVG children repaint.", "docked": "Designing a hitch into a loader puts a seam on purpose; hot orange pips and the ghost demand attention, and at 120px the side-view cup under a spout is close to generic coffee clip art.", "c": {"concept": 5, "motion": 3, "craft": 6, "clarity": 4, "pitch": 6}, "sig": 2}}}, "j-rosie-tran": {"model": "haiku", "teams": {"bare-wire": {"loved": "The top-down cup with its handle reads as coffee, and the splash is calm and simple.", "docked": "The drop and heal are too subtle at 120px, so it reads as a static cup rather than a wait.", "c": {"concept": 6, "motion": 5, "craft": 7, "clarity": 4, "pitch": 6}, "sig": 4}, "warm-hands": {"loved": "A pour already in progress that never finishes makes the wait feel like someone is working on it.", "docked": "The stain and fine rings turn to mush at 120px, and the spiral could read as a spinner or a cinnamon roll.", "c": {"concept": 8, "motion": 7, "craft": 7, "clarity": 6, "pitch": 7}, "sig": 6}, "the-glitch": {"loved": "The one-second drop and five-dot counter make the wait feel steady and countable, the easiest read at 120px.", "docked": "The band slip every loop looks like a rendering bug, which could make a tired customer wonder if the app is broken.", "c": {"concept": 6, "motion": 5, "craft": 7, "clarity": 8, "pitch": 7}, "sig": 7}}}, "j-sun-park": {"model": "sonnet", "teams": {"bare-wire": {"loved": "Six shapes, no strokes animated, and a README that admits no trace was taken.", "docked": "The scar-and-heal is subtle at 120px and reads as a pulse; markup is pasted twice.", "c": {"concept": 8, "motion": 7, "craft": 8, "clarity": 5, "pitch": 8}, "sig": 9}, "warm-hands": {"loved": "Genuinely seamless, steady rotation with a single shared symbol, and the velocity claim (~13% variation) checks out against the keyframes.", "docked": "Animates SVG child groups (repaints, as they admit) and a turning spiral risks reading as a spinner.", "c": {"concept": 7, "motion": 9, "craft": 9, "clarity": 7, "pitch": 8}, "sig": 9}, "the-glitch": {"loved": "Clear drip read at 120px and a pitch that names the glitch risk and the 4px floor.", "docked": "A purposeful hitch plus hard-cut drops every second makes the loop twitchier than a loader should be.", "c": {"concept": 7, "motion": 5, "craft": 7, "clarity": 7, "pitch": 8}, "sig": 7}}}}};
+const DATA2 = {"ranking": ["warm-hands", "the-glitch", "bare-wire"], "most_improved": "the-glitch", "teams": {"bare-wire": {"rubric": 66.1, "signature_bonus": 9.0, "total": 75.1, "per_judge": {"j-amara-diallo": 65.5, "j-henrik-vale": 65.5, "j-mara-okafor": 68.0, "j-rosie-tran": 60.0, "j-sun-park": 71.5}, "spread": 11.5, "criteria_avg": {"concept": 6.2, "motion": 6.6, "craft": 7.6, "clarity": 5.6, "pitch": 7.2}, "change": 12.6, "drift": -11.0, "previous_rank": 2, "previous_total": 73.5, "v1_same_pass": {"total": 62.5, "rubric": 55.3, "signature_bonus": 7.2, "criteria_avg": {"concept": 5.4, "motion": 4.8, "craft": 7.6, "clarity": 4.6, "pitch": 5.4}, "per_judge": {"j-amara-diallo": 53.5, "j-henrik-vale": 53.5, "j-mara-okafor": 58.0, "j-rosie-tran": 52.0, "j-sun-park": 59.5}}}, "the-glitch": {"rubric": 68.0, "signature_bonus": 9.0, "total": 77.0, "per_judge": {"j-amara-diallo": 70.0, "j-henrik-vale": 67.5, "j-mara-okafor": 69.5, "j-rosie-tran": 66.0, "j-sun-park": 67.0}, "spread": 4.0, "criteria_avg": {"concept": 6.6, "motion": 6.2, "craft": 7.4, "clarity": 7, "pitch": 7}, "change": 15.8, "drift": -4.3, "previous_rank": 3, "previous_total": 65.5, "v1_same_pass": {"total": 61.2, "rubric": 54.3, "signature_bonus": 6.9, "criteria_avg": {"concept": 5.2, "motion": 4.6, "craft": 6.4, "clarity": 5, "pitch": 6.4}, "per_judge": {"j-amara-diallo": 59.0, "j-henrik-vale": 55.5, "j-mara-okafor": 53.0, "j-rosie-tran": 45.5, "j-sun-park": 58.5}}}, "warm-hands": {"rubric": 69.3, "signature_bonus": 11.4, "total": 80.7, "per_judge": {"j-amara-diallo": 72.0, "j-henrik-vale": 69.5, "j-mara-okafor": 74.5, "j-rosie-tran": 61.0, "j-sun-park": 69.5}, "spread": 13.5, "criteria_avg": {"concept": 7.2, "motion": 6.8, "craft": 7, "clarity": 6.4, "pitch": 7.4}, "change": 4.1, "drift": -9.6, "previous_rank": 1, "previous_total": 86.2, "v1_same_pass": {"total": 76.6, "rubric": 65.8, "signature_bonus": 10.8, "criteria_avg": {"concept": 6.6, "motion": 6.8, "craft": 7, "clarity": 5.4, "pitch": 7.2}, "per_judge": {"j-amara-diallo": 70.0, "j-henrik-vale": 67.5, "j-mara-okafor": 70.5, "j-rosie-tran": 55.5, "j-sun-park": 65.5}}}}, "awards": [{"judge": "j-amara-diallo", "model": "sonnet", "signature": "Half-Awake Read Time", "description": "Whether a tired, glare-blinded user gets 'coffee, in progress' from one frozen, grayscale, blurred 120px frame, with 3:1 contrast, 4px+ shapes, a progress cue in the reduced-motion pose, and a specific accessible name.", "winner": "the-glitch", "score": 7, "why": "Spout, falling drop and cup read as coffee on its way even grayscale and blurred; reduced pose keeps a hanging drop and stepping crema; name is specific; the crema step cue itself fades under blur."}, {"judge": "j-henrik-vale", "model": "opus", "signature": "Freeze-Frame Brandability (the cup sleeve test)", "description": "Pause the loader at 0s, 1.25s, 2.5s, 3.75s and at its worst frame, and ask whether each still, full colour and reduced to one ink at 2cm, is a composed mark a cafe could print on a sleeve, bag stamp or menu board.", "winner": "warm-hands", "score": 8, "why": "Every frame is the same hand-made latte-art cup at a new angle, wobbled rim, stain and sienna tip intact; the new stream makes each still a pour stamp, though the stain goes to fuzz at 2cm in one ink."}, {"judge": "j-mara-okafor", "model": "opus", "signature": "One Lead Mover", "description": "At any moment exactly one primary mover carries 'working on it' and every other moving element is visibly quieter, on a nested tempo, close to the lead, at both 120px and splash size.", "winner": "warm-hands", "score": 8, "why": "The turning spiral is clearly the lead; the stream is static and lands on its pivot, the bloom breathes on the same 5s clock, and making the rim stain static removed the one far-off secondary."}, {"judge": "j-rosie-tran", "model": "haiku", "signature": "Already-pouring first frame", "description": "Whether the loader already shows coffee being made in the first frame a customer sees after tapping order, at 120px, judged from a restart at 0, 100 and 250ms.", "winner": "warm-hands", "score": 8, "why": "The pour is already mid-stroke at 0ms with the pour tip in place, and the 0ms frame matches the 5s frame, so a restart looks like a continuation."}, {"judge": "j-sun-park", "model": "sonnet", "signature": "Frame-Budget Footprint", "description": "How much of the loader repaints each frame, how many layers it promotes, and whether it costs nothing when paused or hidden.", "winner": "bare-wire", "score": 7, "why": "Five animated SVG children repaint the whole small SVG each frame, but only 2 will-change nodes, no JS, pausable; v2 drops a node."}], "scores": {"j-amara-diallo": {"model": "sonnet", "teams": {"bare-wire": {"loved": "The closing hole is calm, seam-clean (frame 5.0 equals 0.0), and the pitch owns its ripple mistake.", "docked": "Top-down cup plus dark dot says 'coffee' only weakly and 'progress' barely; accessible name never mentions the order.", "sig": 5, "landed": "rejected", "fix_note": "Five clockwise scars refused as a spinner grammar and clutter, which holds against calm; the fade-in point was taken and the scar is now legible at 120px."}, "warm-hands": {"loved": "Big high-contrast spiral on espresso stays legible blurred, with a one-clock linear sweep that never looks stalled.", "docked": "Spiral still turns like a rosette and the new stream is thin and pale against the paper, so the pour cue is fragile in glare.", "sig": 7, "landed": "partly", "fix_note": "Stream added, stroke thickened to 6.5 and stream held in the reduced pose, but it is 3 units and low contrast, so the spinner read is reduced, not removed."}, "the-glitch": {"loved": "Orange layer, slip and hard cuts are gone, leaving one steady drip per second that divides the 5s loop and a calm, designed reduced-motion pose.", "docked": "The crema count tops out near 80% then swaps back in 0.25s, so it can read as fill-and-empty, which undercuts 'never finishes'.", "sig": 7, "landed": "yes", "fix_note": "Slip, ghost and hard cut deleted outright; drop now fades and squashes into the ring; the pip fade-in is moot because the pips were removed."}}}, "j-henrik-vale": {"model": "opus", "teams": {"bare-wire": {"loved": "The wound now closes instead of spreading: fast open, a held dark hole, a slow settle, which is crema physics told honestly in six shapes.", "docked": "Still a dot in a disc; nothing in the still says this cafe rather than any brown circle, and the bare-field frames at each handoff are an empty cup icon.", "sig": 5, "landed": "yes", "fix_note": "Heal disc deleted, scar opens fast and shrinks over ~1.7s, two off-centre drops per 5s; they added a 0.5s hold, which helps the 120px read."}, "warm-hands": {"loved": "Still the only entry that looks like a specific cafe, and the static stream finally tells a glance that milk is going in.", "docked": "The finished rosetta still spins as a rigid decal, so the motion keeps spinner grammar; the stream sits on top of it rather than driving it.", "sig": 8, "landed": "rejected", "fix_note": "Refused offset-path on seam and Safari risk; the seam worry is real for an open spiral path, and the stream covers the 'being poured' read, but the rotating-decal problem I named is untouched."}, "the-glitch": {"loved": "The coffee now keeps the score: crema lightens per landing and the 3s pull is a real espresso event, not a render bug.", "docked": "The stepped crema peaks near 4.7s then drains in 0.25s, which flirts with a fill-and-reset, and the side-profile cup is generic clip art territory.", "sig": 6, "landed": "yes", "fix_note": "Pips and striped band deleted, crema steps live on the surface ellipse, the hiccup became a scaleY stream at 3.0-3.5s; built as a separate element rather than a stretched drop, which is a fair call."}}}, "j-mara-okafor": {"model": "opus", "teams": {"bare-wire": {"loved": "Open fast, hold, close slowly over 1.7s: the hole settles instead of rippling, and it all stays in six fills-only shapes.", "docked": "At 120px a dark disc in a top-down cup still says 'something in a cup' more than 'coffee on its way', and the 0.3s opening is a little abrupt.", "sig": 7, "landed": "partly", "fix_note": "They took the cap (.55, not .45) and a softer scar colour with a sound contrast reason, but kept two drops per loop; at 2.5s that is calm enough, so I accept the call."}, "warm-hands": {"loved": "The stream turns 'a spiral that spins' into 'a spiral being poured' at no cost to the seamless linear sweep.", "docked": "The spiral is still the biggest shape and still rotates, so a spinner read survives at 120px, and animated SVG groups behind <use> still repaint.", "sig": 8, "landed": "yes", "fix_note": "The stream was built exactly as specified, outside .sweep, opacity-only; the stain went to 3.6 not 4 but is now static and reads as one ring."}, "the-glitch": {"loved": "Removing the orange layer and the hard cuts leaves the most literal and calm coffee read on the table: a drop falls, squashes and rings into the cup.", "docked": "The accumulating crema climbs to near-full at 4.7s and then empties: a fill-and-reset that the team's own screenshots confirm, and the 1Hz beat is still brisk.", "sig": 5, "landed": "partly", "fix_note": "The pips, slip and ghost are gone, but they put a new count in their place that resets every loop, the very thing the note asked them to remove; the 'provocation' reason does not hold for a waiting user."}}}, "j-rosie-tran": {"model": "haiku", "teams": {"bare-wire": {"loved": "The top-down cup with its handle reads as coffee at a glance, and the calm one-beat rhythm has no spinner rotation.", "docked": "The dark hole reads as a pothole or a stall more than coffee arriving, so a half-awake glance does not say 'coming'.", "sig": 6, "landed": "rejected", "fix_note": "The drip stroke was refused as a second subject outside the cup; the team enlarged and held the scar instead."}, "warm-hands": {"loved": "It looks like someone is pouring, not loading: the cup, handle, pour tip and stain say coffee, and nothing flashes.", "docked": "The rotating spiral still reads as a spinner or cinnamon roll at 120px, and the thin stream is too faint to carry the pour alone.", "sig": 8, "landed": "partly", "fix_note": "The stream landed as a fixed line down to the pivot, not from the rim to the moving tip, so it reads as a pour but not a travelling one."}, "the-glitch": {"loved": "One drop a second, falling into a cup that counts up in crema, is a steady, countable wait that reads as coffee on the way.", "docked": "The crema step at beat 5 can look like a drain, and the 3s pull is a little dramatic for a half-awake glance.", "sig": 5, "landed": "yes", "fix_note": "The orange layer was removed at every size, not just at 120px; the slip and ghost are gone and the drop and count are kept."}}}, "j-sun-park": {"model": "sonnet", "teams": {"bare-wire": {"loved": "Six fill-only shapes, zero-state at 0%/100%, no JS in the animation path, and the hole now closes slowly instead of rippling outward.", "docked": "Animation still lives on SVG children so the full SVG repaints, will-change on SVG nodes buys little, and the duplicate pasted SVG remains.", "sig": 7, "landed": "partly", "fix_note": "Scar is larger and held so it reads at 120px and the heal disc is gone, but the heal rim and single-instance markup were not taken."}, "warm-hands": {"loved": "Single 5s period for every animated property, linear sweep with matching velocity at the wrap, and one shared symbol for both sizes.", "docked": "The sweep still repaints the entire cup every frame, and v2 adds another animated node (the stream) while declining the layer split.", "sig": 7, "landed": "rejected", "fix_note": "Layer split declined as a second SVG for about one point; the repaint is disclosed honestly, so the reason mostly holds but the cost stays."}, "the-glitch": {"loved": "The hard cuts and the clip-masked orange slip are gone, and the drop now fades and squashes into the ring on one 1s beat that divides 5s.", "docked": "The pointless 0.98 surface breathe still repaints every frame, and the 0.25s crema swap at the wrap can read as a drain.", "sig": 7, "landed": "yes", "fix_note": "Opacity snap and teleport replaced by eased squash and fade, and the slip was deleted outright."}}}}, "crit": {"j-amara-diallo": {"bare-wire": "Give the five 1s beats direction: replace the single scar/heal pair with five pairs, each with animation-delay of i seconds on a 5s cycle (keyframes compressed into the first 20%), landing at five points stepped clockwise around the crema field (72 degree steps, about 22 units from centre, so no two overlap), and lengthen each scar's fade-in from 0.2s to 0.4s so no beat is a pop. Progress then travels around the cup instead of pulsing in place, and the heal stays visible at 120px because each scar is a distinct place.", "warm-hands": "Stop the spiral reading as a spinner at 120px: thicken the pour stroke to about 7 units, add a short static cream stream from the cup rim down to the pour tip (a small pitcher spout at the top of the cup) so the tip is visibly fed from above, and in the reduced-motion pose show that stream with the spiral held, so the still frame says someone is pouring, not a dial is turning.", "the-glitch": "Remove the calm-breakers: delete the band slip and orange ghost entirely (or cap --slip at 2px with a 0.6s ease so it is felt, not seen), and replace the drop's hard cut at 55.1% with a 0.15s shrink-and-fade into the surface while the ring opens from opacity 0 over 0.1s, so nothing pops. The reduced-motion branch already works; carry its slow pip cross-fade into the full-motion pips by stretching the pip fade-in to 0.3s."}, "j-henrik-vale": {"bare-wire": "Make the crema actually close the scar instead of drawing a second ripple. Delete the growing .heal disc. Let the dark .scar disc open fast (scale .05 to .55 over the first 0.25s, ease-out), then shrink it back to 0 over the remaining 2.25s with a slow ease-in-out, so the crema visibly flows in from the edge and the hole closes at its centre. Slow the beat from 1s to 2.5s (two drops per 5s loop, landing in different off-centre spots, e.g. translate(5 4) then translate(-6 -3)) so at 120px it reads as liquid settling, not a 1Hz sonar ping. Keep the 5s field breathe under it.", "warm-hands": "Stop spinning the finished latte art as a rigid decal. Replace the 360-degree .sweep with a pour that moves while the art stays put: a sienna pour point (the .tip) travels the spiral path once per 5s via offset-path/offset-distance, a thin cream stream drops onto it from above the rim, and the already-poured spiral only drifts about 15 degrees and swells a few percent (scale 1 to 1.04) as if the surface is settling under the new milk. Keep it all on the shared 5s clock so the loop still has no seam.", "the-glitch": "Take out everything that is UI and not coffee: delete the five orange pips and the striped band on the outside of the cup. Put the crema where it lives, on the coffee surface ellipse inside the rim, and let each landing drop lighten and widen it a step (opacity and scaleX on the surface ellipse, five steps that reset when the cup is swapped at 5.0s). If you want to keep a 'hiccup', make it a real espresso event: once per loop the drip thickens into a short continuous stream for 0.5s (a scaleY-stretched drop), the way a shot gushes before it settles, instead of a misregistered stripe that reads as a render bug."}, "j-mara-okafor": {"bare-wire": "Slow the scar beat from five per loop to one per loop (scar/heal on the 5s cycle, not 1s) and soften the scar: use a mid-roast (about #8A5A33) instead of --roast, cap the scar at scale .45 so it never reaches the cup wall, and give the heal disc a 0.3s lead on the opening instead of 0.12s. One slow off-centre bloom-and-close per 5s reads as crema healing; five hard dark rings per 5s reads as a 1Hz target pulse.", "warm-hands": "Add a static pour stream: a thin (about 3-unit) crema line from the top edge of the viewBox down to the spiral's centre at (54,57), outside the .sweep group, with only a slow 5s opacity shimmer. Because it lands on the rotation centre it never fights the sweep, and it turns 'a spiral that spins' into 'a spiral being poured' at 120px. While you are there, thicken the rim-stain strokes to 4 units or cut them at small size; at 120px they are mush.", "the-glitch": "Remove the orange layer entirely: delete the five-pip chaser and the slip/ghost, and let the 1s gravity drop and its impact ring be the only clock. The pip that jumps from 5 back to 1 is a counter that resets every loop, and the designed slip leaves a broken-looking frame for any load that finishes around 3.2s; without them the drip is honest, calm and safe to cut away at any frame."}, "j-rosie-tran": {"bare-wire": "Add a short crema-coloured drip stroke above the cup, from y=2 to y=10 at x=42, that fades in and falls onto the field once per beat just before the dark scar opens. At 120px every second then shows something arriving in the cup, not only a dot appearing inside it.", "warm-hands": "Stop the spiral reading as a spinner: keep the sweep, but add a 4-unit cream stream from the top of the rim (x=54, y=12) down to the moving pour tip, visible for the whole loop. The first glance then says someone is pouring, not that something is turning.", "the-glitch": "At the 120px instance only, hold the band still and remove the orange registration ghost (set .band and .ghost to animation: none under the small pane). Keep the slip on the splash, where it reads as a deliberate effect. The orange mark and the mid-loop shift are what look like a fault at the size where I glance."}, "j-sun-park": {"bare-wire": "Make the heal readable at 120px: let the scar disc peak at scale .95 (reach the crema edge) and hold opacity 1 from 20% to 85% of the beat, delay the heal disc start from 12% to 35%, and give the heal disc a 1px darker rim via a fill-only second circle (r slightly larger, behind it) so a dark ring visibly closes inward each second. Keep all of it transform/opacity on filled circles. Also replace the pasted second SVG with one <symbol> + <use> (or a single instance resized by container) to halve the markup.", "warm-hands": "Move the 360deg sweep off the SVG child group: split into two stacked layers (static cup/rim/handle/stain SVG, and a second SVG or div holding only the spiral + tip + bloom) and put animation:sweep with will-change:transform on that HTML/SVG root element, with sway nested inside it, so the rotation is composited and the cup never repaints. Drop will-change from .bloom and let opacity live on the layer root too.", "the-glitch": "Remove the hard cuts in the drop keyframes (55% to 55.2% opacity 1 to 0 snap, then teleport back up): let the drop squash (scaleY .5, scaleX 1.3) and fade 55% to 65% into the ring, then fade in at the spout from scale .3 over 0-8%, all eased; and cut --slip to 4px with the slip curve starting after the 3s landing, so the one purposeful hitch is the only abrupt thing in the loop."}}};
+
+const V2 = {
+  "warm-hands": { hook: "A pour already in progress, now with the coffee visibly falling in.",
+    concept: "Added one still cream stream landing on the spiral, thicker strokes and a still stain. Kept the spin; refused Henrik's moving pour tip and Sun's layer split." },
+  "bare-wire": { hook: "A drop breaks the crema, and the crema closes the hole.",
+    concept: "Deleted the heal disc. Two off-centre drops per loop: each hole opens fast, holds, and the crema closes it. Refused Amara's five scars and Rosie's drip." },
+  "the-glitch": { hook: "A loader that counts out loud, and is never allowed to finish.",
+    concept: "Dropped the slip and all the orange. Each drop lightens the crema a step, and at 3s one drip becomes an espresso pull. Took or partly took every note." }
+};
+
+const TEAMS = {
+  "warm-hands": { name: "Warm Hands", temperament: "Humanists", title: "One Pour, by Hand",
+    hook: "Every other loader makes you wait. This one is already pouring.",
+    concept: "A hand-wobbled cup with one spiral pour that sways at a wrist's speed, beside a coffee-ring stain that breathes." },
+  "bare-wire": { name: "Bare Wire", temperament: "Purists", title: "Crema Scar",
+    hook: "Water ripples. Coffee heals.",
+    concept: "Six shapes. Each second a dark scar opens in the crema and heals closed from the inside." },
+  "the-glitch": { name: "The Glitch", temperament: "Provocateurs", title: "TICK",
+    hook: "Your coffee is dripping. You can count it. Once, it stumbles, and the next drop fixes it.",
+    concept: "One drop a second with five counting pips, and one deliberate slip at 3s that the next drop snaps back." }
+};
+const JUDGES = {
+  "j-mara-okafor": "Mara Okafor", "j-henrik-vale": "Henrik Vale", "j-sun-park": "Sun Park",
+  "j-amara-diallo": "Amara Diallo", "j-rosie-tran": "Rosie Tran"
+};
+const JUDGE_ROLE = {
+  "j-mara-okafor": "Head of Product Motion · Head Judge", "j-henrik-vale": "Creative Director, coffee brands",
+  "j-sun-park": "Front-end performance", "j-amara-diallo": "UX research, perceived wait",
+  "j-rosie-tran": "Audience proxy, daily coffee-app user"
+};
+const JUDGE_ORDER = ["j-mara-okafor", "j-henrik-vale", "j-sun-park", "j-amara-diallo", "j-rosie-tran"];
+const SHORT = { concept: "Coffee concept", motion: "Motion & wait", craft: "Craft & perf", clarity: "Glance & inclusion", pitch: "Pitch" };
+const ORD = ["1st", "2nd", "3rd", "4th", "5th"];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const f1 = n => Number(n).toFixed(1);
+
+function render() {
+  const rank = DATA.ranking;
+
+  document.getElementById("cups").innerHTML = rank.map((id, i) => {
+    const t = DATA.teams[id], m = TEAMS[id];
+    const bars = DATA.criteria.map(c => {
+      const v = t.criteria_avg[c.id];
+      return `<div class="bar"><span class="label" title="${esc(c.name)}">${SHORT[c.id] || esc(c.name)}</span>
+        <span class="track" aria-hidden="true"><span class="fill" style="width:${v * 10}%"></span></span>
+        <span class="v">${f1(v)}</span></div>`;
+    }).join("");
+    return `<article class="cup${i === 0 ? " winner" : ""}" aria-label="${esc(m.name)}, ${ORD[i]} place">
+      <div class="stage"><iframe src="loaders/${id}.html" title="${esc(m.title)} loader by ${esc(m.name)}, running live" loading="lazy"></iframe></div>
+      <div class="cup-body">
+        <div class="cup-top">
+          <div><span class="rank">${ORD[i]} · ${esc(m.temperament)}</span><h3>${esc(m.name)}</h3></div>
+          <span class="total">${f1(t.total)}<small>/115</small></span>
+        </div>
+        <p class="hook">“${esc(m.hook)}”</p>
+        <p class="concept">${esc(m.concept)}</p>
+        <div class="split"><span>Rubric <b>${f1(t.rubric)}</b></span><span>Sealed bonus <b>+${f1(t.signature_bonus)}</b></span><span>Judge spread <b>${f1(t.spread)}</b></span></div>
+        <div class="bars">${bars}</div>
+        <div class="cup-links"><a href="loaders/${id}.html" target="_blank" rel="noopener">Open ${esc(m.title)} full size</a></div>
+      </div>
+    </article>`;
+  }).join("");
+
+  const best = cid => Math.max(...rank.map(id => DATA.teams[id].criteria_avg[cid]));
+  document.getElementById("sheet").innerHTML =
+    `<thead><tr><th scope="col">Criterion</th><th scope="col" class="num">Weight</th>${rank.map(id => `<th scope="col" class="num">${esc(TEAMS[id].name)}</th>`).join("")}</tr></thead>
+    <tbody>${DATA.criteria.map(c => `<tr><td>${esc(c.name)}</td><td class="num">${c.weight}</td>${rank.map(id => {
+      const v = DATA.teams[id].criteria_avg[c.id];
+      return `<td class="num${v === best(c.id) ? " hi" : ""}">${f1(v)}</td>`;
+    }).join("")}</tr>`).join("")}
+    <tr class="sum"><td>Rubric score</td><td class="num">100</td>${rank.map(id => `<td class="num">${f1(DATA.teams[id].rubric)}</td>`).join("")}</tr>
+    <tr class="sum"><td>Sealed bonus</td><td class="num">15</td>${rank.map(id => `<td class="num">+${f1(DATA.teams[id].signature_bonus)}</td>`).join("")}</tr>
+    <tr class="sum"><td>Total</td><td class="num">115</td>${rank.map((id, i) => `<td class="num${i === 0 ? " hi" : ""}">${f1(DATA.teams[id].total)}</td>`).join("")}</tr></tbody>`;
+
+  document.getElementById("judges").innerHTML =
+    `<thead><tr><th scope="col">Judge (rubric total)</th>${rank.map(id => `<th scope="col" class="num">${esc(TEAMS[id].name)}</th>`).join("")}</tr></thead>
+    <tbody>${JUDGE_ORDER.map(j => {
+      const vals = rank.map(id => DATA.teams[id].per_judge[j]);
+      const top = Math.max(...vals);
+      return `<tr><td>${esc(JUDGES[j])}<span class="model">${esc(DATA.scores[j].model)}</span></td>${vals.map(v => `<td class="num${v === top ? " hi" : ""}">${f1(v)}</td>`).join("")}</tr>`;
+    }).join("")}</tbody>`;
+
+  const awards = Object.fromEntries(DATA.awards.map(a => [a.judge, a]));
+  document.getElementById("seals").innerHTML = JUDGE_ORDER.map(j => {
+    const a = awards[j];
+    return `<article class="seal">
+      <div class="who"><span><b>${esc(JUDGES[j])}</b> · ${esc(JUDGE_ROLE[j])}</span><span class="num">${esc(a.model)}</span></div>
+      <h3>${esc(a.signature)}</h3>
+      <p class="desc">${esc(a.description)}</p>
+      <div class="won"><span class="chip">Won by ${esc(TEAMS[a.winner].name)}</span><span class="num">${a.score}/10</span></div>
+      <p class="why">${esc(a.why)}</p>
+    </article>`;
+  }).join("");
+
+  document.getElementById("notes").innerHTML = rank.map((id, i) => `<details${i === 0 ? " open" : ""}>
+    <summary>${esc(TEAMS[id].name)}<span>${ORD[i]} · ${f1(DATA.teams[id].total)}</span></summary>
+    <div class="note-list">${JUDGE_ORDER.map(j => {
+      const n = DATA.scores[j].teams[id];
+      return `<div class="note"><div class="j">${esc(JUDGES[j])}<small>sealed ${n.sig}/10</small></div>
+        <div><p class="lv">${esc(n.loved)}</p><p class="dk">${esc(n.docked)}</p></div></div>`;
+    }).join("")}</div>
+  </details>`).join("");
+}
+render();
+
+function renderRematch() {
+  const rank = DATA2.ranking;
+  const landedOrder = ["yes", "partly", "no", "rejected"];
+
+  document.getElementById("cups2").innerHTML = rank.map((id, i) => {
+    const t = DATA2.teams[id], m = TEAMS[id], v = V2[id];
+    const up = t.change >= 0;
+    const counts = landedOrder.map(k => [k, JUDGE_ORDER.filter(j => DATA2.scores[j].teams[id].landed === k).length]).filter(([, n]) => n);
+    const bars = DATA.criteria.map(c => {
+      const now = t.criteria_avg[c.id], was = t.v1_same_pass.criteria_avg[c.id];
+      return `<div class="bar"><span class="label" title="${esc(c.name)}">${SHORT[c.id] || esc(c.name)}</span>
+        <span class="track" aria-hidden="true"><span class="fill" style="width:${now * 10}%"></span></span>
+        <span class="v" title="v1 scored today ${f1(was)}">${f1(now)}</span></div>`;
+    }).join("");
+    return `<article class="cup${i === 0 ? " winner" : ""}" aria-label="${esc(m.name)} v2, ${ORD[i]} place">
+      <div class="stage"><iframe src="loaders/${id}-v2.html" title="${esc(m.title)} v2 by ${esc(m.name)}, running live" loading="lazy"></iframe></div>
+      <div class="cup-body">
+        <div class="cup-top">
+          <div><span class="rank">${ORD[i]} · was ${ORD[t.previous_rank - 1]}${id === DATA2.most_improved ? " · most improved" : ""}</span><h3>${esc(m.name)} v2</h3></div>
+          <span class="total">${f1(t.total)}<small>/115</small></span>
+        </div>
+        <div><span class="change ${up ? "up" : "down"}">${up ? "+" : "−"}${f1(Math.abs(t.change))} vs v1 scored today (${f1(t.v1_same_pass.total)})</span></div>
+        <p class="hook">“${esc(v.hook)}”</p>
+        <p class="concept">${esc(v.concept)}</p>
+        <p class="tally-line">Notes: ${counts.map(([k, n]) => `${n} ${k}`).join(" · ")}</p>
+        <div class="bars">${bars}</div>
+        <div class="vlinks"><a href="loaders/${id}-v2.html" target="_blank" rel="noopener">Open v2 full size</a><a href="loaders/${id}.html" target="_blank" rel="noopener">Open v1</a></div>
+      </div>
+    </article>`;
+  }).join("");
+
+  document.getElementById("landed").innerHTML = rank.map((id, i) => `<details${i === 0 ? " open" : ""}>
+    <summary>${esc(TEAMS[id].name)}<span>${f1(DATA2.teams[id].v1_same_pass.total)} → ${f1(DATA2.teams[id].total)}</span></summary>
+    <div class="note-list">${JUDGE_ORDER.map(j => {
+      const n = DATA2.scores[j].teams[id];
+      return `<div class="land"><div class="j">${esc(JUDGES[j])}<small>${esc(DATA2.scores[j].model)}</small></div>
+        <div><p class="ask">${esc(DATA2.crit[j][id])}</p><p><span class="lchip ${esc(n.landed)}">${esc(n.landed)}</span>${esc(n.fix_note)}</p></div></div>`;
+    }).join("")}</div>
+  </details>`).join("");
+
+  const drifts = rank.map(id => Math.abs(DATA2.teams[id].drift));
+  document.getElementById("drift-range").textContent = `${f1(Math.min(...drifts))} to ${f1(Math.max(...drifts))}`;
+
+  const awards = Object.fromEntries(DATA2.awards.map(a => [a.judge, a]));
+  document.getElementById("seals2").innerHTML = JUDGE_ORDER.map(j => {
+    const a = awards[j];
+    return `<article class="seal">
+      <div class="who"><span><b>${esc(JUDGES[j])}</b> · ${esc(JUDGE_ROLE[j])}</span><span class="num">${esc(a.model)}</span></div>
+      <h3>${esc(a.signature)}</h3>
+      <p class="desc">${esc(a.description)}</p>
+      <div class="won"><span class="chip">Won by ${esc(TEAMS[a.winner].name)}</span><span class="num">${a.score}/10</span></div>
+      <p class="why">${esc(a.why)}</p>
+    </article>`;
+  }).join("");
+}
+renderRematch();
+
+function fitStages() {
+  document.querySelectorAll(".stage").forEach(s => s.style.setProperty("--s", s.clientWidth / 760));
+}
+fitStages();
+if ("ResizeObserver" in window) { const ro = new ResizeObserver(fitStages); ro.observe(document.getElementById("cups")); ro.observe(document.getElementById("cups2")); }
+else window.addEventListener("resize", fitStages);
+</script>

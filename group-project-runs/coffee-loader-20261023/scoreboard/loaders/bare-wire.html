@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bare Wire - Crema Scar Loader</title>
+<style>
+:root{
+  --roast:#2B1810; --cup:#1B120D; --crema:#C98B4E; --glint:#E8C08F; --paper:#F4EBDD;
+  --ease-scar:cubic-bezier(.2,.6,.3,1);
+  --ease-swell:cubic-bezier(.45,0,.55,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow-x:hidden}
+body{background:var(--paper);color:var(--roast);font:14px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;display:flex}
+
+/* Layout: the 120px in-app instance beside the splash. Both are the same markup; only the container differs. */
+.side{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;border-right:1px solid rgba(43,24,16,.15)}
+.cap{font-size:12px;letter-spacing:.04em;text-transform:uppercase;opacity:.7}
+.inst{width:120px;height:120px}
+.splash{flex:1;min-width:0;height:100vh;container-type:size;display:flex;align-items:center;justify-content:center}
+.splash .loader-wrap{width:min(100cqw,100cqh);height:min(100cqw,100cqh)}
+.loader{display:block;width:100%;height:100%}
+
+/* Component: cup, handle, crema field, one scar (dark disc + crema disc), one glint. Fills only. */
+.handle{fill:none;stroke:var(--cup);stroke-width:5}
+.cup{fill:var(--cup)}
+.field{fill:var(--crema);transform-box:fill-box;transform-origin:center;animation:bloom 5s var(--ease-swell) infinite}
+.glint{fill:none;stroke:var(--glint);stroke-width:2.2;stroke-linecap:round;opacity:.7}
+/* A drop lands every 1s (5 per cycle). The dark disc opens; the crema disc follows it and closes the gap from inside. */
+.scar,.heal{transform-box:fill-box;transform-origin:center;transform:scale(.05);will-change:transform,opacity}
+.scar{fill:var(--roast);opacity:0;animation:scar 1s var(--ease-scar) infinite}
+.heal{fill:var(--crema);animation:heal 1s var(--ease-scar) infinite}
+
+@keyframes scar{
+  0%{transform:scale(.05);opacity:0}
+  20%{opacity:1}
+  70%{opacity:1}
+  100%{transform:scale(.8);opacity:0}
+}
+@keyframes heal{
+  0%,12%{transform:scale(.03)}
+  100%{transform:scale(.8)}
+}
+@keyframes bloom{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes breathe-field{0%,100%{opacity:.88}50%{opacity:1}}
+@keyframes breathe-scar{0%,100%{opacity:.25}50%{opacity:1}}
+
+/* Reduced motion: no travel. One healed scar sits off-centre, breathing .25 to 1 over 5s. */
+@media (prefers-reduced-motion: reduce){
+  .field{animation:breathe-field 5s var(--ease-swell) infinite}
+  .scar{transform:scale(.6);animation:breathe-scar 5s var(--ease-swell) infinite}
+  .heal{transform:scale(.5);animation:none}
+}
+/* Same rules for the preview toggle (CSS cannot share a selector list between @media and an attribute). */
+:root[data-motion="reduce"] .field{animation:breathe-field 5s var(--ease-swell) infinite}
+:root[data-motion="reduce"] .scar{transform:scale(.6);animation:breathe-scar 5s var(--ease-swell) infinite}
+:root[data-motion="reduce"] .heal{transform:scale(.5);animation:none}
+
+/* Preview controls */
+.ctl{display:flex;gap:8px;margin-top:8px}
+.ctl button{font:inherit;color:var(--paper);background:var(--roast);border:0;border-radius:6px;padding:8px 12px;cursor:pointer}
+.ctl button:focus-visible{outline:2px solid var(--crema);outline-offset:2px}
+@media (max-width:640px){body{flex-direction:column}.side{border-right:0;border-bottom:1px solid rgba(43,24,16,.15)}.splash{height:70vh}}
+</style>
+</head>
+<body>
+  <div class="side">
+    <div class="loader-wrap inst" role="img" aria-label="Loading">
+      <svg class="loader" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+        <path class="handle" d="M80 40h6a10 10 0 0 1 0 20h-6"/>
+        <circle class="cup" cx="42" cy="50" r="40"/>
+        <circle class="field" cx="42" cy="50" r="35"/>
+        <g transform="translate(5 4)">
+          <circle class="scar" cx="42" cy="50" r="35"/>
+          <circle class="heal" cx="42" cy="50" r="35"/>
+        </g>
+        <path class="glint" d="M20 40A24 24 0 0 1 34 26"/>
+      </svg>
+    </div>
+    <div class="cap">120 &times; 120</div>
+    <p class="cap" style="max-width:20ch;text-align:center;text-transform:none;letter-spacing:0">A drop breaks the crema; the crema heals it closed.</p>
+    <div class="ctl">
+      <button id="replay" type="button">Replay</button>
+      <button id="rm" type="button" aria-pressed="false">Preview reduced motion</button>
+    </div>
+  </div>
+  <div class="splash">
+    <!-- Identical to the 120px markup on purpose: inline SVG is pasted, not <use>d, to avoid Safari shadow-tree animation quirks. -->
+    <div class="loader-wrap" role="img" aria-label="Loading">
+      <svg class="loader" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+        <path class="handle" d="M80 40h6a10 10 0 0 1 0 20h-6"/>
+        <circle class="cup" cx="42" cy="50" r="40"/>
+        <circle class="field" cx="42" cy="50" r="35"/>
+        <g transform="translate(5 4)">
+          <circle class="scar" cx="42" cy="50" r="35"/>
+          <circle class="heal" cx="42" cy="50" r="35"/>
+        </g>
+        <path class="glint" d="M20 40A24 24 0 0 1 34 26"/>
+      </svg>
+    </div>
+  </div>
+<script>
+// Controls only: restart the clock, and preview the reduced-motion state. No animation logic here.
+document.getElementById('replay').onclick=function(){document.getAnimations().forEach(function(a){a.cancel();a.play()})};
+document.getElementById('rm').onclick=function(){
+  var r=document.documentElement,on=r.getAttribute('data-motion')!=='reduce';
+  if(on)r.setAttribute('data-motion','reduce');else r.removeAttribute('data-motion');
+  this.setAttribute('aria-pressed',String(on));
+};
+</script>
+</body>
+</html>

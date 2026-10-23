@@ -1,0 +1,410 @@
+<title>Coffee Loader Cupping Table</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a cupping table - three cups (live loaders) side by side, then the score sheet, then the sealed criteria opened. */
+:root {
+  --bg: #F6F4F1;
+  --surface: #FFFFFF;
+  --ink: #1E1814;
+  --muted: #6B5F57;
+  --line: #E3DCD5;
+  --cherry: #9B2335;      /* coffee-cherry red: the accent */
+  --crema: #C4874A;       /* score bars */
+  --crema-soft: #F1E2D1;
+  --gold: #8A6A12;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "Instrument Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15100D; --surface: #1F1814; --ink: #F2EBE5; --muted: #A99B91; --line: #3A2F28;
+    --cherry: #E4687A; --crema: #D9A066; --crema-soft: #3A2A1D; --gold: #E1BE5A; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15100D; --surface: #1F1814; --ink: #F2EBE5; --muted: #A99B91; --line: #3A2F28;
+  --cherry: #E4687A; --crema: #D9A066; --crema-soft: #3A2A1D; --gold: #E1BE5A; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font: 15px/1.55 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 40px 64px; display: grid; gap: 56px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.1; }
+h1 { font-size: clamp(32px, 5vw, 52px); font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; }
+h3 { font-size: 20px; font-weight: 700; }
+p { margin: 0; }
+.eyebrow { font: 600 12px/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+a { color: var(--cherry); }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--cherry); outline-offset: 2px; }
+
+header { display: grid; gap: 14px; max-width: 760px; }
+header .lede { font-size: 17px; color: var(--muted); max-width: 65ch; }
+.facts { display: flex; flex-wrap: wrap; gap: 8px 20px; font: 13px var(--mono); color: var(--muted); }
+.facts b { color: var(--ink); font-weight: 600; }
+
+section { display: grid; gap: 20px; }
+.section-head { display: grid; gap: 6px; max-width: 70ch; }
+.section-head p { color: var(--muted); }
+
+/* The table: three cups */
+.cups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.cup { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: grid; grid-template-rows: auto auto 1fr; min-width: 0; }
+.cup.winner { border-color: var(--cherry); box-shadow: 0 0 0 1px var(--cherry); }
+/* Each build is laid out for a desktop window, so it renders at 760x440 and is scaled to the card width. */
+.stage { position: relative; background: var(--crema-soft); aspect-ratio: 760 / 440; max-width: 100%; overflow: hidden; }
+.stage iframe { position: absolute; top: 0; left: 0; width: 760px; height: 440px; border: 0; display: block; transform-origin: 0 0; transform: scale(var(--s, 0.48)); }
+.cup-body { padding: 18px 18px 20px; display: grid; gap: 14px; min-width: 0; }
+.cup-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.rank { font: 600 12px var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.cup.winner .rank { color: var(--cherry); }
+.total { font: 600 30px/1 var(--mono); font-variant-numeric: tabular-nums; }
+.total small { font-size: 13px; color: var(--muted); font-weight: 400; margin-left: 4px; }
+.hook { font-family: var(--display); font-size: 18px; line-height: 1.25; font-weight: 500; }
+.concept { color: var(--muted); font-size: 14px; }
+.split { display: flex; gap: 14px; font: 12px var(--mono); color: var(--muted); flex-wrap: wrap; }
+.split b { color: var(--ink); font-weight: 600; }
+.cup-links { display: flex; gap: 16px; font-size: 13px; flex-wrap: wrap; }
+
+.bars { display: grid; gap: 7px; }
+.bar { display: grid; grid-template-columns: 9.5em minmax(0, 1fr) 2.6em; gap: 10px; align-items: center; font-size: 13px; }
+.bar .label { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar .track { height: 8px; background: var(--crema-soft); border-radius: 4px; overflow: hidden; }
+.bar .fill { height: 100%; background: var(--crema); border-radius: 4px; }
+.bar .v { font: 12px var(--mono); text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Score sheet */
+.sheet-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 14px; }
+th, td { padding: 11px 14px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+thead th { font: 600 11px var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); background: var(--bg); }
+tbody tr:last-child td { border-bottom: 0; }
+td.num, th.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+td .model { font: 11px var(--mono); color: var(--muted); margin-left: 6px; }
+tr.sum td { font-weight: 600; background: var(--bg); }
+.hi { color: var(--cherry); font-weight: 600; }
+
+/* Sealed criteria */
+.seals { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.seal { border: 1px dashed var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 10px; align-content: start; background: var(--surface); min-width: 0; }
+.seal .who { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; color: var(--muted); }
+.seal .who b { color: var(--ink); }
+.seal h3 { font-size: 18px; }
+.seal .desc { font-size: 14px; color: var(--muted); }
+.seal .won { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+.chip { font: 600 11px var(--mono); letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 8px; border-radius: 999px; background: var(--crema-soft); color: var(--ink); white-space: nowrap; }
+.seal .why { font-size: 14px; }
+
+/* Judges' notes */
+.notes { display: grid; gap: 12px; }
+details { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+summary { cursor: pointer; padding: 14px 18px; font-family: var(--display); font-weight: 700; font-size: 17px; display: flex; justify-content: space-between; gap: 12px; }
+summary span { font: 13px var(--mono); color: var(--muted); font-weight: 400; }
+.note-list { display: grid; gap: 14px; padding: 0 18px 18px; }
+.note { display: grid; grid-template-columns: 11em minmax(0, 1fr); gap: 4px 16px; font-size: 14px; }
+.note .j { font-weight: 600; }
+.note .j small { display: block; font: 11px var(--mono); color: var(--muted); font-weight: 400; }
+.note .lv::before { content: "Loved "; font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: 0.05em; color: var(--gold); }
+.note .dk::before { content: "Docked "; font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: 0.05em; color: var(--cherry); }
+
+.change { font: 600 13px var(--mono); padding: 3px 8px; border-radius: 999px; background: var(--crema-soft); white-space: nowrap; }
+.change.up { color: var(--gold); }
+.change.down { color: var(--cherry); }
+.drift { max-width: 75ch; color: var(--muted); font-size: 14px; border-left: 3px solid var(--crema); padding-left: 14px; }
+.drift b { color: var(--ink); }
+.vlinks { display: flex; gap: 16px; font-size: 13px; flex-wrap: wrap; }
+.land { display: grid; grid-template-columns: 11em minmax(0, 1fr); gap: 4px 16px; font-size: 14px; }
+.land .ask { color: var(--muted); }
+.land .ask::before { content: "Asked "; font: 600 11px var(--mono); text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+.lchip { font: 600 11px var(--mono); letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 7px; border-radius: 999px; border: 1px solid var(--line); margin-right: 8px; }
+.lchip.yes { color: var(--gold); border-color: var(--gold); }
+.lchip.partly { color: var(--crema); border-color: var(--crema); }
+.lchip.no, .lchip.rejected { color: var(--cherry); border-color: var(--cherry); }
+.tally-line { font: 13px var(--mono); color: var(--muted); }
+@media (max-width: 520px) { .land { grid-template-columns: minmax(0, 1fr); } }
+.caveat { border-left: 3px solid var(--cherry); padding: 4px 0 4px 16px; display: grid; gap: 8px; max-width: 75ch; }
+.caveat p { color: var(--muted); }
+.caveat p b { color: var(--ink); }
+
+@media (max-width: 900px) {
+  .cups { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 520px) {
+  .note { grid-template-columns: minmax(0, 1fr); }
+  .bar { grid-template-columns: 7.5em minmax(0, 1fr) 2.4em; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Group project · Lite run + rematch · 23 Oct 2026</span>
+    <h1>Coffee Loader Cupping Table</h1>
+    <p class="lede">Three teams of four agents each built a 5-second looping loader for a coffee-ordering app in plain HTML and CSS. Five judges scored them on a shared rubric, plus one criterion each that they kept sealed until the end. Then every judge gave each team one fix, the teams decided which to take, and built a second version. The loaders below are the real builds, running live.</p>
+    <div class="facts">
+      <span><b>3</b> teams × <b>4</b> members (Sonnet)</span>
+      <span><b>5</b> judges: 2 Opus, 2 Sonnet, 1 Haiku</span>
+      <span><b>73</b> subagents across both rounds</span>
+      <span>Rubric <b>100</b> + sealed bonus <b>15</b></span>
+    </div>
+  </header>
+
+  <section aria-labelledby="re-h">
+    <div class="section-head">
+      <span class="eyebrow">Rematch · v2</span>
+      <h2 id="re-h">After the judges' notes</h2>
+      <p>Each judge wrote the one change that would most raise their score for each team. Each team's Producer accepted, partly took or rejected every note, and the team built v2. The judges re-scored it with fresh sealed criteria.</p>
+    </div>
+    <div class="cups" id="cups2"></div>
+    <p class="drift"><b>Scored side by side.</b> Each judge scored v1 and v2 of every team in the same pass, so each change compares like with like. That pass also showed how much harder the judges grade now: they put the same v1 builds <span id="drift-range"></span> points below their round 1 scores. A first, unpaired re-score had mixed that drift into the change and showed Warm Hands falling 5.2 points; paired, it rose 4.1.</p>
+  </section>
+
+  <section aria-labelledby="land-h">
+    <div class="section-head">
+      <span class="eyebrow">The notes</span>
+      <h2 id="land-h">Did each judge's fix land?</h2>
+      <p>The note each judge gave, and what they found in v2. A rejection with a sound reason was not penalised.</p>
+    </div>
+    <div class="notes" id="landed"></div>
+  </section>
+
+  <section aria-labelledby="seal2-h">
+    <div class="section-head">
+      <span class="eyebrow">Fresh sealed criteria, opened</span>
+      <h2 id="seal2-h">What the judges secretly graded in the rematch</h2>
+      <p>The round 1 criteria were public by then, so each judge sealed a new one.</p>
+    </div>
+    <div class="seals" id="seals2"></div>
+  </section>
+
+  <section aria-labelledby="table-h">
+    <div class="section-head">
+      <span class="eyebrow">Round 1 · v1</span>
+      <h2 id="table-h">The first three loaders, ranked</h2>
+      <p>Each cup shows the team's build as it ships: a 120px in-app instance beside a larger splash. Open one full size to see it at the scale the judges reviewed.</p>
+    </div>
+    <div class="cups" id="cups"></div>
+  </section>
+
+  <section aria-labelledby="sheet-h">
+    <div class="section-head">
+      <span class="eyebrow">Score sheet</span>
+      <h2 id="sheet-h">How the points add up</h2>
+      <p>Criterion scores are the average of five judges, out of 10. A team's rubric score is each judge's weighted total, averaged. Sealed criteria add up to 3 points per judge.</p>
+    </div>
+    <div class="sheet-wrap"><table id="sheet"></table></div>
+    <div class="sheet-wrap"><table id="judges"></table></div>
+  </section>
+
+  <section aria-labelledby="seal-h">
+    <div class="section-head">
+      <span class="eyebrow">Round 1 · sealed criteria, opened</span>
+      <h2 id="seal-h">What each judge was secretly grading</h2>
+      <p>Teams knew every judge held one undisclosed criterion. They never saw what it was.</p>
+    </div>
+    <div class="seals" id="seals"></div>
+  </section>
+
+  <section aria-labelledby="notes-h">
+    <div class="section-head">
+      <span class="eyebrow">Round 1 · judges' notes</span>
+      <h2 id="notes-h">What they loved and docked in v1</h2>
+    </div>
+    <div class="notes" id="notes"></div>
+  </section>
+
+  <section aria-labelledby="cav-h">
+    <div class="caveat">
+      <span class="eyebrow">Read before you share</span>
+      <h2 id="cav-h">Known issues with this run</h2>
+      <p><b>Isolation leaked.</b> Builders shared a local test port and the in-app browser pane, so two Warm Hands members briefly saw Bare Wire's build. Both say they used nothing from it, and Warm Hands won, so treat the ranking as indicative. The skill now gives each team its own port and a private browser.</p>
+      <p><b>Ideas converged early.</b> Nine of twelve first proposals were a drop or a crema ring, likely steered by technique examples in the judges' brief. The Head Judge prompt now describes outcomes only.</p>
+      <p><b>Testing was thin.</b> Every build was checked in headless Chromium only. Safari, Firefox and real phones are untested.</p>
+      <p><b>Judges drifted between rounds.</b> After writing their notes they graded the same v1 builds lower than in round 1. The rematch change is measured inside one pass to cancel this, but round 1 and rematch totals still aren't on the same scale.</p>
+    </div>
+  </section>
+</div>
+
+<script>
+const DATA = /*DATA*/null;
+const DATA2 = /*DATA2*/null;
+
+const V2 = {
+  "warm-hands": { hook: "A pour already in progress, now with the coffee visibly falling in.",
+    concept: "Added one still cream stream landing on the spiral, thicker strokes and a still stain. Kept the spin; refused Henrik's moving pour tip and Sun's layer split." },
+  "bare-wire": { hook: "A drop breaks the crema, and the crema closes the hole.",
+    concept: "Deleted the heal disc. Two off-centre drops per loop: each hole opens fast, holds, and the crema closes it. Refused Amara's five scars and Rosie's drip." },
+  "the-glitch": { hook: "A loader that counts out loud, and is never allowed to finish.",
+    concept: "Dropped the slip and all the orange. Each drop lightens the crema a step, and at 3s one drip becomes an espresso pull. Took or partly took every note." }
+};
+
+const TEAMS = {
+  "warm-hands": { name: "Warm Hands", temperament: "Humanists", title: "One Pour, by Hand",
+    hook: "Every other loader makes you wait. This one is already pouring.",
+    concept: "A hand-wobbled cup with one spiral pour that sways at a wrist's speed, beside a coffee-ring stain that breathes." },
+  "bare-wire": { name: "Bare Wire", temperament: "Purists", title: "Crema Scar",
+    hook: "Water ripples. Coffee heals.",
+    concept: "Six shapes. Each second a dark scar opens in the crema and heals closed from the inside." },
+  "the-glitch": { name: "The Glitch", temperament: "Provocateurs", title: "TICK",
+    hook: "Your coffee is dripping. You can count it. Once, it stumbles, and the next drop fixes it.",
+    concept: "One drop a second with five counting pips, and one deliberate slip at 3s that the next drop snaps back." }
+};
+const JUDGES = {
+  "j-mara-okafor": "Mara Okafor", "j-henrik-vale": "Henrik Vale", "j-sun-park": "Sun Park",
+  "j-amara-diallo": "Amara Diallo", "j-rosie-tran": "Rosie Tran"
+};
+const JUDGE_ROLE = {
+  "j-mara-okafor": "Head of Product Motion · Head Judge", "j-henrik-vale": "Creative Director, coffee brands",
+  "j-sun-park": "Front-end performance", "j-amara-diallo": "UX research, perceived wait",
+  "j-rosie-tran": "Audience proxy, daily coffee-app user"
+};
+const JUDGE_ORDER = ["j-mara-okafor", "j-henrik-vale", "j-sun-park", "j-amara-diallo", "j-rosie-tran"];
+const SHORT = { concept: "Coffee concept", motion: "Motion & wait", craft: "Craft & perf", clarity: "Glance & inclusion", pitch: "Pitch" };
+const ORD = ["1st", "2nd", "3rd", "4th", "5th"];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const f1 = n => Number(n).toFixed(1);
+
+function render() {
+  const rank = DATA.ranking;
+
+  document.getElementById("cups").innerHTML = rank.map((id, i) => {
+    const t = DATA.teams[id], m = TEAMS[id];
+    const bars = DATA.criteria.map(c => {
+      const v = t.criteria_avg[c.id];
+      return `<div class="bar"><span class="label" title="${esc(c.name)}">${SHORT[c.id] || esc(c.name)}</span>
+        <span class="track" aria-hidden="true"><span class="fill" style="width:${v * 10}%"></span></span>
+        <span class="v">${f1(v)}</span></div>`;
+    }).join("");
+    return `<article class="cup${i === 0 ? " winner" : ""}" aria-label="${esc(m.name)}, ${ORD[i]} place">
+      <div class="stage"><iframe src="loaders/${id}.html" title="${esc(m.title)} loader by ${esc(m.name)}, running live" loading="lazy"></iframe></div>
+      <div class="cup-body">
+        <div class="cup-top">
+          <div><span class="rank">${ORD[i]} · ${esc(m.temperament)}</span><h3>${esc(m.name)}</h3></div>
+          <span class="total">${f1(t.total)}<small>/115</small></span>
+        </div>
+        <p class="hook">“${esc(m.hook)}”</p>
+        <p class="concept">${esc(m.concept)}</p>
+        <div class="split"><span>Rubric <b>${f1(t.rubric)}</b></span><span>Sealed bonus <b>+${f1(t.signature_bonus)}</b></span><span>Judge spread <b>${f1(t.spread)}</b></span></div>
+        <div class="bars">${bars}</div>
+        <div class="cup-links"><a href="loaders/${id}.html" target="_blank" rel="noopener">Open ${esc(m.title)} full size</a></div>
+      </div>
+    </article>`;
+  }).join("");
+
+  const best = cid => Math.max(...rank.map(id => DATA.teams[id].criteria_avg[cid]));
+  document.getElementById("sheet").innerHTML =
+    `<thead><tr><th scope="col">Criterion</th><th scope="col" class="num">Weight</th>${rank.map(id => `<th scope="col" class="num">${esc(TEAMS[id].name)}</th>`).join("")}</tr></thead>
+    <tbody>${DATA.criteria.map(c => `<tr><td>${esc(c.name)}</td><td class="num">${c.weight}</td>${rank.map(id => {
+      const v = DATA.teams[id].criteria_avg[c.id];
+      return `<td class="num${v === best(c.id) ? " hi" : ""}">${f1(v)}</td>`;
+    }).join("")}</tr>`).join("")}
+    <tr class="sum"><td>Rubric score</td><td class="num">100</td>${rank.map(id => `<td class="num">${f1(DATA.teams[id].rubric)}</td>`).join("")}</tr>
+    <tr class="sum"><td>Sealed bonus</td><td class="num">15</td>${rank.map(id => `<td class="num">+${f1(DATA.teams[id].signature_bonus)}</td>`).join("")}</tr>
+    <tr class="sum"><td>Total</td><td class="num">115</td>${rank.map((id, i) => `<td class="num${i === 0 ? " hi" : ""}">${f1(DATA.teams[id].total)}</td>`).join("")}</tr></tbody>`;
+
+  document.getElementById("judges").innerHTML =
+    `<thead><tr><th scope="col">Judge (rubric total)</th>${rank.map(id => `<th scope="col" class="num">${esc(TEAMS[id].name)}</th>`).join("")}</tr></thead>
+    <tbody>${JUDGE_ORDER.map(j => {
+      const vals = rank.map(id => DATA.teams[id].per_judge[j]);
+      const top = Math.max(...vals);
+      return `<tr><td>${esc(JUDGES[j])}<span class="model">${esc(DATA.scores[j].model)}</span></td>${vals.map(v => `<td class="num${v === top ? " hi" : ""}">${f1(v)}</td>`).join("")}</tr>`;
+    }).join("")}</tbody>`;
+
+  const awards = Object.fromEntries(DATA.awards.map(a => [a.judge, a]));
+  document.getElementById("seals").innerHTML = JUDGE_ORDER.map(j => {
+    const a = awards[j];
+    return `<article class="seal">
+      <div class="who"><span><b>${esc(JUDGES[j])}</b> · ${esc(JUDGE_ROLE[j])}</span><span class="num">${esc(a.model)}</span></div>
+      <h3>${esc(a.signature)}</h3>
+      <p class="desc">${esc(a.description)}</p>
+      <div class="won"><span class="chip">Won by ${esc(TEAMS[a.winner].name)}</span><span class="num">${a.score}/10</span></div>
+      <p class="why">${esc(a.why)}</p>
+    </article>`;
+  }).join("");
+
+  document.getElementById("notes").innerHTML = rank.map((id, i) => `<details${i === 0 ? " open" : ""}>
+    <summary>${esc(TEAMS[id].name)}<span>${ORD[i]} · ${f1(DATA.teams[id].total)}</span></summary>
+    <div class="note-list">${JUDGE_ORDER.map(j => {
+      const n = DATA.scores[j].teams[id];
+      return `<div class="note"><div class="j">${esc(JUDGES[j])}<small>sealed ${n.sig}/10</small></div>
+        <div><p class="lv">${esc(n.loved)}</p><p class="dk">${esc(n.docked)}</p></div></div>`;
+    }).join("")}</div>
+  </details>`).join("");
+}
+render();
+
+function renderRematch() {
+  const rank = DATA2.ranking;
+  const landedOrder = ["yes", "partly", "no", "rejected"];
+
+  document.getElementById("cups2").innerHTML = rank.map((id, i) => {
+    const t = DATA2.teams[id], m = TEAMS[id], v = V2[id];
+    const up = t.change >= 0;
+    const counts = landedOrder.map(k => [k, JUDGE_ORDER.filter(j => DATA2.scores[j].teams[id].landed === k).length]).filter(([, n]) => n);
+    const bars = DATA.criteria.map(c => {
+      const now = t.criteria_avg[c.id], was = t.v1_same_pass.criteria_avg[c.id];
+      return `<div class="bar"><span class="label" title="${esc(c.name)}">${SHORT[c.id] || esc(c.name)}</span>
+        <span class="track" aria-hidden="true"><span class="fill" style="width:${now * 10}%"></span></span>
+        <span class="v" title="v1 scored today ${f1(was)}">${f1(now)}</span></div>`;
+    }).join("");
+    return `<article class="cup${i === 0 ? " winner" : ""}" aria-label="${esc(m.name)} v2, ${ORD[i]} place">
+      <div class="stage"><iframe src="loaders/${id}-v2.html" title="${esc(m.title)} v2 by ${esc(m.name)}, running live" loading="lazy"></iframe></div>
+      <div class="cup-body">
+        <div class="cup-top">
+          <div><span class="rank">${ORD[i]} · was ${ORD[t.previous_rank - 1]}${id === DATA2.most_improved ? " · most improved" : ""}</span><h3>${esc(m.name)} v2</h3></div>
+          <span class="total">${f1(t.total)}<small>/115</small></span>
+        </div>
+        <div><span class="change ${up ? "up" : "down"}">${up ? "+" : "−"}${f1(Math.abs(t.change))} vs v1 scored today (${f1(t.v1_same_pass.total)})</span></div>
+        <p class="hook">“${esc(v.hook)}”</p>
+        <p class="concept">${esc(v.concept)}</p>
+        <p class="tally-line">Notes: ${counts.map(([k, n]) => `${n} ${k}`).join(" · ")}</p>
+        <div class="bars">${bars}</div>
+        <div class="vlinks"><a href="loaders/${id}-v2.html" target="_blank" rel="noopener">Open v2 full size</a><a href="loaders/${id}.html" target="_blank" rel="noopener">Open v1</a></div>
+      </div>
+    </article>`;
+  }).join("");
+
+  document.getElementById("landed").innerHTML = rank.map((id, i) => `<details${i === 0 ? " open" : ""}>
+    <summary>${esc(TEAMS[id].name)}<span>${f1(DATA2.teams[id].v1_same_pass.total)} → ${f1(DATA2.teams[id].total)}</span></summary>
+    <div class="note-list">${JUDGE_ORDER.map(j => {
+      const n = DATA2.scores[j].teams[id];
+      return `<div class="land"><div class="j">${esc(JUDGES[j])}<small>${esc(DATA2.scores[j].model)}</small></div>
+        <div><p class="ask">${esc(DATA2.crit[j][id])}</p><p><span class="lchip ${esc(n.landed)}">${esc(n.landed)}</span>${esc(n.fix_note)}</p></div></div>`;
+    }).join("")}</div>
+  </details>`).join("");
+
+  const drifts = rank.map(id => Math.abs(DATA2.teams[id].drift));
+  document.getElementById("drift-range").textContent = `${f1(Math.min(...drifts))} to ${f1(Math.max(...drifts))}`;
+
+  const awards = Object.fromEntries(DATA2.awards.map(a => [a.judge, a]));
+  document.getElementById("seals2").innerHTML = JUDGE_ORDER.map(j => {
+    const a = awards[j];
+    return `<article class="seal">
+      <div class="who"><span><b>${esc(JUDGES[j])}</b> · ${esc(JUDGE_ROLE[j])}</span><span class="num">${esc(a.model)}</span></div>
+      <h3>${esc(a.signature)}</h3>
+      <p class="desc">${esc(a.description)}</p>
+      <div class="won"><span class="chip">Won by ${esc(TEAMS[a.winner].name)}</span><span class="num">${a.score}/10</span></div>
+      <p class="why">${esc(a.why)}</p>
+    </article>`;
+  }).join("");
+}
+renderRematch();
+
+function fitStages() {
+  document.querySelectorAll(".stage").forEach(s => s.style.setProperty("--s", s.clientWidth / 760));
+}
+fitStages();
+if ("ResizeObserver" in window) { const ro = new ResizeObserver(fitStages); ro.observe(document.getElementById("cups")); ro.observe(document.getElementById("cups2")); }
+else window.addEventListener("resize", fitStages);
+</script>

@@ -1,0 +1,26 @@
+{
+  "judge": "j-rosie-tran",
+  "teams": {
+    "bare-wire": {
+      "fix": "Add a short crema-coloured drip stroke above the cup, from y=2 to y=10 at x=42, that fades in and falls onto the field once per beat just before the dark scar opens. At 120px every second then shows something arriving in the cup, not only a dot appearing inside it.",
+      "criterion": "clarity",
+      "expected_gain": 3,
+      "confidence": "medium",
+      "keep": "The top-down cup with its handle, which already reads as coffee at a glance, and the calm one-beat rhythm with no spinner-like rotation."
+    },
+    "warm-hands": {
+      "fix": "Stop the spiral reading as a spinner: keep the sweep, but add a 4-unit cream stream from the top of the rim (x=54, y=12) down to the moving pour tip, visible for the whole loop. The first glance then says someone is pouring, not that something is turning.",
+      "criterion": "clarity",
+      "expected_gain": 2,
+      "confidence": "medium",
+      "keep": "The pour that is already in progress and never finishes, with no entrance, which makes the wait feel like someone is working on it."
+    },
+    "the-glitch": {
+      "fix": "At the 120px instance only, hold the band still and remove the orange registration ghost (set .band and .ghost to animation: none under the small pane). Keep the slip on the splash, where it reads as a deliberate effect. The orange mark and the mid-loop shift are what look like a fault at the size where I glance.",
+      "criterion": "clarity",
+      "expected_gain": 1,
+      "confidence": "medium",
+      "keep": "The one-second drop and the five-pip count, which make the wait feel steady and countable."
+    }
+  }
+}
