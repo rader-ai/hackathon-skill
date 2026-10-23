@@ -18,7 +18,8 @@ and present the results.
 
 A `lite` run with 3 teams finishes in **about 15 minutes**; `standard` with 4 teams in about 25;
 a rematch adds about 10. In one early run with no limits, a single team's build and revision
-took 35 minutes while the other teams sat finished, and the whole run took 56. These rules keep it on time:
+took 35 minutes while the other teams sat finished, and the whole run took 56. With these rules a
+timed `lite` run of 3 teams finished in 9 min 50 s, every phase ahead of its deadline:
 
 1. **Every agent has a budget** (the TIMEBOX block in [references/prompts.md](references/prompts.md)).
    It reads the clock when it starts, checks before each new task, and when the budget is spent it
@@ -40,14 +41,18 @@ took 35 minutes while the other teams sat finished, and the whole run took 56. T
 | 2a. Clash | every member, parallel | 1.5 | 1.5 |
 | 2b. Second clash | every member, parallel | - | 1.5 |
 | 3. Decide | Producer | 1 | 1 |
-| 4. Build | Craftsperson (+ Visionary in parallel if the plan splits work) | 4 | 8 |
+| 4. Build | Craftsperson (+ Visionary in parallel if the plan splits work) | 5 | 8 |
 | 5. Review | Skeptic red-teams; for a tool, the Visionary uses it cold in parallel | 1.5 | 2 |
 | 6. Fix | Craftsperson fixes the top 3 issues | 1.5 | 3 |
 | 7. Pitch | Visionary | 1 | 1 |
 | Q&A | judges, then Producers | - | 2 |
 | Judge | Host renders, then every judge in parallel | 2 | 2.5 |
 | Tally + reveal | Host | 0.5 | 0.5 |
-| **Total** | | **~16** | **~25** |
+| **Total** | | **~17** (measured 10) | **~25** |
+
+Budgets are ceilings, not targets: agents usually finish early, and teams don't wait for each
+other, so the deadlines add up to more than the run takes. The extra build minute in `lite` is there
+because timed builds came in at 3-5 KB and three minutes early; spend it on depth, not scope.
 
 Tell the user the mode, team count and expected time before Setup.
 
@@ -150,7 +155,11 @@ Rules the Host enforces:
 
 1. **Render once.** When the last team's pitch lands, render every build yourself into `renders/`
    (capture.mjs frames for anything animated; GitHub's markdown renderer plus a screenshot for a
-   README; a screenshot for a page) so every judge looks at identical images.
+   README; a screenshot for a page) so every judge looks at identical images. Serve web pages
+   over a local HTTP server on a port of your own, at a plausible path (for a 404 page, a
+   mistyped one like `/menue.html`), never `file://`: pages that echo their URL will print your
+   local folder path, and judges score what the render shows. Take phone (375px) and desktop
+   (1280px) widths.
 2. **Q&A** (standard): each judge writes one question per team to `qa/<judge-id>.json`; build each
    team's `qa.md` from them; each Producer answers in parallel.
 3. **Scoring**: every judge in parallel, on its own model, reads its sealed file, the renders, and

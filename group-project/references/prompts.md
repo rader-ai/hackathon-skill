@@ -134,6 +134,9 @@ shared port lets one team's checker load another team's build.)
   (frames as styled panels or generated images), and a mood/reference section.
 - **Product / feature idea**: `one-pager.md`, a clickable `prototype.html` of the core flow,
   and `risks.md`.
+- **Web page**: one self-contained `build/index.html`. Essentials (headline, key facts, links)
+  are static HTML, not built by JavaScript. Any text built from the URL or clock must read well at
+  the address a visitor would really see, and with JavaScript off. Check 375px and 1280px.
 - **Brand / identity**: `identity.html` showing logo/wordmark (SVG), palette, type, and 3 applications.
 - **Tool or skill**: the tool itself plus a demo of it used on the brief's test input, as
   separate folders in `build/`.
