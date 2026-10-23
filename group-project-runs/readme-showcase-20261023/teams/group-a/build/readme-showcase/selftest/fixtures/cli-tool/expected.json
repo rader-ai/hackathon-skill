@@ -1,0 +1,13 @@
+{
+  "facts": {
+    "python.floor": "3.9",
+    "license.type": "MIT",
+    "imports.stdlib_only": true,
+    "subcommands": ["count", "report"],
+    "flags": [{"sub": "count", "flag": "--top"}, {"sub": "report", "flag": "--output", "required": true}],
+    "tests.framework_hint": "unittest",
+    "outputs.paths": ["out/sample-report.html"]
+  },
+  "clean": {"lint_fail": 0, "firstscreen": "pass", "assets": "pass"},
+  "link_base": "repo"
+}

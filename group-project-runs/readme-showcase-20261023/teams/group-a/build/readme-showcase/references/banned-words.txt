@@ -1,0 +1,46 @@
+# Hype words. One per line, matched case-insensitively on word boundaries (hyphen/space variants allowed).
+# Used by scripts/lint.mjs (FAIL anywhere in the README) and scripts/firstscreen.mjs (first screen).
+# To allow a word that the repo itself uses as a proper noun, quote it in the ledger as kind "term"; do not edit this list per repo.
+blazing
+blazingly
+blazing-fast
+lightning-fast
+lightning fast
+powerful
+seamless
+seamlessly
+robust
+cutting-edge
+cutting edge
+state-of-the-art
+revolutionary
+revolutionize
+game-changing
+game changer
+effortless
+effortlessly
+supercharge
+supercharged
+next-generation
+next-gen
+world-class
+best-in-class
+enterprise-grade
+production-ready
+battle-tested
+delightful
+magical
+magic
+unleash
+leverage
+turnkey
+easy-to-use
+user-friendly
+ultimate
+groundbreaking
+innovative
+cutting
+disruptive
+holistic
+synergy
+unparalleled

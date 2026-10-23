@@ -1,0 +1,5 @@
+{
+  "facts": {"commands": [], "unparsed_contains": "go.mod"},
+  "clean": {"lint_fail": 0, "firstscreen": "pass", "assets": "none", "lint_notes_min": 1},
+  "link_base": "repo"
+}

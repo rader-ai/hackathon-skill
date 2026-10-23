@@ -1,0 +1,5 @@
+[
+  {"id": "phantom-npm-script", "op": "replace", "find": "npm test", "with": "npm run lint", "expect": "command-npm-script"},
+  {"id": "nonexistent-file", "op": "append", "text": "\nThe core lives in `lib/slug.js`.\n", "expect": "path-missing"},
+  {"id": "wrong-node-floor", "op": "replace", "find": "Node 18 or newer.", "with": "Node 12 or newer.", "expect": "req-node"}
+]

@@ -1,0 +1,105 @@
+[
+ {
+  "id": "wrong-subcommand",
+  "op": "replace",
+  "find": "python3 tally.py report examples/sample.log --output out/sample-report.html",
+  "with": "python3 tally.py publish examples/sample.log --output out/sample-report.html",
+  "expect": "command-subcommand"
+ },
+ {
+  "id": "wrong-flag",
+  "op": "replace",
+  "find": "python3 tally.py count examples/sample.log --top 3",
+  "with": "python3 tally.py count examples/sample.log --limit 3",
+  "expect": "command-flag"
+ },
+ {
+  "id": "wrong-python-floor",
+  "op": "replace",
+  "find": "Python 3.9 or newer",
+  "with": "Python 3.6 or newer",
+  "expect": "req-python"
+ },
+ {
+  "id": "invented-number",
+  "op": "append",
+  "text": "\nTally is used by 2,000+ teams.\n",
+  "expect": "number-invented"
+ },
+ {
+  "id": "phantom-badge",
+  "op": "replace",
+  "find": "# Tally\n",
+  "with": "# Tally\n\n![build](https://img.shields.io/github/actions/workflow/status/acme/tally/ci.yml)\n",
+  "expect": "badge-unpinned"
+ },
+ {
+  "id": "missing-image",
+  "op": "replace",
+  "find": "assets/report-light.png\" width",
+  "with": "assets/report-hero.png\" width",
+  "expect": "img-missing"
+ },
+ {
+  "id": "hype-word",
+  "op": "replace",
+  "find": "Tally turns",
+  "with": "Tally is a blazing-fast tool that turns",
+  "expect": "banned-word"
+ },
+ {
+  "id": "wrong-license",
+  "op": "replace",
+  "find": "\nMIT\n",
+  "with": "\nApache-2.0 license\n",
+  "expect": "req-license"
+ },
+ {
+  "id": "process-leak",
+  "op": "append",
+  "text": "\nThe test command is pinned per the repo's own README.\n",
+  "expect": "process-leak"
+ },
+ {
+  "id": "placeholder-no-format",
+  "op": "append",
+  "text": "\n```bash\npython3 tally.py count /path/to/access.log\n```\n",
+  "expect": "placeholder-no-format"
+ },
+ {
+  "id": "committed-but-ignored",
+  "op": "append",
+  "text": "\nThe sample report is a committed file, `out/sample-report.html`.\n",
+  "facts_ignore": [
+   "out/sample-report.html"
+  ],
+  "expect": "committed-but-ignored"
+ },
+ {
+  "id": "quote-not-entailing",
+  "op": "none",
+  "ledger": {
+   "id": "C6",
+   "set": {
+    "evidence": [
+     {
+      "file": "tests/test_tally.py",
+      "quote": "unittest.main()"
+     }
+    ]
+   }
+  },
+  "expect": "quote-not-entailing"
+ },
+ {
+  "id": "carrier-not-in-quote",
+  "op": "none",
+  "ledger": {
+   "id": "C11",
+   "set": {
+    "carrier": "compressed gzip archives"
+   }
+  },
+  "expect": "carrier-not-in-quote"
+ }
+]

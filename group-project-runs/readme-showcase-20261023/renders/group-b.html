@@ -1,0 +1,98 @@
+<!doctype html><html><head><meta charset="utf-8"><base href="file://group-project-runs/readme-showcase-20261023/teams/group-b/build/demo/">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
+<style>body{margin:0;background:#fff}.markdown-body{box-sizing:border-box;max-width:1012px;margin:0 auto;padding:32px}</style></head>
+<body><article class="markdown-body"><h1>Call Review Lab</h1>
+<p>Turn a pile of sales or customer calls into an account timeline, evidence checked observations, and a coaching report.</p>
+<themed-picture data-catalyst-inline="true"><picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/reel-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/reel-light.svg">
+  <img src="assets/reel-final.png" alt="A three-step animation. A line from the sample call, Jordan at 00:40 saying the operations lead cannot spot delayed jobs until Monday, goes in. The quote check for that line returns ok true. The report shows the same sentence tagged Quote verified." width="880">
+</picture></themed-picture>
+<p>Requires Python 3.10 or newer. The core workflow uses only the standard library.</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">git clone https://github.com/rader-ai/sales-call-review.git
+<span class="pl-c1">cd</span> sales-call-review
+python3 run.py demo
+open workspace/report.html           <span class="pl-c"><span class="pl-c">#</span> macOS</span>
+<span class="pl-c"><span class="pl-c">#</span> xdg-open workspace/report.html     # Linux</span></pre></div>
+<h2>What it does</h2>
+<p>The demo imports a synthetic discovery call, a later unrecorded meeting, and a sample analysis. It generates <code class="notranslate">workspace/report.html</code>, which is local and ignored by git. Calls without recordings stay in the timeline so gaps remain visible. All accounts, speakers, quotes, and dates in <code class="notranslate">examples/</code> are invented.</p>
+<p>The report below is example output, captured from the repo's <code class="notranslate">workspace/report.html</code> (synthetic data).</p>
+<p><a target="_blank" rel="noopener noreferrer" href="assets/report.png"><img src="assets/report.png" alt="One call card from the report: Discovery, 2026-01-12 discovery-01, Transcript reviewed. Internal talk share 53%, Question marks 4 / 0, Longest internal run 21 words. Three evidence quotes are tagged Quote verified." width="880" style="max-width: 100%;"></a></p>
+<p>Question marks 4 / 0 is the internal count, then the external count. Numbers count words and question marks in speaker labeled transcripts. They do not measure speaking time or question quality.</p>
+<p>Run <code class="notranslate">python3 -m unittest discover -s tests</code> to check the core logic.</p>
+<h2>Who it fits</h2>
+<p>It starts from transcripts from any source. No HubSpot account or API key is needed. Review the report with the account owner before using it for coaching.</p>
+<h2>Use it with your own calls</h2>
+<ol>
+<li>Obtain recordings or transcripts with permission. Redact sensitive material before using an external model.</li>
+<li>Convert a transcript into Markdown turns: <code class="notranslate">**Speaker Name** [mm:ss] Spoken text</code>.</li>
+<li>Import a call and build the report:</li>
+</ol>
+<div class="highlight highlight-source-shell"><pre class="notranslate">python3 run.py init
+python3 run.py add \
+  --account <span class="pl-s"><span class="pl-pds">"</span>Example Account<span class="pl-pds">"</span></span> --id <span class="pl-s"><span class="pl-pds">"</span>discovery-01<span class="pl-pds">"</span></span> \
+  --date <span class="pl-s"><span class="pl-pds">"</span>2026-01-12<span class="pl-pds">"</span></span> --title <span class="pl-s"><span class="pl-pds">"</span>Discovery<span class="pl-pds">"</span></span> \
+  --internal <span class="pl-s"><span class="pl-pds">"</span>Rep Name<span class="pl-pds">"</span></span> --external <span class="pl-s"><span class="pl-pds">"</span>Buyer Name<span class="pl-pds">"</span></span> \
+  --transcript /path/to/reviewed-transcript.md
+python3 run.py report</pre></div>
+<p>For many calls, use <code class="notranslate">python3 run.py import-csv /path/to/calls.csv</code>. The CSV columns are <code class="notranslate">account,id,date,title,internal,external,transcript,recorded,source</code>.</p>
+<ol start="4">
+<li>Review the measured statistics with <code class="notranslate">python3 run.py review</code>. The calculation counts words and question marks from the labeled transcript. Unknown speakers are excluded from talk share.</li>
+<li>For qualitative analysis, use <a href="prompts/analyze_call.md">the analyst prompt</a> with the reviewed transcript, <code class="notranslate">meta.json</code>, and any earlier analyses for that account. Save the result as <code class="notranslate">workspace/accounts/&lt;account&gt;/calls/&lt;id&gt;/analysis.json</code>.</li>
+</ol>
+<p>Optional local transcription: install <code class="notranslate">ffmpeg</code> and <a href="https://github.com/ggml-org/whisper.cpp">whisper.cpp</a> separately, put a compatible model on your computer, then run:</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">python3 run.py transcribe --media /path/to/call.mp4 \
+  --model /path/to/ggml-model.bin \
+  --output /path/to/call.txt --language en --threads 4</pre></div>
+<p>This only creates a raw text transcript. It does not identify speakers.</p>
+<h2>How it works</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>Stage</th>
+<th>Purpose</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Timeline</td>
+<td>Group calls by account and include missing recordings</td>
+<td>Call coverage</td>
+</tr>
+<tr>
+<td>Deterministic measures</td>
+<td>Count words, question marks, and longest internal run</td>
+<td><code class="notranslate">metrics.json</code></td>
+</tr>
+<tr>
+<td>Evidence based analysis</td>
+<td>Ask what worked, what to practice, and what is still unknown</td>
+<td><code class="notranslate">analysis.json</code></td>
+</tr>
+<tr>
+<td>Quote verification</td>
+<td>Check each quote within one speaker turn</td>
+<td><code class="notranslate">verification.json</code></td>
+</tr>
+<tr>
+<td>Owner review</td>
+<td>Reconcile the call with deal context and outcomes</td>
+<td>Human coaching decisions</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p>Every quote in the analysis is checked against a single speaker turn. Unsupported quotes are flagged and hidden from the visible evidence.</p>
+<h2>Privacy</h2>
+<p>The Python commands run locally and make no model API calls. If you paste transcripts into a cloud coding agent or model, that provider processes the content under its own terms. Reports contain call content and belong in an access controlled location.</p>
+<h2>Limits</h2>
+<ul>
+<li>This is a review aid, not a performance verdict.</li>
+<li>A question mark count is not a measure of good discovery.</li>
+<li>It does not silently infer deal outcomes, automatically fetch CRM data, or automate model analysis.</li>
+<li>A git ignore rule is not access control.</li>
+<li>Review the report with the account owner before using it for coaching.</li>
+</ul>
+<h2>License</h2>
+<p>MIT licensed. Created by Chris Rader.</p>
+<p>Commands other than <code class="notranslate">python3 run.py demo</code> are copied from the repo's README and were not run for this page (unverified).</p></article></body></html>

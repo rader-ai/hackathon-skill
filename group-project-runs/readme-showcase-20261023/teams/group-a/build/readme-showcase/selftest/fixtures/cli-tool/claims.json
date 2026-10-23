@@ -1,0 +1,187 @@
+{
+ "repo": "repo",
+ "claims": [
+  {
+   "id": "C1",
+   "kind": "why",
+   "status": "PINNED",
+   "text": "Purpose in the repo's own words",
+   "value": "ranked list of the paths that get the most hits, so you can see where traffic goes without a dashboard",
+   "evidence": [
+    {
+     "file": "docs/USAGE.md",
+     "quote": "a ranked list of the paths that get the most hits, so you can see where traffic goes without a dashboard"
+    }
+   ]
+  },
+  {
+   "id": "C2",
+   "kind": "command",
+   "status": "PINNED",
+   "text": "Count the busiest paths",
+   "value": "python3 tally.py count examples/sample.log --top 3",
+   "evidence": [
+    {
+     "file": "docs/USAGE.md",
+     "quote": "python3 tally.py count examples/sample.log --top 3"
+    }
+   ]
+  },
+  {
+   "id": "C3",
+   "kind": "output",
+   "status": "PINNED",
+   "text": "Captured output of C2",
+   "value": "/checkout   41",
+   "evidence": [
+    {
+     "file": "captures/count-output.txt",
+     "quote": "/checkout   41"
+    }
+   ]
+  },
+  {
+   "id": "C4",
+   "kind": "command",
+   "status": "PINNED",
+   "text": "Write the HTML table",
+   "value": "python3 tally.py report examples/sample.log --output out/sample-report.html",
+   "evidence": [
+    {
+     "file": "docs/USAGE.md",
+     "quote": "python3 tally.py report examples/sample.log --output out/sample-report.html"
+    }
+   ]
+  },
+  {
+   "id": "C5",
+   "kind": "requirement",
+   "status": "PINNED",
+   "text": "Python 3.9 or newer",
+   "value": "Python 3.9",
+   "evidence": [
+    {
+     "file": "pyproject.toml",
+     "quote": "requires-python = \">=3.9\""
+    }
+   ]
+  },
+  {
+   "id": "C6",
+   "kind": "command",
+   "status": "PINNED",
+   "text": "Run the tests",
+   "value": "python3 -m unittest discover -s tests",
+   "evidence": [
+    {
+     "file": "docs/USAGE.md",
+     "quote": "python3 -m unittest discover -s tests"
+    }
+   ]
+  },
+  {
+   "id": "C7",
+   "kind": "generated_path",
+   "status": "PINNED",
+   "text": "report written by C4",
+   "value": "out/sample-report.html",
+   "evidence": [
+    {
+     "file": "tally.py",
+     "quote": "out.write(page)"
+    },
+    {
+     "file": "docs/USAGE.md",
+     "quote": "--output out/sample-report.html"
+    }
+   ]
+  },
+  {
+   "id": "C8",
+   "kind": "license",
+   "status": "PINNED",
+   "text": "MIT license",
+   "value": "MIT",
+   "evidence": [
+    {
+     "file": "LICENSE",
+     "quote": "MIT License"
+    }
+   ]
+  },
+  {
+   "id": "C9",
+   "kind": "number",
+   "status": "PINNED",
+   "text": "Sample log: /checkout 41 hits, /search 27 hits, / 9 hits",
+   "value": "41 27 9",
+   "evidence": [
+    {
+     "file": "captures/count-output.txt",
+     "quote": "/checkout   41"
+    },
+    {
+     "file": "captures/count-output.txt",
+     "quote": "/search     27"
+    },
+    {
+     "file": "captures/count-output.txt",
+     "quote": "/           9"
+    }
+   ]
+  },
+  {
+   "id": "C11",
+   "kind": "other",
+   "status": "PINNED",
+   "text": "Input is a raw web access log with a method and a path on each line",
+   "value": "web access log",
+   "evidence": [
+    {
+     "file": "docs/USAGE.md",
+     "quote": "turns a raw web access log"
+    }
+   ],
+   "carrier": "turns a raw web access log"
+  },
+  {
+   "id": "C10",
+   "kind": "other",
+   "status": "UNKNOWN",
+   "text": "Handles gzip-compressed logs",
+   "value": "gzip"
+  }
+ ],
+ "could_not_verify": [
+  {
+   "text": "Handles gzip-compressed logs",
+   "why": "tally.py opens files as plain UTF-8 text; nothing handles gzip, so the README does not claim it"
+  }
+ ],
+ "first_screen": {
+  "input_noun": "access log",
+  "output_noun": "ranked list",
+  "why_claim": "C1",
+  "no_command_reason": null,
+  "output_producer": "code",
+  "quickstart_lines": []
+ },
+ "visual": {
+  "verdict": "capture",
+  "reason": "committed HTML output exists (out/sample-report.html) and the table is the product's output",
+  "assets": [
+   {
+    "path": "assets/report-light.png",
+    "source": "capture of out/sample-report.html"
+   },
+   {
+    "path": "assets/report-dark.png",
+    "source": "capture of out/sample-report.html, dark scheme"
+   }
+  ],
+  "shows": [
+   "C3",
+   "C9"
+  ]
+ }
+}

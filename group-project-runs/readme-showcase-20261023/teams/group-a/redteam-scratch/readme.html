@@ -1,0 +1,22 @@
+<!doctype html><meta charset=utf-8><base href="file://group-project-runs/readme-showcase-20261023/teams/group-a/build/demo/"><style>body{font-family:-apple-system,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.5;max-width:900px;margin:0 auto;padding:24px;color:#1f2328;background:#fff}pre{background:#f6f8fa;padding:16px;border-radius:6px;overflow:auto}code{background:#eff1f3;padding:.2em .4em;border-radius:6px;font-size:85%}pre code{background:none;padding:0}img{max-width:100%}h1,h2{border-bottom:1px solid #d1d9e0;padding-bottom:.3em}</style><body><h1>Call Review Lab</h1>
+<p>Call Review Lab turns speaker labeled call transcripts into an account timeline and a coaching report. Calls without recordings stay in the timeline so gaps remain visible. It is for people coaching on sales or customer calls, with the account owner reviewing the result.</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">python3 run.py demo</pre></div>
+<p>The demo imports a synthetic call and writes <code class="notranslate">workspace/report.html</code>. This capture of that report shows measured talk share and question marks, with each quote checked against a single speaker turn (Harbor Tools is demo data):</p>
+<p><a target="_blank" rel="noopener noreferrer" href="assets/report-light.png"><img alt="Report for Harbor Tools, a synthetic account: talk share 53%, question marks 4 / 0, longest internal run 21 words, three quotes marked Quote verified" src="assets/report-light.png" width="880" style="max-width: 100%;"></a></p>
+<h2>Requirements</h2>
+<p>Python 3.10 or newer, per the repo's own README. The Python commands use only the standard library.</p>
+<h2>With your own calls</h2>
+<div class="highlight highlight-source-shell"><pre class="notranslate">python3 run.py init
+python3 run.py import-csv /path/to/calls.csv
+python3 run.py review
+python3 run.py report</pre></div>
+<p>Convert each transcript to Markdown turns first. The measures count words and question marks, not speaking time or question quality. A call with no transcript appears as Transcript absent. For the qualitative analysis, the repo supplies a prompt, <a href="prompts/analyze_call.md">prompts/analyze_call.md</a>; it does not run a model for you. The method is in <a href="docs/METHOD.md">docs/METHOD.md</a>.</p>
+<h2>Limits</h2>
+<ul>
+<li>The demo output shown here is the committed report, not a fresh run.</li>
+<li>Human review is required for coaching conclusions.</li>
+</ul>
+<h2>Tests</h2>
+<div class="highlight highlight-source-shell"><pre class="notranslate">python3 -m unittest discover -s tests</pre></div>
+<h2>License</h2>
+<p>MIT</p>

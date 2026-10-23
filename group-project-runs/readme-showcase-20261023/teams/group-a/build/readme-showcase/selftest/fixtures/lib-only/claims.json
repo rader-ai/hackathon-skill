@@ -1,0 +1,110 @@
+{
+ "repo": "repo",
+ "claims": [
+  {
+   "id": "C1",
+   "kind": "why",
+   "status": "PINNED",
+   "text": "Purpose in the repo's own words",
+   "value": "turns a title into a URL slug: lower case, words joined by hyphens",
+   "evidence": [
+    {
+     "file": "index.js",
+     "quote": "Turn a title into a URL slug: lower case, words joined by hyphens."
+    }
+   ]
+  },
+  {
+   "id": "C2",
+   "kind": "command",
+   "status": "PINNED",
+   "text": "Call slugify",
+   "value": "console.log(slugify('Hello, World!'));",
+   "evidence": [
+    {
+     "file": "test/index.test.js",
+     "quote": "slugify('Hello, World!')"
+    }
+   ]
+  },
+  {
+   "id": "C3",
+   "kind": "output",
+   "status": "PINNED",
+   "text": "Captured output of C2",
+   "value": "hello-world",
+   "evidence": [
+    {
+     "file": "captures/slugify-output.txt",
+     "quote": "hello-world"
+    }
+   ]
+  },
+  {
+   "id": "C4",
+   "kind": "command",
+   "status": "PINNED",
+   "text": "Run the tests",
+   "value": "npm test",
+   "evidence": [
+    {
+     "file": "package.json",
+     "quote": "\"test\": \"node --test test/\""
+    }
+   ]
+  },
+  {
+   "id": "C5",
+   "kind": "requirement",
+   "status": "PINNED",
+   "text": "Node 18 or newer",
+   "value": "Node 18",
+   "evidence": [
+    {
+     "file": "package.json",
+     "quote": "\"node\": \">=18\""
+    }
+   ]
+  },
+  {
+   "id": "C6",
+   "kind": "license",
+   "status": "PINNED",
+   "text": "ISC license",
+   "value": "ISC",
+   "evidence": [
+    {
+     "file": "LICENSE",
+     "quote": "ISC License"
+    }
+   ]
+  },
+  {
+   "id": "C7",
+   "kind": "other",
+   "status": "UNKNOWN",
+   "text": "Published to the npm registry",
+   "value": "npm install slugify-lite"
+  }
+ ],
+ "could_not_verify": [
+  {
+   "text": "Published to npm",
+   "why": "package.json has a name but nothing shows a publish; the README uses a local require instead of an install command"
+  }
+ ],
+ "first_screen": {
+  "input_noun": "title",
+  "output_noun": "URL slug",
+  "why_claim": "C1",
+  "no_command_reason": null,
+  "first_runnable_claim": "C2",
+  "output_producer": "code",
+  "quickstart_lines": []
+ },
+ "visual": {
+  "verdict": "none",
+  "reason": "library with no UI and no committed images; the captured text output carries the proof",
+  "assets": []
+ }
+}

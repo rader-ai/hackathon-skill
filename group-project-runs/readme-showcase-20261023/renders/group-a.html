@@ -1,0 +1,33 @@
+<!doctype html><html><head><meta charset="utf-8"><base href="file://group-project-runs/readme-showcase-20261023/teams/group-a/build/demo/">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
+<style>body{margin:0;background:#fff}.markdown-body{box-sizing:border-box;max-width:1012px;margin:0 auto;padding:32px}</style></head>
+<body><article class="markdown-body"><h1>Call Review Lab</h1>
+<p>Call Review Lab turns speaker labeled call transcripts into an account timeline, measured talk statistics and a report in which each coaching point is tagged Quote verified or Needs evidence review. Calls without recordings stay in the timeline so gaps remain visible.</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">git clone https://github.com/rader-ai/sales-call-review.git
+<span class="pl-c1">cd</span> sales-call-review
+python3 run.py demo
+open workspace/report.html           <span class="pl-c"><span class="pl-c">#</span> macOS</span></pre></div>
+<p>The demo imports a synthetic discovery call, a later unrecorded meeting, and a sample analysis, then generates <code class="notranslate">workspace/report.html</code> (use <code class="notranslate">xdg-open</code> on Linux). The summary and quotes in that report come from a prepared sample, <code class="notranslate">examples/sample-analysis.json</code>. The tool measures and checks; it does not run a model. The Python commands run locally and make no model API calls.</p>
+<p><a target="_blank" rel="noopener noreferrer" href="assets/report-1-light.png"><img alt="Report header for Harbor Tools, a synthetic account: Accounts 1, Timeline calls 2, Transcripts 1, Analyzed 1, Unverified quotes 0" src="assets/report-1-light.png" width="880" style="max-width: 100%;"></a></p>
+<p>The header of the report <code class="notranslate">python3 run.py demo</code> generates: two calls on the timeline but one transcript. The unrecorded follow-up appears further down the page as Transcript absent. Harbor Tools is demo data. The repo ignores <code class="notranslate">workspace/</code> in git, so you get this file by running the demo.</p>
+<p><a target="_blank" rel="noopener noreferrer" href="assets/report-2-light.png"><img alt="The same report further down: internal talk share 53%, question marks 4 / 0, longest internal run 21 words, two points each tagged Quote verified with the quoted words" src="assets/report-2-light.png" width="880" style="max-width: 100%;"></a></p>
+<p>Measured numbers, then the sample analysis. A quote is shown only when it matches a single speaker turn; otherwise the point is tagged Needs evidence review.</p>
+<h2>Requirements</h2>
+<p>Python 3.10 or newer. The core workflow uses only the standard library. <code class="notranslate">demo</code> stops with an error if <code class="notranslate">workspace/</code> already holds calls.</p>
+<h2>With your own calls</h2>
+<div class="highlight highlight-source-shell"><pre class="notranslate">python3 run.py init
+python3 run.py import-csv /path/to/calls.csv
+python3 run.py report</pre></div>
+<p>The CSV columns are <code class="notranslate">account,id,date,title,internal,external,transcript,recorded,source</code>. Transcript paths are relative to the CSV; omit one to keep an unrecorded call in the timeline. Each transcript is Markdown turns: <code class="notranslate">**Speaker Name** [mm:ss] Spoken text</code>.</p>
+<p>The report shows coaching points only if you supply an analysis. The repo provides an analyst prompt, <a href="prompts/analyze_call.md">prompts/analyze_call.md</a>; you run it with a model yourself and save the JSON as <code class="notranslate">workspace/accounts/&lt;account&gt;/calls/&lt;id&gt;/analysis.json</code> before <code class="notranslate">python3 run.py report</code>. The method is in <a href="docs/METHOD.md">docs/METHOD.md</a>.</p>
+<h2>Limits</h2>
+<ul>
+<li>Numbers count words and question marks, not speaking time or question quality. A question mark count is not a measure of good discovery.</li>
+<li>Unknown speakers are excluded from talk share.</li>
+<li>Human review is required for coaching conclusions.</li>
+<li>The optional <code class="notranslate">transcribe</code> command needs <code class="notranslate">ffmpeg</code> and whisper.cpp installed separately and only writes plain text without speaker labels.</li>
+</ul>
+<h2>Tests</h2>
+<div class="highlight highlight-source-shell"><pre class="notranslate">python3 -m unittest discover -s tests</pre></div>
+<h2>License</h2>
+<p>MIT, see <a href="LICENSE">LICENSE</a>.</p></article></body></html>

@@ -1,0 +1,151 @@
+{
+  "round": 1,
+  "ranking": [
+    "group-a",
+    "group-c",
+    "group-b"
+  ],
+  "teams": {
+    "group-a": {
+      "rubric": 78.4,
+      "signature_bonus": 11.1,
+      "total": 89.5,
+      "per_judge": {
+        "j-jess-alvarez": 70.0,
+        "j-keiko-hart": 78.5,
+        "j-marcus-webb": 82.5,
+        "j-priya-raman": 80.5,
+        "j-tomas-ferreira": 80.5
+      },
+      "spread": 12.5,
+      "criteria_avg": {
+        "skill": 8.6,
+        "truth": 8.6,
+        "story": 7,
+        "visuals": 7,
+        "pitch": 7.8
+      }
+    },
+    "group-b": {
+      "rubric": 75.6,
+      "signature_bonus": 9.6,
+      "total": 85.2,
+      "per_judge": {
+        "j-jess-alvarez": 80.0,
+        "j-keiko-hart": 80.0,
+        "j-marcus-webb": 76.0,
+        "j-priya-raman": 68.0,
+        "j-tomas-ferreira": 74.0
+      },
+      "spread": 12.0,
+      "criteria_avg": {
+        "skill": 7.4,
+        "truth": 7.4,
+        "story": 7.4,
+        "visuals": 8.2,
+        "pitch": 7.4
+      }
+    },
+    "group-c": {
+      "rubric": 75.7,
+      "signature_bonus": 10.2,
+      "total": 85.9,
+      "per_judge": {
+        "j-jess-alvarez": 72.0,
+        "j-keiko-hart": 75.5,
+        "j-marcus-webb": 75.5,
+        "j-priya-raman": 80.0,
+        "j-tomas-ferreira": 75.5
+      },
+      "spread": 8.0,
+      "criteria_avg": {
+        "skill": 7.2,
+        "truth": 9,
+        "story": 7.8,
+        "visuals": 6.2,
+        "pitch": 7.8
+      }
+    }
+  },
+  "signature_awards": [
+    {
+      "judge": "j-jess-alvarez",
+      "model": "haiku",
+      "signature": "Stated-limits accuracy",
+      "description": "The README tells a developer what the project will not do for them, in concrete, checkable terms that match the repository.",
+      "winner": "group-c",
+      "score": 9,
+      "why": "Names the whisper-cli binary, the case-and-punctuation substring match, the missing speaker and context checks, and no CRM access; each matches run.py lines 144-161 and 270."
+    },
+    {
+      "judge": "j-keiko-hart",
+      "model": "sonnet",
+      "signature": "Every Image Earns Its Place and Reads at Size",
+      "description": "Each image is a real capture, legible at ~880px, captioned, and shows a distinct part of the product.",
+      "winner": "group-a",
+      "score": 2,
+      "why": "Two real, captioned, readable crops showing different parts of the report; first is mostly a large title block and both are light-only."
+    },
+    {
+      "judge": "j-marcus-webb",
+      "model": "sonnet",
+      "signature": "Cold-run reproducibility",
+      "description": "Could a fresh session given only the skill folder and an unseen repo execute SKILL.md deterministically, with declared dependencies, loud failures, explicit stop conditions and no author-machine paths.",
+      "winner": "group-a",
+      "score": 9,
+      "why": "Step 0 preflight (check-env + selftest 77/77, 18/18 seeded lies) gates everything; every step has Output and Stop-if; scripts exit 2/1 with messages; no author paths; demo lint/firstscreen/assets all re-run green."
+    },
+    {
+      "judge": "j-priya-raman",
+      "model": "opus",
+      "signature": "First-Screen Conversion",
+      "description": "Before the first scroll, does the page say what it does and for whom, show real output, show the path to a first result, and does that path actually work, by design of the SKILL.md rather than luck?",
+      "winner": "group-a",
+      "score": 8,
+      "why": "Plain what-sentence, the exact clone/demo/open block and a real report capture all fit on the first screen, and a scripted first-screen gate makes it repeatable; but the opener drops 'sales' and never says who it is for."
+    },
+    {
+      "judge": "j-tomas-ferreira",
+      "model": "opus",
+      "signature": "Claim traceability",
+      "description": "Every factual claim in the demo README traces to a file, function, CLI argument, test or the generated report in demo-repo, and SKILL.md forces a claim-to-source verification step rather than just asking for accuracy.",
+      "winner": "group-a",
+      "score": 10,
+      "why": "All ~20 sampled claims check out against run.py and report.html (subcommands, CSV columns, analysis.json path, empty-workspace precondition, tag names); pitch counts (7 subcommands, 17 flags, 18 files) are exact; ledger lint re-ran 44/44 and selftest 77/77 with 18/18 seeded lies caught."
+    }
+  ],
+  "most_divisive": "group-a",
+  "criteria": [
+    {
+      "id": "skill",
+      "name": "Skill reusability",
+      "weight": 25,
+      "description": "Judged on build/readme-showcase/. A fresh session can follow SKILL.md on a repo it has never seen with no guesswork: the frontmatter description says when to trigger, inputs, outputs and stop conditions are explicit, every bundled script or dependency is declared and fails loudly with a clear message, and nothing in it is specific to the demo repo. The demo README is visibly the product of following these instructions, not of hand-tuning around them."
+    },
+    {
+      "id": "truth",
+      "name": "Accuracy & trust",
+      "weight": 20,
+      "description": "Judged on build/demo/README.md against demo-repo/. Every claim, command, requirement, file name and output description can be traced to the repo or its real output; setup and usage steps would work as written; nothing is invented (no metrics, badges, testimonials, features or package names that do not exist). The skill itself contains a deliberate way to keep generated READMEs honest."
+    },
+    {
+      "id": "story",
+      "name": "Story & clarity",
+      "weight": 20,
+      "description": "Judged on the demo README as GitHub renders it. A developer who has never heard of the project quickly understands what it does, who it is for and why it is worth trying; the structure matches how readers skim; the copy is specific, persuasive and free of hype words and filler."
+    },
+    {
+      "id": "visuals",
+      "name": "Visual craft",
+      "weight": 20,
+      "description": "Judged on build/demo/assets/ in the rendered README. Visuals show the real project doing its real job, are legible at GitHub's content width in light and dark themes, render correctly on GitHub, earn their place in the page's hierarchy, and stay within the 6 MB budget. The skill decides what visuals a repo warrants, including when it has none."
+    },
+    {
+      "id": "pitch",
+      "name": "Pitch",
+      "weight": 15,
+      "description": "Judged on pitch.md (max 400 words). Short, persuasive and honest: says what the skill does differently, gives evidence from the demo, names the real risks and limits, and makes the panel want to adopt it."
+    }
+  ],
+  "signature_points": 3
+}

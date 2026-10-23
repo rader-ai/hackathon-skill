@@ -1,0 +1,456 @@
+{
+ "captures": {
+  "report": "workspace/report.html"
+ },
+ "claims": [
+  {
+   "id": "c-what",
+   "text": "Turn a pile of sales or customer calls into an account timeline, evidence checked observations, and a coaching report.",
+   "kind": "fact",
+   "source": "README.md:3",
+   "quote": "Turn a pile of sales or customer calls into an account timeline, evidence checked observations, and a coaching report.",
+   "status": "verified"
+  },
+  {
+   "id": "c-gaps",
+   "text": "Calls without recordings stay in the timeline so gaps remain visible.",
+   "kind": "fact",
+   "source": "README.md:3",
+   "quote": "Calls without recordings stay in the timeline so gaps remain visible.",
+   "status": "verified"
+  },
+  {
+   "id": "c-synth",
+   "text": "All accounts, speakers, quotes, and dates in `examples/` are invented.",
+   "kind": "fact",
+   "source": "README.md:5",
+   "quote": "All accounts, speakers, quotes, and dates in `examples/` are invented.",
+   "status": "verified"
+  },
+  {
+   "id": "c-req",
+   "text": "Requires Python 3.10 or newer. The core workflow uses only the standard library.",
+   "kind": "fact",
+   "source": "README.md:9",
+   "quote": "Requires Python 3.10 or newer. The core workflow uses only the standard library.",
+   "status": "verified"
+  },
+  {
+   "id": "c-clone",
+   "text": "git clone https://github.com/rader-ai/sales-call-review.git",
+   "kind": "command",
+   "source": "README.md:14",
+   "quote": "git clone https://github.com/rader-ai/sales-call-review.git",
+   "status": "unverified"
+  },
+  {
+   "id": "c-cd",
+   "text": "cd sales-call-review",
+   "kind": "command",
+   "source": "README.md:15",
+   "quote": "cd sales-call-review",
+   "status": "unverified"
+  },
+  {
+   "id": "c-demo",
+   "text": "python3 run.py demo",
+   "kind": "command",
+   "source": "README.md:16",
+   "quote": "python3 run.py demo",
+   "status": "artifact",
+   "evidence": "report"
+  },
+  {
+   "id": "c-open",
+   "text": "open workspace/report.html           # macOS",
+   "kind": "command",
+   "source": "README.md:17",
+   "quote": "open workspace/report.html           # macOS",
+   "status": "unverified"
+  },
+  {
+   "id": "c-demodoes",
+   "text": "The demo imports a synthetic discovery call, a later unrecorded meeting, and a sample analysis.",
+   "kind": "fact",
+   "source": "README.md:21",
+   "quote": "The demo imports a synthetic discovery call, a later unrecorded meeting, and a sample analysis.",
+   "status": "verified"
+  },
+  {
+   "id": "c-genrep",
+   "text": "It generates `workspace/report.html`, which is local and ignored by git.",
+   "kind": "fact",
+   "source": "README.md:21",
+   "quote": "It generates `workspace/report.html`, which is local and ignored by git.",
+   "status": "verified"
+  },
+  {
+   "id": "c-unit",
+   "text": "Run `python3 -m unittest discover -s tests` to check the core logic.",
+   "kind": "command",
+   "source": "README.md:21",
+   "quote": "Run `python3 -m unittest discover -s tests` to check the core logic.",
+   "status": "unverified"
+  },
+  {
+   "id": "c-ex",
+   "text": "The report below is example output, captured from the repo's `workspace/report.html` (synthetic data).",
+   "kind": "derived",
+   "source": "capture:report",
+   "quote": "Numbers count words and question marks in speaker labeled transcripts",
+   "status": "verified"
+  },
+  {
+   "id": "c-aidnotverdict",
+   "text": "This is a review aid, not a performance verdict.",
+   "kind": "fact",
+   "source": "capture:report",
+   "quote": "This is a review aid, not a performance verdict.",
+   "status": "verified"
+  },
+  {
+   "id": "c-own1",
+   "text": "Obtain recordings or transcripts with permission. Redact sensitive material before using an external model.",
+   "kind": "fact",
+   "source": "README.md:25",
+   "quote": "Obtain recordings or transcripts with permission. Redact sensitive material before using an external model.",
+   "status": "verified"
+  },
+  {
+   "id": "c-own2",
+   "text": "Convert a transcript into Markdown turns: `**Speaker Name** [mm:ss] Spoken text`.",
+   "kind": "fact",
+   "source": "README.md:26",
+   "quote": "Convert a transcript into Markdown turns: `**Speaker Name** [mm:ss] Spoken text`.",
+   "status": "verified"
+  },
+  {
+   "id": "c-init",
+   "text": "python3 run.py init",
+   "kind": "command",
+   "source": "README.md:30",
+   "quote": "python3 run.py init",
+   "status": "unverified"
+  },
+  {
+   "id": "c-report",
+   "text": "python3 run.py report",
+   "kind": "command",
+   "source": "README.md:36",
+   "quote": "python3 run.py report",
+   "status": "unverified"
+  },
+  {
+   "id": "c-csv",
+   "text": "For many calls, use `python3 run.py import-csv /path/to/calls.csv`.",
+   "kind": "command",
+   "source": "README.md:39",
+   "quote": "For many calls, use `python3 run.py import-csv /path/to/calls.csv`.",
+   "status": "unverified"
+  },
+  {
+   "id": "c-csvcols",
+   "text": "The CSV columns are `account,id,date,title,internal,external,transcript,recorded,source`.",
+   "kind": "fact",
+   "source": "README.md:39",
+   "quote": "The CSV columns are `account,id,date,title,internal,external,transcript,recorded,source`.",
+   "status": "verified"
+  },
+  {
+   "id": "c-review",
+   "text": "Review the measured statistics with `python3 run.py review`.",
+   "kind": "command",
+   "source": "README.md:41",
+   "quote": "Review the measured statistics with `python3 run.py review`.",
+   "status": "unverified"
+  },
+  {
+   "id": "c-calc",
+   "text": "The calculation counts words and question marks from the labeled transcript. Unknown speakers are excluded from talk share.",
+   "kind": "fact",
+   "source": "README.md:41",
+   "quote": "The calculation counts words and question marks from the labeled transcript. Unknown speakers are excluded from talk share.",
+   "status": "verified"
+  },
+  {
+   "id": "c-qverify",
+   "text": "Every quote in the analysis is checked against a single speaker turn. Unsupported quotes are flagged and hidden from the visible evidence.",
+   "kind": "fact",
+   "source": "README.md:43",
+   "quote": "Every quote in the analysis is checked against a single speaker turn. Unsupported quotes are flagged and hidden from the visible evidence.",
+   "status": "verified"
+  },
+  {
+   "id": "c-prompt",
+   "text": "For qualitative analysis, use the analyst prompt with the reviewed transcript, `meta.json`, and any earlier analyses for that account.",
+   "kind": "fact",
+   "source": "README.md:42",
+   "quote": "For qualitative analysis, use [the analyst prompt](prompts/analyze_call.md) with the reviewed transcript, `meta.json`, and any earlier analyses for that account.",
+   "status": "verified"
+  },
+  {
+   "id": "c-save",
+   "text": "Save the result as `workspace/accounts/<account>/calls/<id>/analysis.json`.",
+   "kind": "fact",
+   "source": "README.md:42",
+   "quote": "Save the result as `workspace/accounts/<account>/calls/<id>/analysis.json`.",
+   "status": "verified"
+  },
+  {
+   "id": "c-tx",
+   "text": "Install `ffmpeg` and [whisper.cpp](https://github.com/ggml-org/whisper.cpp) separately, put a compatible model on your computer, then run:",
+   "kind": "fact",
+   "source": "README.md:47",
+   "quote": "Install `ffmpeg` and [whisper.cpp](https://github.com/ggml-org/whisper.cpp) separately, put a compatible model on your computer, then run:",
+   "status": "verified"
+  },
+  {
+   "id": "c-txonly",
+   "text": "This only creates a raw text transcript. It does not identify speakers.",
+   "kind": "fact",
+   "source": "README.md:55",
+   "quote": "This only creates a raw text transcript. It does not identify speakers.",
+   "status": "verified"
+  },
+  {
+   "id": "c-t0",
+   "text": "| Timeline | Group calls by account and include missing recordings | Call coverage |",
+   "kind": "fact",
+   "source": "README.md:61",
+   "quote": "| Timeline | Group calls by account and include missing recordings | Call coverage |",
+   "status": "verified"
+  },
+  {
+   "id": "c-t1",
+   "text": "| Deterministic measures | Count words, question marks, and longest internal run | `metrics.json` |",
+   "kind": "fact",
+   "source": "README.md:63",
+   "quote": "| Deterministic measures | Count words, question marks, and longest internal run | `metrics.json` |",
+   "status": "verified"
+  },
+  {
+   "id": "c-t2",
+   "text": "| Evidence based analysis | Ask what worked, what to practice, and what is still unknown | `analysis.json` |",
+   "kind": "fact",
+   "source": "README.md:64",
+   "quote": "| Evidence based analysis | Ask what worked, what to practice, and what is still unknown | `analysis.json` |",
+   "status": "verified"
+  },
+  {
+   "id": "c-t3",
+   "text": "| Quote verification | Check each quote within one speaker turn | `verification.json` |",
+   "kind": "fact",
+   "source": "README.md:65",
+   "quote": "| Quote verification | Check each quote within one speaker turn | `verification.json` |",
+   "status": "verified"
+  },
+  {
+   "id": "c-t4",
+   "text": "| Owner review | Reconcile the call with deal context and outcomes | Human coaching decisions |",
+   "kind": "fact",
+   "source": "README.md:67",
+   "quote": "| Owner review | Reconcile the call with deal context and outcomes | Human coaching decisions |",
+   "status": "verified"
+  },
+  {
+   "id": "c-priv1",
+   "text": "The Python commands run locally and make no model API calls.",
+   "kind": "fact",
+   "source": "README.md:74",
+   "quote": "The Python commands run locally and make no model API calls.",
+   "status": "verified"
+  },
+  {
+   "id": "c-priv2",
+   "text": "If you paste transcripts into a cloud coding agent or model, that provider processes the content under its own terms.",
+   "kind": "fact",
+   "source": "README.md:74",
+   "quote": "If you paste transcripts into a cloud coding agent or model, that provider processes the content under its own terms.",
+   "status": "verified"
+  },
+  {
+   "id": "c-priv3",
+   "text": "Reports contain call content and belong in an access controlled location.",
+   "kind": "fact",
+   "source": "README.md:74",
+   "quote": "Reports contain call content and belong in an access controlled location.",
+   "status": "verified"
+  },
+  {
+   "id": "c-nocrm",
+   "text": "No HubSpot account or API key is needed.",
+   "kind": "fact",
+   "source": "README.md:76",
+   "quote": "No HubSpot account or API key is needed.",
+   "status": "verified"
+  },
+  {
+   "id": "c-l1",
+   "text": "A question mark count is not a measure of good discovery.",
+   "kind": "limit",
+   "source": "README.md:41",
+   "quote": "A question mark count is not a measure of good discovery.",
+   "status": "verified"
+  },
+  {
+   "id": "c-l2",
+   "text": "It does not silently infer deal outcomes, automatically fetch CRM data, or automate model analysis.",
+   "kind": "limit",
+   "source": "README.md:70",
+   "quote": "It does not silently infer deal outcomes, automatically fetch CRM data, or automate model analysis.",
+   "status": "verified"
+  },
+  {
+   "id": "c-l3",
+   "text": "A git ignore rule is not access control.",
+   "kind": "limit",
+   "source": "README.md:74",
+   "quote": "a git ignore rule is not access control",
+   "status": "verified"
+  },
+  {
+   "id": "c-l4",
+   "text": "Review the report with the account owner before using it for coaching.",
+   "kind": "limit",
+   "source": "README.md:43",
+   "quote": "Review the report with the account owner before using it for coaching.",
+   "status": "verified"
+  },
+  {
+   "id": "c-lic",
+   "text": "MIT licensed. Created by Chris Rader.",
+   "kind": "license",
+   "source": "README.md:82",
+   "quote": "MIT licensed. Created by Chris Rader.",
+   "status": "verified"
+  },
+  {
+   "id": "r-in",
+   "text": "Jordan [00:40] The operations lead cannot spot delayed jobs until Monday. We want a pilot before the summer rush.",
+   "kind": "fact",
+   "source": "examples/discovery.md:9",
+   "quote": "**Jordan** [00:40] The operations lead cannot spot delayed jobs until Monday. We want a pilot before the summer rush.",
+   "status": "verified"
+  },
+  {
+   "id": "r-step",
+   "text": "\"ok\": true, \"quote\": \"The operations lead cannot spot delayed jobs until Monday.\"",
+   "kind": "fact",
+   "source": "workspace/accounts/harbor-tools/calls/discovery-01/verification.json:17-18",
+   "quote": "\"ok\": true, \"quote\": \"The operations lead cannot spot delayed jobs until Monday.\"",
+   "status": "verified"
+  },
+  {
+   "id": "r-out",
+   "text": "Quote verified “The operations lead cannot spot delayed jobs until Monday.”",
+   "kind": "fact",
+   "source": "workspace/report.html:1",
+   "quote": "Quote verified “The operations lead cannot spot delayed jobs until Monday.”",
+   "status": "verified"
+  },
+  {
+   "id": "c-add0",
+   "text": "python3 run.py add \\",
+   "kind": "command",
+   "source": "README.md:31",
+   "quote": "python3 run.py add \\",
+   "status": "unverified"
+  },
+  {
+   "id": "c-add1",
+   "text": "--account \"Example Account\" --id \"discovery-01\" \\",
+   "kind": "command",
+   "source": "README.md:32",
+   "quote": "--account \"Example Account\" --id \"discovery-01\" \\",
+   "status": "unverified"
+  },
+  {
+   "id": "c-add2",
+   "text": "--date \"2026-01-12\" --title \"Discovery\" \\",
+   "kind": "command",
+   "source": "README.md:33",
+   "quote": "--date \"2026-01-12\" --title \"Discovery\" \\",
+   "status": "unverified"
+  },
+  {
+   "id": "c-add3",
+   "text": "--internal \"Rep Name\" --external \"Buyer Name\" \\",
+   "kind": "command",
+   "source": "README.md:34",
+   "quote": "--internal \"Rep Name\" --external \"Buyer Name\" \\",
+   "status": "unverified"
+  },
+  {
+   "id": "c-add4",
+   "text": "--transcript /path/to/reviewed-transcript.md",
+   "kind": "command",
+   "source": "README.md:35",
+   "quote": "--transcript /path/to/reviewed-transcript.md",
+   "status": "unverified"
+  },
+  {
+   "id": "c-xdg",
+   "text": "# xdg-open workspace/report.html     # Linux",
+   "kind": "command",
+   "source": "README.md:18",
+   "quote": "# xdg-open workspace/report.html     # Linux",
+   "status": "unverified"
+  },
+  {
+   "id": "c-fit1",
+   "text": "It starts from transcripts from any source.",
+   "kind": "fact",
+   "source": "README.md:3",
+   "quote": "Start with transcripts from any source.",
+   "status": "verified"
+  },
+  {
+   "id": "c-nums",
+   "text": "Numbers count words and question marks in speaker labeled transcripts. They do not measure speaking time or question quality.",
+   "kind": "fact",
+   "source": "capture:report",
+   "quote": "Numbers count words and question marks in speaker labeled transcripts. They do not measure speaking time or question quality.",
+   "status": "verified"
+  },
+  {
+   "id": "c-card",
+   "text": "The card shows Internal talk share 53%, Question marks 4 / 0 and Longest internal run 21 words.",
+   "kind": "number",
+   "source": "capture:report",
+   "quote": "Internal talk share 53% Question marks 4 / 0 Longest internal run 21 words",
+   "status": "verified"
+  },
+  {
+   "id": "c-qm",
+   "text": "Question marks 4 / 0 is the internal count, then the external count.",
+   "kind": "derived",
+   "source": "run.py:235",
+   "quote": "Question marks <b>{stats[\"question_marks\"][\"internal\"]} / {stats[\"question_marks\"][\"external\"]}</b>",
+   "status": "verified"
+  },
+  {
+   "id": "c-tr0",
+   "text": "python3 run.py transcribe --media /path/to/call.mp4 \\",
+   "kind": "command",
+   "source": "README.md:50",
+   "quote": "python3 run.py transcribe --media /path/to/call.mp4 \\",
+   "status": "unverified"
+  },
+  {
+   "id": "c-tr1",
+   "text": "  --model /path/to/ggml-model.bin \\",
+   "kind": "command",
+   "source": "README.md:51",
+   "quote": "--model /path/to/ggml-model.bin \\",
+   "status": "unverified"
+  },
+  {
+   "id": "c-tr2",
+   "text": "  --output /path/to/call.txt --language en --threads 4",
+   "kind": "command",
+   "source": "README.md:52",
+   "quote": "--output /path/to/call.txt --language en --threads 4",
+   "status": "unverified"
+  }
+ ]
+}

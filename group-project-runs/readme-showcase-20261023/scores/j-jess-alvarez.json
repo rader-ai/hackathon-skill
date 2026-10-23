@@ -1,0 +1,31 @@
+{
+  "judge": "j-jess-alvarez",
+  "model": "haiku",
+  "signature": {
+    "name": "Stated-limits accuracy",
+    "description": "The README tells a developer what the project will not do for them, in concrete, checkable terms that match the repository."
+  },
+  "teams": {
+    "group-a": {
+      "criteria": {"skill": 7, "truth": 8, "story": 6, "visuals": 7, "pitch": 7},
+      "signature_score": 8,
+      "signature_why": "Python 3.10, the demo refusing a non-empty workspace, and the transcribe dependencies all match run.py; the 3.10 floor itself is not enforced in code.",
+      "loved": "The first screen shows the real report header and the README states plainly that the tool measures and checks but does not run a model.",
+      "docked": "The opener is a dense paragraph before the clone command, so the first ten seconds are text-heavy."
+    },
+    "group-b": {
+      "criteria": {"skill": 7, "truth": 8, "story": 9, "visuals": 9, "pitch": 7},
+      "signature_score": 8,
+      "signature_why": "Limits section is specific (not access control, transcription does not identify speakers, ffmpeg and whisper.cpp needed) and all match the code; the 3.10 claim is unverified in code.",
+      "loved": "The animated input-check-output reel shows a real quote going through the check, and the what-and-who sentence sits right under the title.",
+      "docked": "The closing line saying the other commands were not run for the page undercuts the trust the rest of the page builds."
+    },
+    "group-c": {
+      "criteria": {"skill": 7, "truth": 9, "story": 7, "visuals": 6, "pitch": 7},
+      "signature_score": 9,
+      "signature_why": "Names the whisper-cli binary, the case-and-punctuation substring match, the missing speaker and context checks, and no CRM access; each matches run.py lines 144-161 and 270.",
+      "loved": "The hook is concrete: three real transcript lines and a crop of the passing Quote verified result, with the limits stated right after.",
+      "docked": "The How this README was checked block exposes check.log and claims.md, which is process leakage on a page meant for readers."
+    }
+  }
+}

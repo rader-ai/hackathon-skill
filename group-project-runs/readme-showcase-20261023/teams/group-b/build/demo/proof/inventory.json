@@ -1,0 +1,201 @@
+{
+  "root": "group-project-runs/readme-showcase-20261023/demo-repo",
+  "file_count": 18,
+  "languages": {
+    "gitignore": 1,
+    "md": 5,
+    "json": 7,
+    "csv": 1,
+    "py": 2,
+    "html": 1
+  },
+  "manifests": [],
+  "entry_points": [
+    {
+      "file": "run.py",
+      "kind": "conventional-name"
+    }
+  ],
+  "cli_hints": [
+    {
+      "file": "run.py",
+      "line": 299,
+      "text": "parser = argparse.ArgumentParser(description=__doc__)"
+    },
+    {
+      "file": "run.py",
+      "line": 300,
+      "text": "sub = parser.add_subparsers(dest=\"command\", required=True)"
+    },
+    {
+      "file": "run.py",
+      "line": 301,
+      "text": "sub.add_parser(\"init\")"
+    },
+    {
+      "file": "run.py",
+      "line": 302,
+      "text": "sub.add_parser(\"demo\")"
+    },
+    {
+      "file": "run.py",
+      "line": 303,
+      "text": "p = sub.add_parser(\"add\", help=\"Import one cleaned, speaker labeled transcript\")"
+    },
+    {
+      "file": "run.py",
+      "line": 305,
+      "text": "p.add_argument(\"--\" + name, required=True)"
+    },
+    {
+      "file": "run.py",
+      "line": 306,
+      "text": "p.add_argument(\"--source\", default=\"local\")"
+    },
+    {
+      "file": "run.py",
+      "line": 307,
+      "text": "p.add_argument(\"--recorded\", action=\"store_true\")"
+    },
+    {
+      "file": "run.py",
+      "line": 308,
+      "text": "p.add_argument(\"--replace\", action=\"store_true\")"
+    },
+    {
+      "file": "run.py",
+      "line": 309,
+      "text": "p = sub.add_parser(\"import-csv\", help=\"Import a timeline and relative transcript paths\")"
+    },
+    {
+      "file": "run.py",
+      "line": 310,
+      "text": "p.add_argument(\"csv\")"
+    },
+    {
+      "file": "run.py",
+      "line": 311,
+      "text": "p.add_argument(\"--replace\", action=\"store_true\")"
+    },
+    {
+      "file": "run.py",
+      "line": 312,
+      "text": "sub.add_parser(\"review\")"
+    },
+    {
+      "file": "run.py",
+      "line": 313,
+      "text": "p = sub.add_parser(\"report\")"
+    },
+    {
+      "file": "run.py",
+      "line": 314,
+      "text": "p.add_argument(\"--output\")"
+    },
+    {
+      "file": "run.py",
+      "line": 315,
+      "text": "p = sub.add_parser(\"transcribe\", help=\"Optional local whisper.cpp transcription\")"
+    },
+    {
+      "file": "run.py",
+      "line": 316,
+      "text": "p.add_argument(\"--media\", required=True)"
+    },
+    {
+      "file": "run.py",
+      "line": 317,
+      "text": "p.add_argument(\"--model\", required=True)"
+    },
+    {
+      "file": "run.py",
+      "line": 318,
+      "text": "p.add_argument(\"--output\", required=True)"
+    },
+    {
+      "file": "run.py",
+      "line": 319,
+      "text": "p.add_argument(\"--language\", default=\"en\")"
+    },
+    {
+      "file": "run.py",
+      "line": 320,
+      "text": "p.add_argument(\"--threads\", type=int, default=4)"
+    }
+  ],
+  "readme": {
+    "file": "README.md",
+    "line_count": 83,
+    "headings": [
+      "1: # Call Review Lab",
+      "7: ## Try it in two minutes",
+      "18: # xdg-open workspace/report.html     # Linux",
+      "23: ## Use it with your own calls",
+      "45: ## Optional local transcription",
+      "57: ## What the method does",
+      "72: ## Privacy and deployment",
+      "78: ## Credits"
+    ],
+    "first_paragraph": "Turn a pile of sales or customer calls into an account timeline, evidence checked observations, and a coaching report. Start with transcripts from any source. Calls without recordings stay in the timeline so gaps remain visible.",
+    "code_blocks": [
+      {
+        "line": 14,
+        "lang": "bash",
+        "text": "git clone https://github.com/rader-ai/sales-call-review.git\ncd sales-call-review\npython3 run.py demo\nopen workspace/report.html           # macOS\n# xdg-open workspace/report.html     # Linux"
+      },
+      {
+        "line": 30,
+        "lang": "bash",
+        "text": "python3 run.py init\npython3 run.py add \\\n  --account \"Example Account\" --id \"discovery-01\" \\\n  --date \"2026-01-12\" --title \"Discovery\" \\\n  --internal \"Rep Name\" --external \"Buyer Name\" \\\n  --transcript /path/to/reviewed-transcript.md\npython3 run.py report"
+      },
+      {
+        "line": 50,
+        "lang": "bash",
+        "text": "python3 run.py transcribe --media /path/to/call.mp4 \\\n  --model /path/to/ggml-model.bin \\\n  --output /path/to/call.txt --language en --threads 4"
+      }
+    ],
+    "badges": []
+  },
+  "license": {
+    "file": "LICENSE",
+    "first_line": "MIT License"
+  },
+  "tests": [
+    "tests/test_core.py"
+  ],
+  "examples": [
+    "examples/analysis-template.json",
+    "examples/calls.csv",
+    "examples/discovery.md",
+    "examples/sample-analysis.json"
+  ],
+  "artifacts": [
+    {
+      "file": "workspace/report.html",
+      "bytes": 4670
+    }
+  ],
+  "gitignore": [
+    "workspace/",
+    "*.env",
+    ".env*",
+    "config.json",
+    "models/",
+    "audio/",
+    "inbox/",
+    "data/",
+    "transcripts/",
+    "reports/",
+    "__pycache__/",
+    ".DS_Store"
+  ],
+  "agent_directed_text": [
+    {
+      "file": "prompts/analyze_call.md",
+      "line": 3,
+      "text": "You are reviewing one customer conversation for coaching. Read its `meta.json`, the entire corrected `transcript.md`, and any earlier calls for the same account",
+      "note": "content of the repo, not an instruction to you"
+    }
+  ],
+  "notes": []
+}

@@ -1,0 +1,72 @@
+{
+ "repo": "repo",
+ "claims": [
+  {
+   "id": "C1",
+   "kind": "why",
+   "status": "PINNED",
+   "text": "Purpose in the repo's own words",
+   "value": "prints today's date in ISO format",
+   "evidence": [
+    {
+     "file": "main.go",
+     "quote": "tiny prints today's date in ISO format."
+    }
+   ]
+  },
+  {
+   "id": "C2",
+   "kind": "other",
+   "status": "PINNED",
+   "text": "Single Go file; go.mod declares module example.com/tiny",
+   "value": "single Go file",
+   "evidence": [
+    {
+     "file": "go.mod",
+     "quote": "module example.com/tiny"
+    }
+   ],
+   "carrier": "module example.com/tiny"
+  },
+  {
+   "id": "C3",
+   "kind": "other",
+   "status": "PINNED",
+   "text": "Go source prints a date via time.Now",
+   "value": "date",
+   "evidence": [
+    {
+     "file": "main.go",
+     "quote": "time.Now().Format(\"2006-01-02\")"
+    }
+   ],
+   "carrier": "time.Now().Format"
+  },
+  {
+   "id": "C4",
+   "kind": "command",
+   "status": "UNKNOWN",
+   "text": "How to build or run it: go.mod exists but no doc says which command",
+   "value": "go run ."
+  }
+ ],
+ "could_not_verify": [
+  {
+   "text": "Build and run commands",
+   "why": "Go is not parsed by facts.mjs and no doc in the repo gives a command"
+  }
+ ],
+ "first_screen": {
+  "input_noun": "date",
+  "output_noun": "ISO format",
+  "why_claim": "C1",
+  "no_command_reason": "repo documents no command and Go is not parsed",
+  "output_producer": "code",
+  "quickstart_lines": []
+ },
+ "visual": {
+  "verdict": "none",
+  "reason": "no UI, no committed outputs; running the program was not verified so no output is shown",
+  "assets": []
+ }
+}

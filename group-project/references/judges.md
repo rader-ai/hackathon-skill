@@ -6,7 +6,7 @@ Default 5 judges. Model mix is fixed so the panel has different depths of readin
 
 | Seat | Model | Role on the panel |
 |---|---|---|
-| Head Judge | opus | Most senior voice in the domain. Writes the judges' brief and rubric. |
+| Head Judge | opus | Most senior voice in the domain; breaks ties. |
 | Senior Judge | opus | A different senior discipline that touches the domain. |
 | Practitioner | sonnet | Someone who does this work daily - craft and feasibility. |
 | Practitioner | sonnet | An adjacent field (client side, strategy, engineering, marketing...). |
@@ -31,7 +31,7 @@ are known to love and to hate.
 
 ## Signature criterion (the secret grade)
 
-Each judge chooses one thing they personally care about more than the rubric captures - their
+The panel designer gives each judge one thing they personally care about more than the rubric captures - their
 "surprise grade". It must:
 - be specific and observable (not "quality" or "creativity"),
 - fit the judge's background,
@@ -42,7 +42,7 @@ Examples: "Does the first half-second work with the sound off?", "Could a junior
 extend this system without asking anyone?", "Is there one moment I'd screenshot and send to a
 friend?", "Does it respect the viewer's time?".
 
-The judge writes it to `judges/sealed/<judge-id>.md`. Teams are told signatures exist, never
+It goes in `judges/sealed/<judge-id>.md`. One author writes all five, so they never overlap. Teams are told signatures exist, never
 what they are. The Host never paraphrases a sealed file into any team prompt.
 
 ## Independence

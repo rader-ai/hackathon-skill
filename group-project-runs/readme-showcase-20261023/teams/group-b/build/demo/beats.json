@@ -1,0 +1,23 @@
+{
+ "duration": 6,
+ "beats": [
+  {
+   "type": "in",
+   "text": "Jordan [00:40] The operations lead cannot spot delayed jobs until Monday. We want a pilot before the summer rush.",
+   "source": "examples/discovery.md:9",
+   "claim": "r-in"
+  },
+  {
+   "type": "step",
+   "text": "\"ok\": true, \"quote\": \"The operations lead cannot spot delayed jobs until Monday.\"",
+   "source": "workspace/accounts/harbor-tools/calls/discovery-01/verification.json:17-18",
+   "claim": "r-step"
+  },
+  {
+   "type": "out",
+   "text": "Quote verified “The operations lead cannot spot delayed jobs until Monday.”",
+   "source": "workspace/report.html:1",
+   "claim": "r-out"
+  }
+ ]
+}

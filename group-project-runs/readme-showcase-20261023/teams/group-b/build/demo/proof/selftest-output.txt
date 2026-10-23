@@ -1,0 +1,3 @@
+PASS  render-readme: renders light+dark frames
+selftest: 36 passed, 0 failed
+COMPLETE: every script path was exercised.

@@ -1,0 +1,1 @@
+{"does": "Call Review Lab turns speaker-labeled call transcripts, plus a CSV of calls and an optional analysis JSON, into an account timeline, measured talk statistics, and an HTML report whose coaching points are tagged Quote verified or Needs evidence review.", "audience": "unclear", "command": "git clone https://github.com/rader-ai/sales-call-review.git"}

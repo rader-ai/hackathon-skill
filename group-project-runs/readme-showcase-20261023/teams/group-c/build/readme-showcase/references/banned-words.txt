@@ -1,0 +1,36 @@
+# One phrase per line; matched case-insensitively on word boundaries in README prose
+# (outside fenced code). Lines starting with # are comments.
+blazing
+blazingly fast
+lightning fast
+lightning-fast
+powerful
+seamless
+seamlessly
+cutting-edge
+cutting edge
+state-of-the-art
+revolutionary
+game-changer
+game changer
+game-changing
+next-generation
+next generation
+ai-powered
+supercharge
+effortless
+effortlessly
+robust
+best-in-class
+world-class
+enterprise-grade
+battle-tested
+production-ready
+unleash
+leverage
+elevate
+streamline
+turnkey
+magical
+easy to use
+simple yet powerful

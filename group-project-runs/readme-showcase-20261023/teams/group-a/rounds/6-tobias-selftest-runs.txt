@@ -1,0 +1,6 @@
+run 1: selftest: 77 checks passed, 0 failed selftest: seeded lies caught 18/18 (recall 100%) selftest: PASSED 
+run 2: selftest: 77 checks passed, 0 failed selftest: seeded lies caught 18/18 (recall 100%) selftest: PASSED 
+run 3: selftest: 77 checks passed, 0 failed selftest: seeded lies caught 18/18 (recall 100%) selftest: PASSED 
+run 4: selftest: 77 checks passed, 0 failed selftest: seeded lies caught 18/18 (recall 100%) selftest: PASSED 
+run 5: selftest: 77 checks passed, 0 failed selftest: seeded lies caught 18/18 (recall 100%) selftest: PASSED 
+run 6: selftest: 77 checks passed, 0 failed selftest: seeded lies caught 18/18 (recall 100%) selftest: PASSED 

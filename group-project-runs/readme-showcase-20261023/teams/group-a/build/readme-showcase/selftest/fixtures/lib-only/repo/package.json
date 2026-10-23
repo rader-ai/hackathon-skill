@@ -1,0 +1,8 @@
+{
+  "name": "slugify-lite",
+  "version": "1.2.0",
+  "main": "index.js",
+  "license": "ISC",
+  "engines": { "node": ">=18" },
+  "scripts": { "test": "node --test test/" }
+}

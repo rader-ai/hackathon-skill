@@ -1,0 +1,28 @@
+PASS  inventory: fixture ok
+PASS  inventory: missing path
+PASS  inventory: file not dir
+PASS  inventory: empty dir
+PASS  reel: renders fixture
+PASS  reel: reel-light.svg exists and < 150 KB
+PASS  reel: reel-dark.svg exists and < 150 KB
+PASS  reel: reel-final.png written
+PASS  reel: no pair -> exit 3
+PASS  reel: no pair writes nothing
+PASS  reel: >3 beats rejected
+PASS  reel: >8 s rejected
+PASS  reel: missing source rejected
+PASS  reel: overlong text rejected
+PASS  verify: clean fixture passes
+PASS  verify: dead source fails
+PASS  verify: altered number fails
+PASS  verify: hype word fails
+PASS  verify: false quote fails
+PASS  verify: missing Limits fails
+PASS  verify: dead image fails
+PASS  verify: invented badge fails
+PASS  verify: edited Reel SVG fails
+PASS  verify: unverified claim not labelled fails
+PASS  verify: usage error
+PASS  capture: PNG written
+PASS  capture: missing file
+selftest: 27 passed, 0 failed

@@ -1,0 +1,4 @@
+[
+  {"id": "invented-command", "op": "append", "text": "\n```bash\ngo run .\n```\n", "expect": "command-unpinned"},
+  {"id": "unknown-leak", "op": "append", "text": "\nBuild it with go run . and read the date.\n", "expect": "unknown-leaked"}
+]

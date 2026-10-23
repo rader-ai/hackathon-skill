@@ -1,0 +1,5 @@
+{
+  "facts": {"node.floor": "18", "license.type": "ISC", "npm.name": "slugify-lite", "npm.scripts.test": "node --test test/", "commands": ["npm test"], "subcommands": []},
+  "clean": {"lint_fail": 0, "firstscreen": "pass", "assets": "none"},
+  "link_base": "repo"
+}

@@ -1,0 +1,51 @@
+<!doctype html><html><head><meta charset="utf-8"><base href="file://group-project-runs/readme-showcase-20261023/teams/group-c/build/demo/">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.5.1/github-markdown-light.min.css">
+<style>body{margin:0;background:#fff}.markdown-body{box-sizing:border-box;max-width:1012px;margin:0 auto;padding:32px}</style></head>
+<body><article class="markdown-body"><h1>Call Review Lab</h1>
+<p>For people who review sales or customer calls: turns transcripts into an account timeline, evidence checked observations, and a coaching report. A quote is tagged "Quote verified" only if its words (ignoring case and punctuation) appear inside one speaker turn of the transcript.</p>
+<p>Three lines from <code class="notranslate">examples/discovery.md</code>:</p>
+<pre class="notranslate"><code class="notranslate">**Maya** [00:00] Thanks for joining. What would make this conversation useful for you?
+**Jordan** [00:40] The operations lead cannot spot delayed jobs until Monday. We want a pilot before the summer rush.
+**Maya** [01:40] Great. I will send a pilot outline Tuesday, and you will invite them to a working session Thursday. Does that fit?
+</code></pre>
+<p><a target="_blank" rel="noopener noreferrer" href="assets/proof.png"><img src="assets/proof.png" alt="Part of the coaching report with three quotes from the lines above, each tagged &quot;Quote verified&quot;." style="max-width: 100%;"></a></p>
+<p><em>Crop of <code class="notranslate">workspace/report.html</code>, produced by <code class="notranslate">python3 run.py demo</code> from the synthetic data in <code class="notranslate">examples/</code>. The demo has no failing quote, so this shows only the passing case.</em></p>
+<h2>Try it</h2>
+<p>Requires Python 3.10 or newer. The core workflow uses only the standard library.</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">git clone https://github.com/rader-ai/sales-call-review.git
+<span class="pl-c1">cd</span> sales-call-review
+python3 run.py demo
+open workspace/report.html           <span class="pl-c"><span class="pl-c">#</span> macOS</span>
+<span class="pl-c"><span class="pl-c">#</span> xdg-open workspace/report.html     # Linux</span></pre></div>
+<p>The demo imports a synthetic discovery call, a later unrecorded meeting, and a sample analysis. It writes <code class="notranslate">workspace/report.html</code>, which is local and ignored by git. To check the core logic, run <code class="notranslate">python3 -m unittest discover -s tests</code>.</p>
+<h2>What goes in and comes out</h2>
+<ul>
+<li>In: Markdown transcripts with turns like <code class="notranslate">**Speaker Name** [mm:ss] Spoken text</code>, plus a CSV timeline (<code class="notranslate">examples/calls.csv</code>) or <code class="notranslate">python3 run.py add</code>.</li>
+<li>In (optional): an <code class="notranslate">analysis.json</code> per call, shaped like <code class="notranslate">examples/analysis-template.json</code>, written with <a href="prompts/analyze_call.md">the analyst prompt</a>.</li>
+<li>Out: <code class="notranslate">metrics.json</code> and <code class="notranslate">verification.json</code> per call, and one <code class="notranslate">workspace/report.html</code>.</li>
+<li>Calls with no recording stay in the timeline, so gaps stay visible.</li>
+</ul>
+<h2>Use it with your own calls</h2>
+<div class="highlight highlight-source-shell"><pre class="notranslate">python3 run.py init
+python3 run.py add \
+  --account <span class="pl-s"><span class="pl-pds">"</span>Example Account<span class="pl-pds">"</span></span> --id <span class="pl-s"><span class="pl-pds">"</span>discovery-01<span class="pl-pds">"</span></span> \
+  --date <span class="pl-s"><span class="pl-pds">"</span>2026-01-12<span class="pl-pds">"</span></span> --title <span class="pl-s"><span class="pl-pds">"</span>Discovery<span class="pl-pds">"</span></span> \
+  --internal <span class="pl-s"><span class="pl-pds">"</span>Rep Name<span class="pl-pds">"</span></span> --external <span class="pl-s"><span class="pl-pds">"</span>Buyer Name<span class="pl-pds">"</span></span> \
+  --transcript /path/to/reviewed-transcript.md
+python3 run.py report</pre></div>
+<p>For many calls, use <code class="notranslate">python3 run.py import-csv /path/to/calls.csv</code>. Run <code class="notranslate">python3 run.py review</code> for the measured statistics. Each quote in an analysis is checked against single speaker turns. A quote that fails is labelled "Needs evidence review" and its text is left out of the report. The check is a case and punctuation insensitive substring match: it does not look at who spoke, how long the quote is, or whether it is read in context. More detail: <a href="docs/METHOD.md">docs/METHOD.md</a>.</p>
+<h2>Limits</h2>
+<ul>
+<li>The numbers count words and question marks from the labeled transcript. A question mark count is not a measure of good discovery.</li>
+<li>Unknown speakers are excluded from talk share.</li>
+<li>It does not silently infer deal outcomes, fetch CRM data, or automate model analysis.</li>
+<li><code class="notranslate">python3 run.py transcribe</code> needs <code class="notranslate">ffmpeg</code> and a <code class="notranslate">whisper-cli</code> binary (from whisper.cpp) on your PATH, and it does not identify speakers.</li>
+</ul>
+<h2>Privacy</h2>
+<p>The Python commands run locally and make no model API calls. If you paste transcripts into a cloud model, that provider processes them under its own terms. Reports contain call content and belong in an access controlled location.</p>
+<h2>License</h2>
+<p>MIT, see <a href="LICENSE">LICENSE</a>.</p>
+<details>
+<summary>How this README was checked</summary>
+<p>Every command, path, and number was traced to a file and line in the repo and checked by a script (check_readme.py in the readme-showcase skill); the last run is in <code class="notranslate">check.log</code> next to this file. Links such as <code class="notranslate">LICENSE</code> and <code class="notranslate">docs/METHOD.md</code> resolve when this file replaces the repo's <code class="notranslate">README.md</code> at the root. The checker cannot read code: the sentences about quote checking were verified by reading <code class="notranslate">run.py</code> lines 140-161 and 250-252 (see <code class="notranslate">claims.md</code>).</p>
+</details></article></body></html>

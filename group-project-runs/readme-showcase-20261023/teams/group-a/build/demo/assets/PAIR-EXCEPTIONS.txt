@@ -1,0 +1,3 @@
+# The demo page has no dark theme (its CSS ignores prefers-color-scheme), so each capture ships as one framed light image.
+report-1
+report-2

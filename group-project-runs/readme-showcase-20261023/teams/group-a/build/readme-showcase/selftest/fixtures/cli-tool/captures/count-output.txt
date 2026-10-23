@@ -1,0 +1,3 @@
+/checkout   41
+/search     27
+/           9

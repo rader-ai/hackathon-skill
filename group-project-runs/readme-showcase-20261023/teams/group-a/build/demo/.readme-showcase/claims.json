@@ -1,0 +1,586 @@
+{
+ "repo": "demo-repo",
+ "claims": [
+  {
+   "id": "C1",
+   "kind": "why",
+   "status": "PINNED",
+   "text": "Reason in the repo's words",
+   "value": "Calls without recordings stay in the timeline so gaps remain visible",
+   "evidence": [
+    {
+     "file": "README.md",
+     "quote": "Calls without recordings stay in the timeline so gaps remain visible."
+    }
+   ]
+  },
+  {
+   "id": "C2",
+   "kind": "other",
+   "status": "PINNED",
+   "text": "Input is speaker-labeled transcripts as Markdown turns `**Speaker Name** [mm:ss] Spoken text`",
+   "value": "transcripts",
+   "evidence": [
+    {
+     "file": "README.md",
+     "quote": "Convert a transcript into Markdown turns: `**Speaker Name** [mm:ss] Spoken text`."
+    }
+   ],
+   "carrier": "Convert a transcript into Markdown turns"
+  },
+  {
+   "id": "C3",
+   "kind": "other",
+   "status": "PINNED",
+   "text": "Report marks each point Quote verified or Needs evidence review and shows the quote only when valid",
+   "value": "Needs evidence review",
+   "evidence": [
+    {
+     "file": "run.py",
+     "quote": "\"Quote verified\" if valid else \"Needs evidence review\""
+    },
+    {
+     "file": "run.py",
+     "quote": "if valid:"
+    }
+   ],
+   "carrier": "\"Quote verified\" if valid else \"Needs evidence review\""
+  },
+  {
+   "id": "C4",
+   "kind": "command",
+   "status": "PINNED",
+   "text": "Demo command",
+   "value": "python3 run.py demo",
+   "evidence": [
+    {
+     "file": "README.md",
+     "quote": "python3 run.py demo"
+    },
+    {
+     "file": "run.py",
+     "quote": "sub.add_parser(\"demo\")"
+    }
+   ]
+  },
+  {
+   "id": "C5",
+   "kind": "generated_path",
+   "status": "PINNED",
+   "text": "Report written by the demo into workspace/ (gitignored)",
+   "value": "workspace/report.html",
+   "evidence": [
+    {
+     "file": "README.md",
+     "quote": "It generates `workspace/report.html`, which is local and ignored by git."
+    }
+   ]
+  },
+  {
+   "id": "C6",
+   "kind": "requirement",
+   "status": "PINNED",
+   "text": "Python 3.10 or newer",
+   "value": "Python 3.10",
+   "evidence": [
+    {
+     "file": "README.md",
+     "quote": "Requires Python 3.10 or newer."
+    }
+   ]
+  },
+  {
+   "id": "C7",
+   "kind": "command",
+   "status": "PINNED",
+   "text": "Run tests",
+   "value": "python3 -m unittest discover -s tests",
+   "evidence": [
+    {
+     "file": "README.md",
+     "quote": "Run `python3 -m unittest discover -s tests` to check the core logic."
+    }
+   ]
+  },
+  {
+   "id": "C8",
+   "kind": "license",
+   "status": "PINNED",
+   "text": "MIT",
+   "value": "MIT",
+   "evidence": [
+    {
+     "file": "LICENSE",
+     "quote": "MIT License"
+    }
+   ]
+  },
+  {
+   "id": "C9",
+   "kind": "command",
+   "status": "PINNED",
+   "text": "Create workspace",
+   "value": "python3 run.py init",
+   "evidence": [
+    {
+     "file": "README.md",
+     "quote": "python3 run.py init"
+    }
+   ]
+  },
+  {
+   "id": "C10",
+   "kind": "command",
+   "status": "PINNED",
+   "text": "Bulk import",
+   "value": "python3 run.py import-csv /path/to/calls.csv",
+   "evidence": [
+    {
+     "file": "README.md",
+     "quote": "For many calls, use `python3 run.py import-csv /path/to/calls.csv`."
+    }
+   ]
+  },
+  {
+   "id": "C11",
+   "kind": "command",
+   "status": "PINNED",
+   "text": "Build report",
+   "value": "python3 run.py report",
+   "evidence": [
+    {
+     "file": "README.md",
+     "quote": "python3 run.py report"
+    }
+   ]
+  },
+  {
+   "id": "C12",
+   "kind": "other",
+   "status": "PINNED",
+   "text": "The analysis file goes at workspace/accounts/<account>/calls/<id>/analysis.json",
+   "value": "analysis.json",
+   "evidence": [
+    {
+     "file": "README.md",
+     "quote": "Save the result as `workspace/accounts/<account>/calls/<id>/analysis.json`."
+    }
+   ],
+   "carrier": "Save the result as `workspace/accounts/<account>/calls/<id>/analysis.json`"
+  },
+  {
+   "id": "C13",
+   "kind": "other",
+   "status": "PINNED",
+   "text": "Quotes are checked against a single speaker turn",
+   "value": "single speaker turn",
+   "evidence": [
+    {
+     "file": "README.md",
+     "quote": "Every quote in the analysis is checked against a single speaker turn."
+    }
+   ],
+   "carrier": "checked against a single speaker turn"
+  },
+  {
+   "id": "C14",
+   "kind": "other",
+   "status": "PINNED",
+   "text": "Measures count words and question marks, not speaking time or question quality",
+   "value": "words and question marks",
+   "evidence": [
+    {
+     "file": "run.py",
+     "quote": "Numbers count words and question marks in speaker labeled transcripts. They do not measure speaking time or question quality."
+    }
+   ],
+   "carrier": "count words and question marks"
+  },
+  {
+   "id": "C15",
+   "kind": "other",
+   "status": "PINNED",
+   "text": "The Python commands run locally and make no model API calls",
+   "value": "make no model API calls",
+   "evidence": [
+    {
+     "file": "README.md",
+     "quote": "The Python commands run locally and make no model API calls."
+    }
+   ],
+   "carrier": "make no model API calls"
+  },
+  {
+   "id": "C16",
+   "kind": "other",
+   "status": "PINNED",
+   "text": "The repo does not automate model analysis; it supplies an analyst prompt for you to run",
+   "value": "analyze_call.md",
+   "evidence": [
+    {
+     "file": "README.md",
+     "quote": "automate model analysis"
+    }
+   ],
+   "carrier": "automate model analysis"
+  },
+  {
+   "id": "C17",
+   "kind": "path",
+   "status": "PINNED",
+   "text": "prompt path",
+   "value": "prompts/analyze_call.md",
+   "evidence": [
+    {
+     "file": "prompts/analyze_call.md",
+     "quote": "# Analyst prompt"
+    }
+   ]
+  },
+  {
+   "id": "C18",
+   "kind": "path",
+   "status": "PINNED",
+   "text": "method guide",
+   "value": "docs/METHOD.md",
+   "evidence": [
+    {
+     "file": "docs/METHOD.md",
+     "quote": "# Method and design choices"
+    }
+   ]
+  },
+  {
+   "id": "C19",
+   "kind": "other",
+   "status": "PINNED",
+   "text": "Demo data is synthetic",
+   "value": "synthetic",
+   "evidence": [
+    {
+     "file": "README.md",
+     "quote": "The demo imports a synthetic discovery call, a later unrecorded meeting, and a sample analysis."
+    }
+   ],
+   "carrier": "The demo imports a synthetic discovery call"
+  },
+  {
+   "id": "C20",
+   "kind": "other",
+   "status": "PINNED",
+   "text": "Harbor Tools in the capture is demo data",
+   "value": "Harbor Tools",
+   "evidence": [
+    {
+     "file": "captures/report.html",
+     "quote": "<h2>Harbor Tools</h2>"
+    }
+   ],
+   "carrier": "Harbor Tools"
+  },
+  {
+   "id": "C21",
+   "kind": "number",
+   "status": "PINNED",
+   "text": "Figures in the captures: Timeline calls 2, Transcripts 1, Unverified quotes 0, talk share 53%, question marks 4 / 0, longest run 21 words",
+   "value": "2 1 0 53 4 21",
+   "evidence": [
+    {
+     "file": "captures/report.html",
+     "quote": "<span>Timeline calls</span><strong>2</strong>"
+    },
+    {
+     "file": "captures/report.html",
+     "quote": "<span>Transcripts</span><strong>1</strong>"
+    },
+    {
+     "file": "captures/report.html",
+     "quote": "<span>Unverified quotes</span><strong>0</strong>"
+    },
+    {
+     "file": "captures/report.html",
+     "quote": "Internal talk share <b>53%</b>"
+    },
+    {
+     "file": "captures/report.html",
+     "quote": "Question marks <b>4 / 0</b>"
+    },
+    {
+     "file": "captures/report.html",
+     "quote": "Longest internal run <b>21 words</b>"
+    }
+   ]
+  },
+  {
+   "id": "C22",
+   "kind": "other",
+   "status": "PINNED",
+   "text": "Unrecorded calls show as Transcript absent",
+   "value": "Transcript absent",
+   "evidence": [
+    {
+     "file": "run.py",
+     "quote": "Transcript absent"
+    }
+   ],
+   "carrier": "Transcript absent"
+  },
+  {
+   "id": "C23",
+   "kind": "url",
+   "status": "PINNED",
+   "text": "clone URL",
+   "value": "https://github.com/rader-ai/sales-call-review.git",
+   "evidence": [
+    {
+     "file": "README.md",
+     "quote": "git clone https://github.com/rader-ai/sales-call-review.git"
+    }
+   ]
+  },
+  {
+   "id": "C24",
+   "kind": "other",
+   "status": "UNKNOWN",
+   "text": "Runs on Windows",
+   "value": "Windows"
+  },
+  {
+   "id": "C25",
+   "kind": "other",
+   "status": "UNKNOWN",
+   "text": "Demo output captured by running",
+   "value": "Demo run output"
+  },
+  {
+   "id": "C26",
+   "kind": "other",
+   "status": "UNKNOWN",
+   "text": "The shown report is committed to the repo",
+   "value": "committed report"
+  },
+  {
+   "id": "C27",
+   "kind": "other",
+   "status": "PINNED",
+   "text": "The demo uses shutil.copyfile(sample, target) to copy a prepared sample analysis; the tool does not write it",
+   "value": "sample-analysis.json",
+   "evidence": [
+    {
+     "file": "run.py",
+     "quote": "sample = root / \"sample-analysis.json\""
+    },
+    {
+     "file": "run.py",
+     "quote": "shutil.copyfile(sample, target)"
+    }
+   ],
+   "carrier": "shutil.copyfile(sample, target)"
+  },
+  {
+   "id": "C28",
+   "kind": "path",
+   "status": "PINNED",
+   "text": "sample analysis file",
+   "value": "examples/sample-analysis.json",
+   "evidence": [
+    {
+     "file": "examples/sample-analysis.json",
+     "quote": "\"summary\""
+    }
+   ]
+  },
+  {
+   "id": "C29",
+   "kind": "format",
+   "status": "PINNED",
+   "text": "CSV columns as the repo documents them",
+   "value": "account,id,date,title,internal,external,transcript,recorded,source",
+   "evidence": [
+    {
+     "file": "README.md",
+     "quote": "The CSV columns are `account,id,date,title,internal,external,transcript,recorded,source`."
+    }
+   ],
+   "applies_to": ".csv"
+  },
+  {
+   "id": "C30",
+   "kind": "other",
+   "status": "PINNED",
+   "text": "Transcript paths in the CSV are relative to it; omit one to keep an unrecorded call",
+   "value": "relative to the CSV",
+   "evidence": [
+    {
+     "file": "README.md",
+     "quote": "Transcript paths are relative to the CSV. Omit a transcript path to retain an unrecorded or missing call in the timeline."
+    }
+   ],
+   "carrier": "Omit a transcript path to retain an unrecorded or missing call in the timeline"
+  },
+  {
+   "id": "C31",
+   "kind": "other",
+   "status": "PINNED",
+   "text": "Unknown speakers are excluded from talk share",
+   "value": "excluded from talk share",
+   "evidence": [
+    {
+     "file": "README.md",
+     "quote": "Unknown speakers are excluded from talk share."
+    }
+   ],
+   "carrier": "Unknown speakers are excluded from talk share"
+  },
+  {
+   "id": "C32",
+   "kind": "other",
+   "status": "PINNED",
+   "text": "Human review is required for coaching conclusions",
+   "value": "Human review",
+   "evidence": [
+    {
+     "file": "run.py",
+     "quote": "Human review is required for coaching conclusions."
+    }
+   ],
+   "carrier": "Human review is required for coaching conclusions"
+  },
+  {
+   "id": "C33",
+   "kind": "other",
+   "status": "PINNED",
+   "text": "transcribe does not identify speakers (no speaker labels) and needs ffmpeg and whisper.cpp installed separately",
+   "value": "transcribe",
+   "evidence": [
+    {
+     "file": "README.md",
+     "quote": "Install `ffmpeg` and [whisper.cpp](https://github.com/ggml-org/whisper.cpp) separately"
+    },
+    {
+     "file": "README.md",
+     "quote": "This only creates a raw text transcript. It does not identify speakers."
+    }
+   ],
+   "carrier": "It does not identify speakers"
+  },
+  {
+   "id": "C34",
+   "kind": "other",
+   "status": "PINNED",
+   "text": "demo stops with an error if the workspace already holds calls",
+   "value": "empty workspace",
+   "evidence": [
+    {
+     "file": "run.py",
+     "quote": "Demo requires an empty workspace so it cannot mix with your calls"
+    }
+   ],
+   "carrier": "Demo requires an empty workspace"
+  },
+  {
+   "id": "C35",
+   "kind": "other",
+   "status": "PINNED",
+   "text": "Core workflow uses only the standard library",
+   "value": "standard library",
+   "evidence": [
+    {
+     "file": "facts.json",
+     "quote": "\"stdlib_only\": true"
+    },
+    {
+     "file": "README.md",
+     "quote": "The core workflow uses only the standard library."
+    }
+   ],
+   "carrier": "uses only the standard library"
+  },
+  {
+   "id": "C36",
+   "kind": "path",
+   "status": "PINNED",
+   "text": "License file",
+   "value": "LICENSE",
+   "evidence": [
+    {
+     "file": "LICENSE",
+     "quote": "MIT License"
+    }
+   ]
+  },
+  {
+   "id": "C37",
+   "kind": "other",
+   "status": "PINNED",
+   "text": "A question mark count is not a measure of good discovery",
+   "value": "question mark count",
+   "evidence": [
+    {
+     "file": "README.md",
+     "quote": "A question mark count is not a measure of good discovery."
+    }
+   ],
+   "carrier": "A question mark count is not a measure of good discovery"
+  }
+ ],
+ "could_not_verify": [
+  {
+   "text": "Output of python3 run.py demo",
+   "why": "running repo code was not allowed; the image is of the existing workspace/report.html, which the repo gitignores (generated by the host's earlier run of the demo)"
+  },
+  {
+   "text": "Windows support",
+   "why": "nothing in the repo tests or states it"
+  },
+  {
+   "text": "Python 3.10 floor",
+   "why": "only the repo README states it; there is no manifest"
+  },
+  {
+   "text": "Who the project is for",
+   "why": "the repo never names an audience, so the README names none"
+  },
+  {
+   "text": "Optional transcribe path",
+   "why": "not run; mentioned only as a limit"
+  }
+ ],
+ "first_screen": {
+  "input_noun": "transcripts",
+  "output_noun": "report",
+  "why_claim": "C1",
+  "output_producer": "mixed",
+  "producer_phrase": "The tool measures and checks; it does not run a model",
+  "quickstart_lines": [
+   "git clone https://github.com/rader-ai/sales-call-review.git",
+   "cd sales-call-review",
+   "python3 run.py demo",
+   "open workspace/report.html"
+  ],
+  "audience_waived": "the repo never says who it is for; it names transcripts and an account owner review only",
+  "first_runnable_claim": null,
+  "no_command_reason": null,
+  "why_none_reason": null
+ },
+ "visual": {
+  "verdict": "capture",
+  "reason": "The report is an HTML page generated by python3 run.py demo (workspace/ is gitignored); a picture of its coverage cards and verified quotes says more than text.",
+  "shows": [
+   "C21",
+   "C22",
+   "C3",
+   "C13"
+  ],
+  "assets": [
+   {
+    "path": "assets/report-1-light.png",
+    "source": "capture of workspace/report.html, generated by python3 run.py demo; header and coverage cards"
+   },
+   {
+    "path": "assets/report-2-light.png",
+    "source": "capture of workspace/report.html, generated by python3 run.py demo; measures, summary and verified quotes"
+   }
+  ]
+ }
+}

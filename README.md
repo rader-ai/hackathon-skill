@@ -85,7 +85,7 @@ Each run can produce a shareable gallery: live loaders, the score sheet, every s
   <img src="assets/flow.svg" alt="Seven phases: judges seal criteria, propose alone, clash, decide and build, red group, pitch and judging, rematch; lessons feed the next run" width="100%">
 </p>
 
-**The judges come first.** Five judges are cast for the domain: 2 on Opus, 2 on Sonnet, and 1 on Haiku, who plays an everyday user's gut reaction. Each seals one criterion they care about more than the rubric does. The Head Judge publishes the goal and rubric, and announces that the secret criteria exist without saying what they are.
+**The judges come first.** One panel designer casts five judges for the domain: 2 on Opus, 2 on Sonnet, and 1 on Haiku, who plays an everyday user's gut reaction. It gives each judge one sealed criterion they care about more than the rubric does, all five distinct, and publishes the goal and rubric, saying the secret criteria exist without saying what they are.
 
 **Every group gets the same four roles and a different temperament.** (Inside the skill's files, groups are called teams.)
 
@@ -145,18 +145,18 @@ Or just say "run a hackathon on…", "have teams compete on…", or "I want vari
 |---|---|
 | Groups | 4 (3-5) |
 | Group size | 4 (3-5; 5 adds a Wildcard from an unrelated field) |
-| Mode | `standard`, or `lite` to skip the second clash and the judges' Q&A |
+| Mode | `lite` (~15 min), or `standard` for a second clash, judges' Q&A and a bigger build (~25 min) |
 | Rematch | offered after the reveal |
 
-### Cost
+### Time and cost
 
-These are subagent calls, not tokens. The skill tells you the mode and group count before Round 1.
+Every agent works to a timebox, groups move at their own pace after the decision round, and the Host stops anything far over budget, so a run keeps to a clock. The skill tells you the mode, group count and expected time before it starts.
 
-| Run | Calls |
-|---|---|
-| `lite`, 3 groups × 4 | about 50 (the example used 51) |
-| `standard`, 4 groups × 4 | about 60-70 |
-| Rematch, 3 groups | about 22 more |
+| Run | Time | Subagent calls |
+|---|---|---|
+| `lite`, 3 groups × 4 | ~15 min | about 45 |
+| `standard`, 4 groups × 4 | ~25 min | about 80 |
+| Rematch, 3 groups | ~10 min more | about 22 more |
 
 ## What's inside
 

@@ -1,0 +1,13 @@
+{
+  "claims": [
+    { "id": "c-what", "text": "Two small numeric helpers for Python: `clamp` and `lerp`.", "kind": "fact", "source": "README.md:3", "quote": "Two small numeric helpers for Python: `clamp` and `lerp`.", "status": "verified" },
+    { "id": "c-copy", "text": "Copy `clampy.py` next to your code, then:", "kind": "fact", "source": "README.md:7", "quote": "Copy `clampy.py` next to your code, then:", "status": "verified" },
+    { "id": "c-import", "text": "from clampy import clamp", "kind": "command", "source": "README.md:10", "quote": "from clampy import clamp", "status": "unverified" },
+    { "id": "c-call", "text": "clamp(15, 0, 10)", "kind": "command", "source": "README.md:11", "quote": "clamp(15, 0, 10)", "status": "unverified" },
+    { "id": "c-result", "text": "The documented result of clamp(15, 0, 10) is 10", "kind": "number", "source": "clampy.py:7-8", "quote": ">>> clamp(15, 0, 10) 10", "status": "verified" },
+    { "id": "c-lerp", "text": "`lerp` is linear interpolation between a start and an end value.", "kind": "fact", "source": "clampy.py:16", "quote": "Linear interpolation between start and end.", "status": "verified" },
+    { "id": "c-test", "text": "Run the tests with `python3 -m unittest discover -s tests`.", "kind": "command", "source": "README.md:14", "quote": "Run the tests with `python3 -m unittest discover -s tests`.", "status": "unverified" },
+    { "id": "c-limit", "text": "Copying the file is the only documented way to use it. This repository documents no package install.", "kind": "limit", "source": "README.md:7", "quote": "Copy `clampy.py` next to your code", "status": "verified" },
+    { "id": "c-lic", "text": "MIT licensed.", "kind": "license", "source": "README.md:16", "quote": "MIT licensed.", "status": "verified" }
+  ]
+}

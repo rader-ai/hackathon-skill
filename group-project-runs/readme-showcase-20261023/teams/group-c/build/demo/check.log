@@ -1,0 +1,2 @@
+check_readme: README.md  (repo: demo-repo)
+check_readme: PASS - 0 fail, 0 unverified (hand-check); 1 images, 41171 bytes; 25 ledger rows

@@ -1,0 +1,7 @@
+{
+  "duration": 5,
+  "beats": [
+    { "type": "in", "text": "clamp(15, 0, 10)", "source": "README.md:11", "claim": "c-call" },
+    { "type": "out", "text": "10", "source": "clampy.py:7-8", "claim": "c-result" }
+  ]
+}

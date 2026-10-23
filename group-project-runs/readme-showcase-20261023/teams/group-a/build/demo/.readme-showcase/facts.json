@@ -1,0 +1,392 @@
+{
+  "schema": 1,
+  "repo": "group-project-runs/readme-showcase-20261023/demo-repo",
+  "repo_name": "demo-repo",
+  "parsed": [
+    "files",
+    "readme",
+    "license",
+    "gitignore",
+    "python"
+  ],
+  "unparsed": [],
+  "notes": [
+    "No machine-readable Python floor (pyproject/setup/.python-version). Any Python version in the README must be pinned to a documented source in the ledger.",
+    "No .github/workflows found: no CI badge can be claimed."
+  ],
+  "files": [
+    {
+      "path": ".gitignore",
+      "bytes": 159,
+      "ignored": false
+    },
+    {
+      "path": "docs/METHOD.md",
+      "bytes": 3183,
+      "ignored": false
+    },
+    {
+      "path": "examples/analysis-template.json",
+      "bytes": 327,
+      "ignored": false
+    },
+    {
+      "path": "examples/calls.csv",
+      "bytes": 246,
+      "ignored": false
+    },
+    {
+      "path": "examples/discovery.md",
+      "bytes": 797,
+      "ignored": false
+    },
+    {
+      "path": "examples/sample-analysis.json",
+      "bytes": 1314,
+      "ignored": false
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 1068,
+      "ignored": false
+    },
+    {
+      "path": "prompts/analyze_call.md",
+      "bytes": 1510,
+      "ignored": false
+    },
+    {
+      "path": "README.md",
+      "bytes": 6133,
+      "ignored": false
+    },
+    {
+      "path": "run.py",
+      "bytes": 18868,
+      "ignored": false
+    },
+    {
+      "path": "tests/test_core.py",
+      "bytes": 1609,
+      "ignored": false
+    },
+    {
+      "path": "workspace/accounts/harbor-tools/calls/discovery-01/analysis.json",
+      "bytes": 1314,
+      "ignored": true
+    },
+    {
+      "path": "workspace/accounts/harbor-tools/calls/discovery-01/meta.json",
+      "bytes": 223,
+      "ignored": true
+    },
+    {
+      "path": "workspace/accounts/harbor-tools/calls/discovery-01/metrics.json",
+      "bytes": 286,
+      "ignored": true
+    },
+    {
+      "path": "workspace/accounts/harbor-tools/calls/discovery-01/transcript.md",
+      "bytes": 797,
+      "ignored": true
+    },
+    {
+      "path": "workspace/accounts/harbor-tools/calls/discovery-01/verification.json",
+      "bytes": 707,
+      "ignored": true
+    },
+    {
+      "path": "workspace/accounts/harbor-tools/calls/followup-02/meta.json",
+      "bytes": 223,
+      "ignored": true
+    },
+    {
+      "path": "workspace/report.html",
+      "bytes": 4670,
+      "ignored": true
+    }
+  ],
+  "files_truncated": false,
+  "readme": {
+    "path": "README.md",
+    "title": "Call Review Lab",
+    "bytes": 6133
+  },
+  "license": {
+    "file": "LICENSE",
+    "type": "MIT",
+    "source": "license file"
+  },
+  "python": {
+    "floor": null,
+    "floor_source": null,
+    "documented": "3.10",
+    "documented_source": "README.md (the repo's own README, not a manifest)",
+    "floor_raw": null
+  },
+  "node": null,
+  "entrypoints": [
+    {
+      "file": "run.py",
+      "kind": "python-argparse",
+      "main_guard": true
+    }
+  ],
+  "subcommands": [
+    {
+      "name": "init",
+      "file": "run.py",
+      "line": 301
+    },
+    {
+      "name": "demo",
+      "file": "run.py",
+      "line": 302
+    },
+    {
+      "name": "add",
+      "file": "run.py",
+      "line": 303
+    },
+    {
+      "name": "import-csv",
+      "file": "run.py",
+      "line": 309
+    },
+    {
+      "name": "review",
+      "file": "run.py",
+      "line": 312
+    },
+    {
+      "name": "report",
+      "file": "run.py",
+      "line": 313
+    },
+    {
+      "name": "transcribe",
+      "file": "run.py",
+      "line": 315
+    }
+  ],
+  "flags": [
+    {
+      "sub": "add",
+      "flag": "--transcript",
+      "required": true,
+      "file": "run.py",
+      "line": 305
+    },
+    {
+      "sub": "add",
+      "flag": "--account",
+      "required": true,
+      "file": "run.py",
+      "line": 305
+    },
+    {
+      "sub": "add",
+      "flag": "--id",
+      "required": true,
+      "file": "run.py",
+      "line": 305
+    },
+    {
+      "sub": "add",
+      "flag": "--date",
+      "required": true,
+      "file": "run.py",
+      "line": 305
+    },
+    {
+      "sub": "add",
+      "flag": "--title",
+      "required": true,
+      "file": "run.py",
+      "line": 305
+    },
+    {
+      "sub": "add",
+      "flag": "--internal",
+      "required": true,
+      "file": "run.py",
+      "line": 305
+    },
+    {
+      "sub": "add",
+      "flag": "--external",
+      "required": true,
+      "file": "run.py",
+      "line": 305
+    },
+    {
+      "sub": "add",
+      "flag": "--source",
+      "required": false,
+      "file": "run.py",
+      "line": 306
+    },
+    {
+      "sub": "add",
+      "flag": "--recorded",
+      "required": false,
+      "file": "run.py",
+      "line": 307
+    },
+    {
+      "sub": "add",
+      "flag": "--replace",
+      "required": false,
+      "file": "run.py",
+      "line": 308
+    },
+    {
+      "sub": "import-csv",
+      "flag": "--replace",
+      "required": false,
+      "file": "run.py",
+      "line": 311
+    },
+    {
+      "sub": "report",
+      "flag": "--output",
+      "required": false,
+      "file": "run.py",
+      "line": 314
+    },
+    {
+      "sub": "transcribe",
+      "flag": "--media",
+      "required": true,
+      "file": "run.py",
+      "line": 316
+    },
+    {
+      "sub": "transcribe",
+      "flag": "--model",
+      "required": true,
+      "file": "run.py",
+      "line": 317
+    },
+    {
+      "sub": "transcribe",
+      "flag": "--output",
+      "required": true,
+      "file": "run.py",
+      "line": 318
+    },
+    {
+      "sub": "transcribe",
+      "flag": "--language",
+      "required": false,
+      "file": "run.py",
+      "line": 319
+    },
+    {
+      "sub": "transcribe",
+      "flag": "--threads",
+      "required": false,
+      "file": "run.py",
+      "line": 320
+    }
+  ],
+  "positionals": [
+    {
+      "sub": "import-csv",
+      "name": "csv",
+      "file": "run.py",
+      "line": 310
+    }
+  ],
+  "commands": [
+    {
+      "cmd": "python3 run.py init",
+      "source": "run.py:301 add_parser",
+      "entry": "run.py",
+      "sub": "init"
+    },
+    {
+      "cmd": "python3 run.py demo",
+      "source": "run.py:302 add_parser",
+      "entry": "run.py",
+      "sub": "demo"
+    },
+    {
+      "cmd": "python3 run.py add",
+      "source": "run.py:303 add_parser",
+      "entry": "run.py",
+      "sub": "add"
+    },
+    {
+      "cmd": "python3 run.py import-csv",
+      "source": "run.py:309 add_parser",
+      "entry": "run.py",
+      "sub": "import-csv"
+    },
+    {
+      "cmd": "python3 run.py review",
+      "source": "run.py:312 add_parser",
+      "entry": "run.py",
+      "sub": "review"
+    },
+    {
+      "cmd": "python3 run.py report",
+      "source": "run.py:313 add_parser",
+      "entry": "run.py",
+      "sub": "report"
+    },
+    {
+      "cmd": "python3 run.py transcribe",
+      "source": "run.py:315 add_parser",
+      "entry": "run.py",
+      "sub": "transcribe"
+    }
+  ],
+  "npm": null,
+  "make_targets": [],
+  "outputs": [
+    {
+      "path": "workspace/report.html",
+      "bytes": 4670,
+      "kind": "html",
+      "gitignored": true,
+      "committed_candidate": false
+    }
+  ],
+  "tests": {
+    "dirs": [
+      "tests"
+    ],
+    "files": [
+      "tests/test_core.py"
+    ],
+    "framework_hint": "unittest"
+  },
+  "imports": {
+    "stdlib_only": true,
+    "third_party": [],
+    "network": [],
+    "external_tools": [
+      "ffmpeg",
+      "whisper-cli"
+    ]
+  },
+  "ci_workflows": [],
+  "urls": [
+    "https://github.com/rader-ai/sales-call-review.git",
+    "https://github.com/ggml-org/whisper.cpp"
+  ],
+  "docs": [
+    "docs/METHOD.md",
+    "examples/discovery.md",
+    "prompts/analyze_call.md",
+    "workspace/accounts/harbor-tools/calls/discovery-01/transcript.md"
+  ],
+  "prompts_or_data": [
+    "examples/analysis-template.json",
+    "examples/calls.csv",
+    "examples/discovery.md",
+    "examples/sample-analysis.json",
+    "prompts/analyze_call.md"
+  ]
+}
